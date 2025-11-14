@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
 import { FaStar, FaSearch, FaMedal, FaMicrophone, FaShoePrints, FaUserTie, FaMusic } from 'react-icons/fa';
 import artistsData from './data/artists.json';
 // File saving functionality would be implemented here in a production environment
@@ -29,22 +28,6 @@ function App() {
   const [selectedSkill, setSelectedSkill] = useState('');
   const [selectedThoughts, setSelectedThoughts] = useState('');
   const [selectedBuild, setSelectedBuild] = useState('');
-  const [showAddModal, setShowAddModal] = useState(false);
-  
-  // New artist form state
-  const [newArtist, setNewArtist] = useState<Partial<Artist>>({
-    id: Math.max(...artistsData.map(a => a.id), 0) + 1,
-    name: '',
-    group: '',
-    genre: '',
-    position: '',
-    rank: '',
-    skills: [],
-    description: '',
-    image: 'https://via.placeholder.com/200x200?text=N',
-    thoughts: '',
-    build: ''
-  });
 
   // Save artists to JSON file
   const saveArtists = async (updatedArtists: Artist[]) => {
@@ -66,33 +49,9 @@ function App() {
   };
 
   // Handle adding a new artist
-  const handleAddArtist = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newArtistData: Artist = {
-      ...newArtist as Required<Artist>,
-      id: Math.max(0, ...artists.map(a => a.id)) + 1,
-      skills: newArtist.skills || [],
-      rating: null,
-    };
-    
-    const updatedArtists = [...artists, newArtistData];
+  const handleAddArtist = (artistData: Artist) => {
+    const updatedArtists = [...artists, artistData];
     saveArtists(updatedArtists);
-    
-    // Close the modal and reset the form
-    setShowAddModal(false);
-    setNewArtist({
-      id: Math.max(0, ...artists.map(a => a.id)) + 2,
-      name: '',
-      group: '',
-      genre: '',
-      position: '',
-      rank: '',
-      skills: [],
-      description: '',
-      image: 'https://via.placeholder.com/200x200?text=N',
-      thoughts: '',
-      build: ''
-    });
   };
 
   // Load artists data on component mount
@@ -113,6 +72,16 @@ function App() {
       // Fall back to initial data if there's an error
       setArtists(artistsData);
     }
+
+    // Listen for messages from the add-artist window
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data.type === 'ADD_ARTIST') {
+        handleAddArtist(event.data.artist);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
   }, []);
 
   // Save to localStorage whenever artists change
@@ -164,7 +133,17 @@ function App() {
         <h1 className="text-3xl font-bold text-white" style={{ color: '#ffffff' }}>JustMick's Awesome Artist Helper</h1>
         <button
           type="button"
-          onClick={() => { console.log('Add Artist button clicked'); setShowAddModal(true); }}
+          onClick={() => {
+            console.log('Add Artist button clicked');
+            // Pass data to the modal window
+            (window as any).__artistData = {
+              roles: roles,
+              rankOptions: rankOptions,
+              genres: genres,
+              nextId: Math.max(0, ...artists.map(a => a.id)) + 1
+            };
+            window.open('/add-artist.html', 'AddArtistModal', 'width=500,height=700,resizable=yes,scrollbars=yes');
+          }}
           className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
           title="Add New Artist"
         >
@@ -408,136 +387,6 @@ function App() {
       <footer className="w-full max-w-7xl mt-8 py-4 text-center text-white text-sm">
         <p>© {new Date().getFullYear()} JustMick's Artist Helper</p>
       </footer>
-      </div>
-
-      {/* Add Artist Modal (rendered in a portal outside the dark root) */}
-      {showAddModal && createPortal(
-        <div id="add-artist-modal-backdrop" data-open="true" className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div id="add-artist-modal" className="bg-white rounded-lg p-6 w-full max-w-md text-black">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Add New Artist</h2>
-              <button 
-                onClick={() => { console.log('Close Add Artist modal'); setShowAddModal(false); }}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                ✕
-              </button>
-            </div>
-            
-            <form onSubmit={handleAddArtist} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Name</label>
-                <input
-                  type="text"
-                  value={newArtist.name}
-                  onChange={(e) => setNewArtist({...newArtist, name: e.target.value})}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Group</label>
-                  <input
-                    type="text"
-                    value={newArtist.group}
-                    onChange={(e) => setNewArtist({...newArtist, group: e.target.value})}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Position</label>
-                  <select
-                    value={newArtist.position}
-                    onChange={(e) => setNewArtist({...newArtist, position: e.target.value})}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    required
-                  >
-                    <option value="">Select Position</option>
-                    {roles.map((role) => (
-                      <option key={role} value={role}>{role}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Rank</label>
-                  <select
-                    value={newArtist.rank}
-                    onChange={(e) => setNewArtist({...newArtist, rank: e.target.value})}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    required
-                  >
-                    <option value="">Select Rank</option>
-                    {rankOptions.map((rank) => (
-                      <option key={rank} value={rank}>{rank}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Genre</label>
-                  <select
-                    value={newArtist.genre}
-                    onChange={(e) => setNewArtist({...newArtist, genre: e.target.value})}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    required
-                  >
-                    <option value="">Select Genre</option>
-                    {genres.map((genre) => (
-                      <option key={genre} value={genre}>{genre}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Skills (comma separated)</label>
-                <input
-                  type="text"
-                  value={Array.isArray(newArtist.skills) ? newArtist.skills.join(', ') : ''}
-                  onChange={(e) => setNewArtist({...newArtist, skills: e.target.value.split(',').map(s => s.trim())})}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                  placeholder="Skill 1, Skill 2, Skill 3"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Description</label>
-                <textarea
-                  value={newArtist.description}
-                  onChange={(e) => setNewArtist({...newArtist, description: e.target.value})}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                  rows={3}
-                  required
-                />
-              </div>
-              
-              <div className="flex justify-end space-x-3">
-                <button
-                  type="button"
-                  onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  Add Artist
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>,
-        document.body
-      )}
     </div>
   );
 }

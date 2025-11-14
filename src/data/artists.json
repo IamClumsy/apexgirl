@@ -212,7 +212,7 @@
     "description": "Ayaka is a talented Vocalist from Tokyo48.",
     "rating": null,
     "image": "https://via.placeholder.com/200x200?text=A",
-    "thoughts": "Defensive Car, Reverse Vocalist",
+    "thoughts": "Defensive Car",
     "build": "No"
   },
   {
@@ -338,7 +338,7 @@
     "description": "Moana is a talented Vocalist from Coral.",
     "rating": null,
     "image": "https://via.placeholder.com/200x200?text=M",
-    "thoughts": "Defensive Car, Reverse Vocalist",
+    "thoughts": "Defensive Car",
     "build": "No"
   },
   {
@@ -572,7 +572,7 @@
     "description": "Leilani is a talented Dancer from Coral.",
     "rating": null,
     "image": "https://via.placeholder.com/200x200?text=L",
-    "thoughts": "Offensive Car, Reverse Dancer",
+    "thoughts": "Offensive Car",
     "build": "Skill Build"
   },
   {

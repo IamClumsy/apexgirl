@@ -161,7 +161,7 @@ function App() {
   return (
     <div className="w-full min-h-screen bg-gray-900 text-white">
       <header className="mb-8 flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-amber-400">Apex Girl Artist Picker</h1>
+        <h1 className="text-3xl font-bold text-white">Apex Girl Artist Picker</h1>
         <button
           onClick={() => setShowAddModal(true)}
           className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
@@ -404,7 +404,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full max-w-7xl mt-8 py-4 text-center text-amber-400 text-sm">
+      <footer className="w-full max-w-7xl mt-8 py-4 text-center text-white text-sm">
         <p>© {new Date().getFullYear()} JustMick's Artist Helper</p>
       </footer>
       </div>

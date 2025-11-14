@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { FaStar, FaSearch, FaMedal, FaMicrophone, FaShoePrints, FaUserTie, FaMusic } from 'react-icons/fa';
 import artistsData from './data/artists.json';
 // File saving functionality would be implemented here in a production environment
@@ -408,10 +409,10 @@ function App() {
       </footer>
       </div>
 
-      {/* Add Artist Modal */}
-      {showAddModal && (
+      {/* Add Artist Modal (rendered in a portal outside the dark root) */}
+      {showAddModal && createPortal(
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md text-black">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Add New Artist</h2>
               <button 
@@ -533,7 +534,8 @@ function App() {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

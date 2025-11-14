@@ -1,14 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { mkdirSync, existsSync } from 'fs';
+
+// Create netlify/functions directory if it doesn't exist
+if (!existsSync('netlify/functions')) {
+  mkdirSync('netlify/functions', { recursive: true });
+}
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, './src'),
-    },
-  },
+  base: '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -36,6 +38,15 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
   },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
+  },
+  define: {
+    'process.env': {},
+    global: 'globalThis'
+  },
   optimizeDeps: {
     include: ['react', 'react-dom'],
     esbuildOptions: {
@@ -44,9 +55,5 @@ export default defineConfig({
         global: 'globalThis',
       },
     },
-  },
-  define: {
-    'process.env': {},
-  },
-  base: '/',
+  }
 });

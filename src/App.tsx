@@ -21,7 +21,6 @@ interface Artist {
 function App() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedGroup, setSelectedGroup] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
@@ -96,7 +95,6 @@ function App() {
   }, [artists]);
 
   // Get unique values for filters
-  const groupOptions = [...new Set(artists.map(artist => artist.group))];
   const rankOptions = [...new Set(artists.map(artist => artist.rank))];
   const roles = [...new Set(artists.map(artist => artist.position))];
   const genres = [...new Set(artists.map(artist => artist.genre))];
@@ -113,7 +111,6 @@ function App() {
       artist.group?.toLowerCase().includes(searchLower) ||
       artist.skills.some((skill: string) => skill && skill.toLowerCase().includes(searchLower));
     
-    const matchesGroup = selectedGroup === '' || artist.group === selectedGroup;
     const matchesRank = selectedRank === '' || artist.rank === selectedRank;
     const matchesRole = selectedRole === '' || artist.position === selectedRole;
     const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
@@ -124,7 +121,7 @@ function App() {
     const matchesBuild = selectedBuild === '' || 
       (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
     
-    return matchesSearch && matchesGroup && matchesRank && matchesRole && matchesGenre && matchesSkill && matchesThoughts && matchesBuild;
+    return matchesSearch && matchesRank && matchesRole && matchesGenre && matchesSkill && matchesThoughts && matchesBuild;
   }).sort((a, b) => {
     // Sort by genre first
     const genreCompare = a.genre.localeCompare(b.genre);
@@ -164,7 +161,7 @@ function App() {
         </button>
       </header>
       
-      {/* Search & Group Filter */}
+      {/* Search Filter */}
       <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4">
         <div className="relative w-full">
           <input
@@ -176,16 +173,6 @@ function App() {
           />
           <FaSearch className="absolute right-3 top-3 text-gray-400" />
         </div>
-        <select
-          value={selectedGroup}
-          onChange={(e) => setSelectedGroup(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border border-amber-500/40 text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent shadow-md transition-all duration-200 cursor-pointer hover:border-amber-500/60 text-center"
-        >
-          <option value="">Select Group</option>
-          {groupOptions.map(group => (
-            <option key={group} value={group}>{group}</option>
-          ))}
-        </select>
       </div>
 
       {/* Main Content */}

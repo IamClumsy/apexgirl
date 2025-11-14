@@ -163,7 +163,8 @@ function App() {
       <header className="mb-8 flex flex-col items-center gap-4 app-header">
         <h1 className="text-3xl font-bold text-white" style={{ color: '#ffffff' }}>JustMick's Awesome Artist Helper</h1>
         <button
-          onClick={() => setShowAddModal(true)}
+          type="button"
+          onClick={() => { console.log('Add Artist button clicked'); setShowAddModal(true); }}
           className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
           title="Add New Artist"
         >
@@ -411,12 +412,12 @@ function App() {
 
       {/* Add Artist Modal (rendered in a portal outside the dark root) */}
       {showAddModal && createPortal(
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md text-black">
+        <div id="add-artist-modal-backdrop" data-open="true" className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div id="add-artist-modal" className="bg-white rounded-lg p-6 w-full max-w-md text-black">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Add New Artist</h2>
               <button 
-                onClick={() => setShowAddModal(false)}
+                onClick={() => { console.log('Close Add Artist modal'); setShowAddModal(false); }}
                 className="text-gray-500 hover:text-gray-700"
               >
                 ✕

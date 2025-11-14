@@ -88,3 +88,8 @@ html {
 .table-force-white * {
   color: #fff !important;
 }
+
+/* High-specificity override for header title to beat external CSS */
+.app-header h1 {
+  color: #ffffff !important;
+}

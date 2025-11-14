@@ -193,83 +193,93 @@ function App() {
         <div className="overflow-x-auto">
           <table className="mx-auto table-auto table-force-white table-with-spacing">
             <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
-              <tr>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">
-                  Artist
-                </th>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">
+              {/* Filter row */}
+              <tr className="align-middle">
+                <th className="px-4 py-2"></th>
+                <th className="px-4 py-2">
                   <select
                     value={selectedGenre}
                     onChange={(e) => setSelectedGenre(e.target.value)}
-                    className="w-full px-2 py-1 rounded-lg bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
+                    className="w-full px-2 py-1 rounded-md bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
                   >
-                    <option value="">Genre</option>
+                    <option value="">All Genres</option>
                     {genres.map(genre => (
                       <option key={genre} value={genre}>{genre}</option>
                     ))}
                   </select>
                 </th>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">
+                <th className="px-4 py-2">
                   <select
                     value={selectedRole}
                     onChange={(e) => setSelectedRole(e.target.value)}
-                    className="w-full px-2 py-1 rounded-lg bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
+                    className="w-full px-2 py-1 rounded-md bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
                   >
-                    <option value="">Role</option>
+                    <option value="">All Roles</option>
                     {roles.map(role => (
                       <option key={role} value={role}>{role}</option>
                     ))}
                   </select>
                 </th>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">
+                <th className="px-4 py-2">
                   <select
                     value={selectedRank}
                     onChange={(e) => setSelectedRank(e.target.value)}
-                    className="w-full px-2 py-1 rounded-lg bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
+                    className="w-full px-2 py-1 rounded-md bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
                   >
-                    <option value="">Rank</option>
+                    <option value="">All Ranks</option>
                     {rankOptions.map(rank => (
                       <option key={rank} value={rank}>{rank}</option>
                     ))}
                   </select>
                 </th>
-                <th className="px-6 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">
+                <th className="px-6 py-2">
                   <select
                     value={selectedSkill}
                     onChange={(e) => setSelectedSkill(e.target.value)}
-                    className="w-full px-2 py-1 rounded-lg bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
+                    className="w-full px-2 py-1 rounded-md bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
                   >
-                    <option value="">Skill 2</option>
+                    <option value="">Skill 2 Any</option>
                     {skills.map(skill => (
                       <option key={skill} value={skill}>{skill || 'No Skill'}</option>
                     ))}
                   </select>
                 </th>
-                <th className="px-6 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">Skill 3</th>
-                <th className="px-6 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">
+                <th className="px-6 py-2"></th>
+                <th className="px-6 py-2">
                   <select
                     value={selectedThoughts}
                     onChange={(e) => setSelectedThoughts(e.target.value)}
-                    className="w-full px-2 py-1 rounded-lg bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
+                    className="w-full px-2 py-1 rounded-md bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
                   >
-                    <option value="">Thoughts</option>
+                    <option value="">Thoughts Any</option>
                     {thoughtsOptions.map(thought => (
                       <option key={thought} value={thought}>{thought}</option>
                     ))}
                   </select>
                 </th>
-                <th className="px-6 py-4 text-center text-sm font-semibold text-white uppercase tracking-wider">
+                <th className="px-6 py-2">
                   <select
                     value={selectedBuild}
                     onChange={(e) => setSelectedBuild(e.target.value)}
-                    className="w-full px-2 py-1 rounded-lg bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
+                    className="w-full px-2 py-1 rounded-md bg-gray-700/90 border border-amber-500/40 text-white text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/60"
                   >
-                    <option value="">Build</option>
+                    <option value="">All Builds</option>
                     {buildOptions.map(build => (
                       <option key={build} value={build}>{build}</option>
                     ))}
                   </select>
                 </th>
+              </tr>
+              {/* Column header row */}
+              <tr>
+                <th className="px-4 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Artist</th>
+                <th className="px-4 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Genre</th>
+                <th className="px-4 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Role</th>
+                <th className="px-4 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Rank</th>
+                <th className="px-6 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Skill 2</th>
+                <th className="px-6 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Skill 3</th>
+                <th className="px-6 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Mick's Thoughts</th>
+                <th className="px-6 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">Skill Based Build</th>
               </tr>
             </thead>
             <tbody className="bg-gray-800/80">

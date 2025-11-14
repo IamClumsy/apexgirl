@@ -145,8 +145,10 @@
           Cancel
         </button>
         <button
+          id="submitBtn"
           type="submit"
-          class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400"
+          disabled
         >
           Add Artist
         </button>
@@ -217,6 +219,28 @@
     
     document.getElementById('cancelBtn').addEventListener('click', () => {
       window.close();
+    });
+    
+    // Validate form and enable/disable submit button
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const group = document.getElementById('group').value.trim();
+      const position = document.getElementById('position').value;
+      const rank = document.getElementById('rank').value.trim();
+      const genre = document.getElementById('genre').value;
+      const description = document.getElementById('description').value.trim();
+      const submitBtn = document.getElementById('submitBtn');
+      
+      // Check if all required fields are filled
+      const allFieldsFilled = name && group && position && rank && genre && description;
+      
+      submitBtn.disabled = !allFieldsFilled;
+    }
+    
+    // Add validation listeners to all input fields
+    ['name', 'group', 'position', 'rank', 'genre', 'description'].forEach(fieldId => {
+      document.getElementById(fieldId).addEventListener('change', validateForm);
+      document.getElementById(fieldId).addEventListener('input', validateForm);
     });
     
     // Form submission

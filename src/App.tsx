@@ -429,7 +429,7 @@ function App() {
                   type="text"
                   value={newArtist.name}
                   onChange={(e) => setNewArtist({...newArtist, name: e.target.value})}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   required
                 />
               </div>
@@ -441,7 +441,7 @@ function App() {
                     type="text"
                     value={newArtist.group}
                     onChange={(e) => setNewArtist({...newArtist, group: e.target.value})}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     required
                   />
                 </div>
@@ -451,7 +451,7 @@ function App() {
                   <select
                     value={newArtist.position}
                     onChange={(e) => setNewArtist({...newArtist, position: e.target.value})}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select Position</option>
@@ -468,7 +468,7 @@ function App() {
                   <select
                     value={newArtist.rank}
                     onChange={(e) => setNewArtist({...newArtist, rank: e.target.value})}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select Rank</option>
@@ -483,7 +483,7 @@ function App() {
                   <select
                     value={newArtist.genre}
                     onChange={(e) => setNewArtist({...newArtist, genre: e.target.value})}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select Genre</option>
@@ -500,7 +500,7 @@ function App() {
                   type="text"
                   value={Array.isArray(newArtist.skills) ? newArtist.skills.join(', ') : ''}
                   onChange={(e) => setNewArtist({...newArtist, skills: e.target.value.split(',').map(s => s.trim())})}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   placeholder="Skill 1, Skill 2, Skill 3"
                 />
               </div>
@@ -510,7 +510,7 @@ function App() {
                 <textarea
                   value={newArtist.description}
                   onChange={(e) => setNewArtist({...newArtist, description: e.target.value})}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   rows={3}
                   required
                 />

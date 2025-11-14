@@ -324,7 +324,9 @@ function App() {
                               '12% Reduction Normal Attack Damage',
                               '12% Skill Damage Reduction'
                             ].includes(artist.skills[1].trim())
-                              ? 'bg-gradient-to-r from-green-600/30 to-emerald-600/30 text-green-100 border border-green-400/50'
+                              ? artist.skills[1].trim() === '20% Skill Damage' || artist.skills[1].trim() === '50% Basic Attack Damage'
+                                ? 'bg-gradient-to-r from-green-600/30 to-emerald-600/30 text-green-100 border border-green-400/50 text-green-400 font-bold'
+                                : 'bg-gradient-to-r from-green-600/30 to-emerald-600/30 text-green-100 border border-green-400/50'
                               : 'bg-gray-700/70 text-white/90 border border-gray-500/30'
                           }`}
                         >
@@ -346,7 +348,9 @@ function App() {
                               '12% Reduction Normal Attack Damage',
                               '12% Skill Damage Reduction'
                             ].includes(artist.skills[2].trim())
-                              ? 'bg-gradient-to-r from-green-600/30 to-emerald-600/30 text-green-100 border border-green-400/50'
+                              ? artist.skills[2].trim() === '20% Skill Damage' || artist.skills[2].trim() === '50% Basic Attack Damage'
+                                ? 'bg-gradient-to-r from-green-600/30 to-emerald-600/30 text-green-100 border border-green-400/50 text-green-400 font-bold'
+                                : 'bg-gradient-to-r from-green-600/30 to-emerald-600/30 text-green-100 border border-green-400/50'
                               : 'bg-gray-700/70 text-white/90 border border-gray-500/30'
                           }`}
                         >

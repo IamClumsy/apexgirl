@@ -161,7 +161,7 @@ function App() {
   return (
     <div className="w-full min-h-screen bg-gray-900 text-white">
       <header className="mb-8 flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-white">JustMick's Awesome Artist Helper</h1>
+        <h1 className="text-3xl font-bold text-white" style={{ color: '#ffffff' }}>JustMick's Awesome Artist Helper</h1>
         <button
           onClick={() => setShowAddModal(true)}
           className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"

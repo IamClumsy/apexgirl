@@ -4,7 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  NODE_ENV = "production"
+  NODE_ENV = "development"
+  NPM_INSTALL_DEV_DEPS = "true"
 
 [dev]
   command = "npm run dev"

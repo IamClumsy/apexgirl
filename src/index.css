@@ -84,15 +84,16 @@ html {
   @apply border border-gray-300 hover:bg-gray-50 focus:ring-gray-500;
 }
 
-/* Force all text inside tables with this class to be white (overrides utility classes) */
+/* Force table text white but exclude form controls to preserve option visibility */
 .table-force-white,
-.table-force-white * {
+.table-force-white :not(select):not(option):not(input):not(textarea):not(button) {
   color: #fff !important;
 }
 
 /* High-specificity override for header title to beat external CSS */
 .app-header h1 {
   color: #ffffff !important;
+  text-align: center !important;
 }
 
 /* Table spacing - force horizontal gaps between columns */

@@ -101,7 +101,7 @@ html {
 
 /* Force table text white but exclude form controls to preserve option visibility */
 .table-force-white,
-.table-force-white :not(select):not(option):not(input):not(textarea):not(button) {
+.table-force-white :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400) {
   color: #fff !important;
 }
 

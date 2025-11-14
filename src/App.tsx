@@ -138,8 +138,8 @@ function App() {
             // Pass data to the modal window
             (window as any).__artistData = {
               roles: roles,
-              rankOptions: rankOptions,
               genres: genres,
+              allSkills: skills,
               nextId: Math.max(0, ...artists.map(a => a.id)) + 1
             };
             window.open('/add-artist.html', 'AddArtistModal', 'width=500,height=700,resizable=yes,scrollbars=yes');

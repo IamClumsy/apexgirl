@@ -76,13 +76,27 @@
       </div>
       
       <div>
-        <label class="block text-sm font-medium text-gray-700">Skills (comma separated)</label>
-        <input
-          id="skills"
-          type="text"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-          placeholder="Skill 1, Skill 2, Skill 3"
-        />
+        <label class="block text-sm font-medium text-gray-700">Skills</label>
+        <div class="grid grid-cols-3 gap-2 mt-1">
+          <select
+            id="skill1"
+            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="">Skill 1</option>
+          </select>
+          <select
+            id="skill2"
+            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="">Skill 2</option>
+          </select>
+          <select
+            id="skill3"
+            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="">Skill 3</option>
+          </select>
+        </div>
       </div>
       
       <div>
@@ -120,12 +134,14 @@
     // Populate select options
     function populateSelects() {
       const positions = openerData.roles || [];
-      const ranks = openerData.rankOptions || [];
       const genres = openerData.genres || [];
+      const skills = openerData.allSkills || [];
       
       const positionSelect = document.getElementById('position');
-      const rankSelect = document.getElementById('rank');
       const genreSelect = document.getElementById('genre');
+      const skill1Select = document.getElementById('skill1');
+      const skill2Select = document.getElementById('skill2');
+      const skill3Select = document.getElementById('skill3');
       
       positions.forEach(p => {
         const opt = document.createElement('option');
@@ -134,18 +150,21 @@
         positionSelect.appendChild(opt);
       });
       
-      ranks.forEach(r => {
-        const opt = document.createElement('option');
-        opt.value = r;
-        opt.textContent = r;
-        rankSelect.appendChild(opt);
-      });
-      
       genres.forEach(g => {
         const opt = document.createElement('option');
         opt.value = g;
         opt.textContent = g;
         genreSelect.appendChild(opt);
+      });
+      
+      // Populate skill dropdowns
+      [skill1Select, skill2Select, skill3Select].forEach(select => {
+        skills.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s;
+          opt.textContent = s;
+          select.appendChild(opt);
+        });
       });
     }
     
@@ -162,6 +181,10 @@
     document.getElementById('addArtistForm').addEventListener('submit', (e) => {
       e.preventDefault();
       
+      const skill1 = document.getElementById('skill1').value;
+      const skill2 = document.getElementById('skill2').value;
+      const skill3 = document.getElementById('skill3').value;
+      
       const newArtist = {
         id: openerData.nextId || 1,
         name: document.getElementById('name').value,
@@ -169,7 +192,7 @@
         position: document.getElementById('position').value,
         rank: document.getElementById('rank').value,
         genre: document.getElementById('genre').value,
-        skills: document.getElementById('skills').value.split(',').map(s => s.trim()),
+        skills: [skill1, skill2, skill3].filter(s => s !== ''),
         description: document.getElementById('description').value,
         image: 'https://via.placeholder.com/200x200?text=N',
         thoughts: '',

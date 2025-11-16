@@ -102,6 +102,22 @@ function App() {
   const genres = [...new Set(artists.map(artist => artist.genre))];
   const allSkills = [...new Set(artists.flatMap(artist => artist.skills).filter(Boolean))];
   const skills = allSkills; // Alias for backward compatibility
+  // Group skills for dropdown headers
+  const SKILL_GROUPS: Record<'Best' | 'Good' | 'Okay' | 'Worst', string[]> = {
+    Best: ['50% Basic Attack Damage'],
+    Good: [],
+    Okay: [],
+    Worst: []
+  };
+  const knownGrouped = new Set([
+    ...SKILL_GROUPS.Best,
+    ...SKILL_GROUPS.Good,
+    ...SKILL_GROUPS.Worst
+  ]);
+  const bestSkills = skills.filter(s => SKILL_GROUPS.Best.includes(s));
+  const goodSkills = skills.filter(s => SKILL_GROUPS.Good.includes(s));
+  const worstSkills = skills.filter(s => SKILL_GROUPS.Worst.includes(s));
+  const okaySkills = skills.filter(s => !knownGrouped.has(s));
   const thoughtsOptions = [...new Set(artists.map(artist => artist.thoughts).filter(Boolean))];
   const buildOptions = [...new Set(artists.map(artist => artist.build).filter(Boolean))];
 
@@ -191,11 +207,9 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Genre</option>
-                    <optgroup label="Genres">
-                      {genres.map(genre => (
-                        <option key={genre} value={genre}>{genre}</option>
-                      ))}
-                    </optgroup>
+                    {genres.map(genre => (
+                      <option key={genre} value={genre}>{genre}</option>
+                    ))}
                   </select>
                 </th>
                 <th className="px-4 py-2">
@@ -205,11 +219,9 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Role</option>
-                    <optgroup label="Roles">
-                      {roles.map(role => (
-                        <option key={role} value={role}>{role}</option>
-                      ))}
-                    </optgroup>
+                    {roles.map(role => (
+                      <option key={role} value={role}>{role}</option>
+                    ))}
                   </select>
                 </th>
                 <th className="px-4 py-2">
@@ -219,11 +231,9 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Rank</option>
-                    <optgroup label="Ranks">
-                      {rankOptions.map(rank => (
-                        <option key={rank} value={rank}>{rank}</option>
-                      ))}
-                    </optgroup>
+                    {rankOptions.map(rank => (
+                      <option key={rank} value={rank}>{rank}</option>
+                    ))}
                   </select>
                 </th>
                 <th className="px-6 py-2">
@@ -233,9 +243,24 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Skill 2</option>
-                    <optgroup label="Skill 2">
-                      {skills.map(skill => (
-                        <option key={skill} value={skill}>{skill || 'No Skill'}</option>
+                    <optgroup label="Best">
+                      {bestSkills.map(skill => (
+                        <option key={`s2-best-${skill}`} value={skill}>{skill}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Good">
+                      {goodSkills.map(skill => (
+                        <option key={`s2-good-${skill}`} value={skill}>{skill}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Okay">
+                      {okaySkills.map(skill => (
+                        <option key={`s2-okay-${skill}`} value={skill}>{skill}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Worst">
+                      {worstSkills.map(skill => (
+                        <option key={`s2-worst-${skill}`} value={skill}>{skill}</option>
                       ))}
                     </optgroup>
                   </select>
@@ -247,9 +272,24 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Skill 3</option>
-                    <optgroup label="Skill 3">
-                      {skills.map(skill => (
-                        <option key={skill + '-3'} value={skill}>{skill || 'No Skill'}</option>
+                    <optgroup label="Best">
+                      {bestSkills.map(skill => (
+                        <option key={`s3-best-${skill}`} value={skill}>{skill}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Good">
+                      {goodSkills.map(skill => (
+                        <option key={`s3-good-${skill}`} value={skill}>{skill}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Okay">
+                      {okaySkills.map(skill => (
+                        <option key={`s3-okay-${skill}`} value={skill}>{skill}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Worst">
+                      {worstSkills.map(skill => (
+                        <option key={`s3-worst-${skill}`} value={skill}>{skill}</option>
                       ))}
                     </optgroup>
                   </select>
@@ -261,11 +301,9 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Thoughts</option>
-                    <optgroup label="Thoughts">
-                      {thoughtsOptions.map(thought => (
-                        <option key={thought} value={thought}>{thought}</option>
-                      ))}
-                    </optgroup>
+                    {thoughtsOptions.map(thought => (
+                      <option key={thought} value={thought}>{thought}</option>
+                    ))}
                   </select>
                 </th>
                 <th className="px-6 py-2">
@@ -275,11 +313,9 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Build</option>
-                    <optgroup label="Builds">
-                      {buildOptions.map(build => (
-                        <option key={build} value={build}>{build}</option>
-                      ))}
-                    </optgroup>
+                    {buildOptions.map(build => (
+                      <option key={build} value={build}>{build}</option>
+                    ))}
                   </select>
                 </th>
               </tr>

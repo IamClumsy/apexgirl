@@ -103,21 +103,14 @@ function App() {
   const allSkills = [...new Set(artists.flatMap(artist => artist.skills).filter(Boolean))];
   const skills = allSkills; // Alias for backward compatibility
   // Group skills for dropdown headers
-  const SKILL_GROUPS: Record<'Best' | 'Good' | 'Okay' | 'Worst', string[]> = {
-    Best: ['50% Basic Attack Damage'],
-    Good: [],
-    Okay: [],
-    Worst: []
+  const isDamageToPlayer = (skill: string) => {
+    const t = (skill || '').toLowerCase();
+    return t.includes('damage') && !t.includes('reduc') && !t.includes('taken');
   };
-  const knownGrouped = new Set([
-    ...SKILL_GROUPS.Best,
-    ...SKILL_GROUPS.Good,
-    ...SKILL_GROUPS.Worst
-  ]);
-  const bestSkills = skills.filter(s => SKILL_GROUPS.Best.includes(s));
-  const goodSkills = skills.filter(s => SKILL_GROUPS.Good.includes(s));
-  const worstSkills = skills.filter(s => SKILL_GROUPS.Worst.includes(s));
-  const okaySkills = skills.filter(s => !knownGrouped.has(s));
+  const bestSkills = skills.filter(isDamageToPlayer);
+  const goodSkills: string[] = [];
+  const worstSkills: string[] = [];
+  const okaySkills = skills.filter(s => !bestSkills.includes(s));
   const thoughtsOptions = [...new Set(artists.map(artist => artist.thoughts).filter(Boolean))];
   const buildOptions = [...new Set(artists.map(artist => artist.build).filter(Boolean))];
 

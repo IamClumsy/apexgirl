@@ -188,7 +188,7 @@
     "genre": "Hip Hop",
     "skills": [
       "10 sec/1800 Damage",
-      "12% Reduce Skill Damage Taken",
+      "12% Skill Damage Reduction",
       "12% Reduction Normal Attack Damage"
     ],
     "description": "Avery is a talented Dancer from Luna.",
@@ -602,7 +602,7 @@
     "genre": "Pop",
     "skills": [
       "10 sec/1800 Damage",
-      "12% Reduce Skill Damage Taken",
+      "12% Skill Damage Reduction",
       "12% Reduction Normal Attack Damage"
     ],
     "description": "Anastasia is a talented Dancer from No Group.",
@@ -728,7 +728,7 @@
     "genre": "Rock",
     "skills": [
       "10 sec/1800 Damage",
-      "12% Reduce Skill Damage Taken",
+      "12% Skill Damage Reduction",
       "12% Reduction Normal Attack Damage"
     ],
     "description": "Genevieve is a talented Dancer from No Group.",

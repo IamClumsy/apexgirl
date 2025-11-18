@@ -107,16 +107,20 @@ function App() {
     const t = (skill || '').toLowerCase();
     return t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage');
   };
+  const isWorstSkill = (skill: string) => {
+    const t = (skill || '').toLowerCase();
+    return t.includes('180/dps') || t.includes('200/dps');
+  };
   const isDirectDamage = (skill: string) => {
     const t = (skill || '').toLowerCase();
     // Direct damage: time-based or explicit damage that isn't a reduction/taken modifier and not the Good buffs
     const mentionsDamage = t.includes('damage') && !t.includes('reduc') && !t.includes('taken');
     const timeBased = t.includes(' sec/') || /\bsec\b/.test(t);
-    return (mentionsDamage || timeBased) && !isGoodBuff(skill);
+    return (mentionsDamage || timeBased) && !isGoodBuff(skill) && !isWorstSkill(skill);
   };
+  const worstSkills = skills.filter(isWorstSkill);
   const bestSkills = skills.filter(isDirectDamage);
   const goodSkills = skills.filter(isGoodBuff);
-  const worstSkills: string[] = [];
   const okaySkills = skills.filter(s => !bestSkills.includes(s) && !goodSkills.includes(s) && !worstSkills.includes(s));
   const thoughtsOptions = [...new Set(artists.map(artist => artist.thoughts).filter(Boolean))];
   const buildOptions = [...new Set(artists.map(artist => artist.build).filter(Boolean))];

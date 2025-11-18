@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaStar, FaSearch, FaMedal, FaMicrophone, FaShoePrints, FaUserTie, FaMusic } from 'react-icons/fa';
+import { FaStar, FaSearch, FaMedal, FaMicrophone, FaShoePrints, FaUserTie, FaMusic, FaDownload } from 'react-icons/fa';
 import artistsData from './data/artists.json';
 // File saving functionality would be implemented here in a production environment
 
@@ -202,23 +202,49 @@ function App() {
       {/* Page Title */}
       <header className="flex flex-col items-center gap-4 app-header">
         <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight text-center" style={{ color: '#ffffff' }}>JustMick's Awesome Artist Helper</h1>
-        <button
-          type="button"
-          onClick={() => {
-            console.log('Add Artist button clicked');
-            (window as any).__artistData = {
-              roles: roles,
-              genres: genres,
-              allSkills: skills,
-              nextId: Math.max(0, ...artists.map(a => a.id)) + 1
-            };
-            window.open('/add-artist.html', 'AddArtistModal', 'width=500,height=700,resizable=yes,scrollbars=yes');
-          }}
-          className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
-          title="Add New Artist"
-        >
-          <FaMusic size={24} />
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => {
+              console.log('Add Artist button clicked');
+              (window as any).__artistData = {
+                roles: roles,
+                genres: genres,
+                allSkills: skills,
+                nextId: Math.max(0, ...artists.map(a => a.id)) + 1
+              };
+              window.open('/add-artist.html', 'AddArtistModal', 'width=500,height=700,resizable=yes,scrollbars=yes');
+            }}
+            className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
+            title="Add New Artist"
+          >
+            <FaMusic size={24} />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              try {
+                const dataStr = JSON.stringify(artists, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'artist-and-records-1.9.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                console.log('Exported artist-and-records-1.9.json');
+              } catch (err) {
+                console.error('Failed to export artists', err);
+              }
+            }}
+            className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
+            title="Download artist-and-records-1.9.json"
+          >
+            <FaDownload size={22} />
+          </button>
+        </div>
       </header>
       
       {/* Search Filter */}

@@ -150,6 +150,15 @@ function App() {
     return points;
   };
   
+  // Convert points to letter grade: 7-9=A, 3-6=B, 1-2=C, -1 to -2=D, -3=F
+  const getLetterGrade = (points: number) => {
+    if (points >= 7) return 'A';
+    if (points >= 3) return 'B';
+    if (points >= 1) return 'C';
+    if (points >= -2) return 'D';
+    return 'F';
+  };
+  
   const thoughtsOptions = [...new Set(artists.map(artist => artist.thoughts).filter(Boolean))];
   const buildOptions = [...new Set(artists.map(artist => artist.build).filter(Boolean))];
 
@@ -488,13 +497,13 @@ function App() {
                   <td className="px-4 py-4 whitespace-nowrap">
                     <div className="text-sm font-bold text-center" title={`Points: ${calculateArtistPoints(artist)}`}>
                       <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-bold ${
-                        calculateArtistPoints(artist) >= 10 ? 'bg-gradient-to-r from-amber-400 to-yellow-600 text-white' :
-                        calculateArtistPoints(artist) >= 7 ? 'bg-gradient-to-r from-emerald-400 to-green-600 text-white' :
-                        calculateArtistPoints(artist) >= 4 ? 'bg-gradient-to-r from-blue-400 to-cyan-600 text-white' :
-                        calculateArtistPoints(artist) >= 1 ? 'bg-gradient-to-r from-slate-400 to-slate-600 text-white' :
-                        'bg-gradient-to-r from-red-500 to-pink-600 text-white'
+                        getLetterGrade(calculateArtistPoints(artist)) === 'A' ? 'bg-gradient-to-r from-emerald-400 to-green-600 text-white' :
+                        getLetterGrade(calculateArtistPoints(artist)) === 'B' ? 'bg-gradient-to-r from-blue-400 to-cyan-600 text-white' :
+                        getLetterGrade(calculateArtistPoints(artist)) === 'C' ? 'bg-gradient-to-r from-slate-400 to-slate-600 text-white' :
+                        getLetterGrade(calculateArtistPoints(artist)) === 'D' ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white' :
+                        'bg-gradient-to-r from-red-600 to-pink-700 text-white'
                       }`}>
-                        {calculateArtistPoints(artist)}
+                        {getLetterGrade(calculateArtistPoints(artist))}
                       </span>
                     </div>
                   </td>

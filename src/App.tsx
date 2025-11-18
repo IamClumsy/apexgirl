@@ -181,7 +181,7 @@ function App() {
     const matchesBuild = selectedBuild === '' || 
       (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
     const matchesRanking = selectedRanking === '' || 
-      calculateArtistPoints(artist).toString() === selectedRanking;
+      getLetterGrade(calculateArtistPoints(artist)) === selectedRanking;
     
     return matchesSearch && matchesRank && matchesRole && matchesGenre && matchesSkill && matchesSkill3 && matchesThoughts && matchesBuild && matchesRanking;
   }).sort((a, b) => {
@@ -378,9 +378,11 @@ function App() {
                     className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                   >
                     <option value="">Select Ranking</option>
-                    {[...new Set(artists.map(a => calculateArtistPoints(a)))].sort((a, b) => b - a).map(points => (
-                      <option key={points} value={points.toString()}>{points}</option>
-                    ))}
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
                   </select>
                 </th>
               </tr>

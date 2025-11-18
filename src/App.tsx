@@ -29,6 +29,7 @@ function App() {
   const [selectedSkill3, setSelectedSkill3] = useState(''); // Skill 3
   const [selectedThoughts, setSelectedThoughts] = useState('');
   const [selectedBuild, setSelectedBuild] = useState('');
+  const [selectedRanking, setSelectedRanking] = useState('');
 
   // Save artists to JSON file
   const saveArtists = async (updatedArtists: Artist[]) => {
@@ -169,8 +170,10 @@ function App() {
       (selectedThoughts === 'No' && !artist.thoughts);
     const matchesBuild = selectedBuild === '' || 
       (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
+    const matchesRanking = selectedRanking === '' || 
+      calculateArtistPoints(artist).toString() === selectedRanking;
     
-    return matchesSearch && matchesRank && matchesRole && matchesGenre && matchesSkill && matchesSkill3 && matchesThoughts && matchesBuild;
+    return matchesSearch && matchesRank && matchesRole && matchesGenre && matchesSkill && matchesSkill3 && matchesThoughts && matchesBuild && matchesRanking;
   }).sort((a, b) => {
     const aIsUR = a.rank.startsWith('UR');
     const bIsUR = b.rank.startsWith('UR');
@@ -355,6 +358,18 @@ function App() {
                     <option value="">Select Build</option>
                     {buildOptions.map(build => (
                       <option key={build} value={build}>{build}</option>
+                    ))}
+                  </select>
+                </th>
+                <th className="px-4 py-2">
+                  <select
+                    value={selectedRanking}
+                    onChange={(e) => setSelectedRanking(e.target.value)}
+                    className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                  >
+                    <option value="">Select Ranking</option>
+                    {[...new Set(artists.map(a => calculateArtistPoints(a)))].sort((a, b) => b - a).map(points => (
+                      <option key={points} value={points.toString()}>{points}</option>
                     ))}
                   </select>
                 </th>

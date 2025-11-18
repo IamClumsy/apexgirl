@@ -106,7 +106,8 @@ function App() {
   // Group skills for dropdown headers
   const isGoodBuff = (skill: string) => {
     const t = (skill || '').toLowerCase();
-    return t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage');
+    return t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage') ||
+           t.includes('10% rally fan capacity');
   };
   const isTerribleSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
@@ -119,7 +120,7 @@ function App() {
     return !isTerribleSkill(skill) && (
       t.includes('gold brick gathering') ||
       t.includes('driving speed') ||
-      t.includes('fan capacity')
+      (t.includes('fan capacity') && !t.includes('10% rally fan capacity'))
     );
   };
   const isDirectDamage = (skill: string) => {

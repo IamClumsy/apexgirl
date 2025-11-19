@@ -109,6 +109,10 @@ function App() {
     const isDamageSkill = t.includes('damage') && (t.includes('sec/') || /\d+\s*damage/.test(t));
     if (isDamageSkill) return false;
     
+    // Exclude 200/DPS defending buildings (HQ, GH, Club, LM)
+    const is200DpsDefending = t.includes('200/dps') && (t.includes('defending') || t.includes('hq') || t.includes('gh') || t.includes('club') || t.includes('lm'));
+    if (is200DpsDefending) return false;
+    
     return t.includes('180/dps') || t.includes('200/dps') || 
            t.includes('world building guard') || t.includes('damage wg') ||
            (t.includes('10 sec') && !t.includes('sec/')) || t.includes('10/sec') ||

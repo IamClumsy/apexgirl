@@ -97,6 +97,7 @@ function App() {
   const genres = [...new Set(artists.map(artist => artist.genre))];
   const allSkills = [...new Set(artists.map(artist => artist.skills[1]).filter(Boolean))]; // Only Skill 2
   const skills = allSkills; // Alias for backward compatibility
+  const allSkills3 = [...new Set(artists.map(artist => artist.skills[2]).filter(Boolean))]; // Only Skill 3
   // Group skills for dropdown headers
   const isGoodBuff = (skill: string) => {
     const t = (skill || '').toLowerCase();
@@ -132,6 +133,13 @@ function App() {
   const bestSkills = skills.filter(isDirectDamage);
   const goodSkills = skills.filter(isGoodBuff);
   const okaySkills = skills.filter(s => !bestSkills.includes(s) && !goodSkills.includes(s) && !worstSkills.includes(s) && !terribleSkills.includes(s));
+  
+  // Skill 3 categorization
+  const terribleSkills3 = allSkills3.filter(isTerribleSkill);
+  const worstSkills3 = allSkills3.filter(isWorstSkill);
+  const bestSkills3 = allSkills3.filter(isDirectDamage);
+  const goodSkills3 = allSkills3.filter(isGoodBuff);
+  const okaySkills3 = allSkills3.filter(s => !bestSkills3.includes(s) && !goodSkills3.includes(s) && !worstSkills3.includes(s) && !terribleSkills3.includes(s));
   
   // Calculate artist points: Best=5, Good=3, Okay=1, Worst=0, Terrible=-1
   // Skip skill 1 (index 0) when calculating ranking
@@ -343,27 +351,27 @@ function App() {
                   >
                     <option value="">Select Skill 3</option>
                     <optgroup label="Best">
-                      {bestSkills.map(skill => (
+                      {bestSkills3.map(skill => (
                         <option key={`s3-best-${skill}`} value={skill}>{skill}</option>
                       ))}
                     </optgroup>
                     <optgroup label="Good">
-                      {goodSkills.map(skill => (
+                      {goodSkills3.map(skill => (
                         <option key={`s3-good-${skill}`} value={skill}>{skill}</option>
                       ))}
                     </optgroup>
                     <optgroup label="Okay">
-                      {okaySkills.map(skill => (
+                      {okaySkills3.map(skill => (
                         <option key={`s3-okay-${skill}`} value={skill}>{skill}</option>
                       ))}
                     </optgroup>
                     <optgroup label="Worst">
-                      {worstSkills.map(skill => (
+                      {worstSkills3.map(skill => (
                         <option key={`s3-worst-${skill}`} value={skill}>{skill}</option>
                       ))}
                     </optgroup>
                     <optgroup label="Terrible">
-                      {terribleSkills.map(skill => (
+                      {terribleSkills3.map(skill => (
                         <option key={`s3-terrible-${skill}`} value={skill}>{skill}</option>
                       ))}
                     </optgroup>

@@ -780,5 +780,56 @@
     "rating": null,
     "thoughts": "Yes",
     "build": "Skill Build"
+  },
+  {
+    "id": 47,
+    "name": "Calliope",
+    "group": "No Group",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "Rock",
+    "skills": [
+      "10 sec/1800 Damage",
+      "50% Basic Attack Damage",
+      "10% Fan Capacity"
+    ],
+    "description": "Calliope is a talented Dancer from No Group.",
+    "rating": null,
+    "thoughts": "Yes",
+    "build": "No"
+  },
+  {
+    "id": 48,
+    "name": "Ariadne",
+    "group": "No Group",
+    "rank": "SSR",
+    "position": "Center",
+    "genre": "Pop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "12% Reduction Normal Attack Damage",
+      "50% Basic Attack Damage"
+    ],
+    "description": "Ariadne is a talented Center from No Group.",
+    "rating": null,
+    "thoughts": "Yes",
+    "build": "No"
+  },
+  {
+    "id": 49,
+    "name": "Eirene",
+    "group": "No Group",
+    "rank": "SSR",
+    "position": "Vocalist",
+    "genre": "R&B",
+    "skills": [
+      "10 sec/1800 Damage",
+      "12% Reduction Normal Attack Damage",
+      "50% Basic Attack Damage"
+    ],
+    "description": "Eirene is a talented Dancer from No Group.",
+    "rating": null,
+    "thoughts": "Yes",
+    "build": "No"
   }
 ]

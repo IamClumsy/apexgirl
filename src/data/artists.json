@@ -13,7 +13,6 @@
     ],
     "description": "Kokoro is a talented Center from Tokyo48.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=K",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -31,7 +30,6 @@
     ],
     "description": "Everly is a talented Center from DreamCatcher.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=E",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -49,7 +47,6 @@
     ],
     "description": "Alice is a talented Vocalist from Fantasy Vibes.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -67,7 +64,6 @@
     ],
     "description": "Cindy is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=C",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -85,7 +81,6 @@
     ],
     "description": "Longkui is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=L",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -103,7 +98,6 @@
     ],
     "description": "Anya is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Bad",
     "build": "No"
   },
@@ -121,7 +115,6 @@
     ],
     "description": "Sari is a talented Vocalist from Coral.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=S",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -139,7 +132,6 @@
     ],
     "description": "Natassaja is a talented Vocalist from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=N",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -157,7 +149,6 @@
     ],
     "description": "Caroline is a talented Dancer from Fantasy Vibes.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=C",
     "thoughts": "No",
     "build": "No"
   },
@@ -175,7 +166,6 @@
     ],
     "description": "Audrey is a talented Center from WildFlower.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "No",
     "build": "No"
   },
@@ -193,7 +183,6 @@
     ],
     "description": "Avery is a talented Dancer from Luna.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -211,7 +200,6 @@
     ],
     "description": "Ayaka is a talented Vocalist from Tokyo48.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Defensive Car",
     "build": "No"
   },
@@ -229,7 +217,6 @@
     ],
     "description": "Bella is a talented Vocalist from Luna.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=B",
     "thoughts": "No",
     "build": "No"
   },
@@ -247,7 +234,6 @@
     ],
     "description": "Chizuru is a talented Center from Tokyo48.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=C",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -265,7 +251,6 @@
     ],
     "description": "Aurora is a talented Center from Sparkle Artists.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -283,7 +268,6 @@
     ],
     "description": "Savannah is a talented Dancer from Echo.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=S",
     "thoughts": "No",
     "build": "No"
   },
@@ -301,7 +285,6 @@
     ],
     "description": "Brooklyn is a talented Vocalist from Echo.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=B",
     "thoughts": "No",
     "build": "No"
   },
@@ -319,7 +302,6 @@
     ],
     "description": "Monica is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=M",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -337,7 +319,6 @@
     ],
     "description": "Moana is a talented Vocalist from Coral.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=M",
     "thoughts": "Defensive Car",
     "build": "No"
   },
@@ -355,7 +336,6 @@
     ],
     "description": "Zendaya is a talented Center from Radiance.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=Z",
     "thoughts": "No",
     "build": "No"
   },
@@ -373,7 +353,6 @@
     ],
     "description": "Nova is a talented Dancer from DreamCatcher.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=N",
     "thoughts": "No",
     "build": "No"
   },
@@ -391,7 +370,6 @@
     ],
     "description": "Julia is a talented Vocalist from Radiance.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=J",
     "thoughts": "No",
     "build": "No"
   },
@@ -409,7 +387,6 @@
     ],
     "description": "Sora is a talented Vocalist from Tokyo48.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=S",
     "thoughts": "No",
     "build": "No"
   },
@@ -427,7 +404,6 @@
     ],
     "description": "Kesnia is a talented Vocalist from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=K",
     "thoughts": "Bad",
     "build": "No"
   },
@@ -445,7 +421,6 @@
     ],
     "description": "Ratih is a talented Dancer from Coral.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=R",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -463,7 +438,6 @@
     ],
     "description": "Claire is a talented Center from Sparkle Artists.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=C",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -481,7 +455,6 @@
     ],
     "description": "Paisley is a talented Dancer from Neon.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=P",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -499,7 +472,6 @@
     ],
     "description": "Yuuko is a talented Dancer from Tokyo48.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=Y",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -517,7 +489,6 @@
     ],
     "description": "Skylar is a talented Vocalist from Neon.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=S",
     "thoughts": "No",
     "build": "No"
   },
@@ -535,7 +506,6 @@
     ],
     "description": "Kasha is a talented Dancer from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=K",
     "thoughts": "Yes",
     "build": "Skill Build"
   },
@@ -553,7 +523,6 @@
     ],
     "description": "Talia is a talented Center from Coral.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=T",
     "thoughts": "No",
     "build": "No"
   },
@@ -571,7 +540,6 @@
     ],
     "description": "Leilani is a talented Dancer from Coral.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=L",
     "thoughts": "Offensive Car",
     "build": "Skill Build"
   },
@@ -589,7 +557,6 @@
     ],
     "description": "Alexandra is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -607,7 +574,6 @@
     ],
     "description": "Anastasia is a talented Dancer from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -625,7 +591,6 @@
     ],
     "description": "Josephine is a talented Vocalist from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=J",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -643,7 +608,6 @@
     ],
     "description": "Beatrice is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=B",
     "thoughts": "No",
     "build": "No"
   },
@@ -661,7 +625,6 @@
     ],
     "description": "Isadora is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=I",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -679,7 +642,6 @@
     ],
     "description": "Marguerite is a talented Vocalist from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=M",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -697,7 +659,6 @@
     ],
     "description": "Elizabeth is a talented Dancer from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=E",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -715,7 +676,6 @@
     ],
     "description": "Gabriella is a talented Vocalist from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=G",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -733,7 +693,6 @@
     ],
     "description": "Genevieve is a talented Dancer from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=G",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -751,7 +710,6 @@
     ],
     "description": "Bunga is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=B",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -769,7 +727,6 @@
     ],
     "description": "Ayuni is a talented Vocalist from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -787,7 +744,6 @@
     ],
     "description": "Putri is a talented Dancer from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=P",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -805,7 +761,6 @@
     ],
     "description": "Xenia is a talented Center from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=B",
     "thoughts": "Yes",
     "build": "No"
   },
@@ -823,7 +778,6 @@
     ],
     "description": "Daphne is a talented Vocalist from No Group.",
     "rating": null,
-    "image": "https://via.placeholder.com/200x200?text=A",
     "thoughts": "Yes",
     "build": "Skill Build"
   }

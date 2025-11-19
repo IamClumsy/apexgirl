@@ -5,6 +5,14 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    'text-yellow-300',
+    'border-yellow-300',
+    'text-yellow-400',
+    'border-yellow-400',
+    { pattern: /text-yellow-/ },
+    { pattern: /border-yellow-/ },
+  ],
   theme: {
     extend: {
       colors: {

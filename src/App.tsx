@@ -385,30 +385,6 @@ function App() {
                     </optgroup>
                   </select>
                 </th>
-                <th className="px-6 py-2">
-                  <select
-                    value={selectedThoughts}
-                    onChange={(e) => setSelectedThoughts(e.target.value)}
-                    className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                  >
-                    <option value="">Select Thoughts</option>
-                    {thoughtsOptions.map(thought => (
-                      <option key={thought} value={thought}>{thought}</option>
-                    ))}
-                  </select>
-                </th>
-                <th className="px-6 py-2">
-                  <select
-                    value={selectedBuild}
-                    onChange={(e) => setSelectedBuild(e.target.value)}
-                    className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                  >
-                    <option value="">Select Build</option>
-                    {buildOptions.map(build => (
-                      <option key={build} value={build}>{build}</option>
-                    ))}
-                  </select>
-                </th>
                 <th className="px-4 py-2">
                   <select
                     value={selectedRanking}
@@ -423,6 +399,30 @@ function App() {
                     <option value="F">F</option>
                   </select>
                 </th>
+                <th className="px-6 py-2">
+                  <select
+                    value={selectedBuild}
+                    onChange={(e) => setSelectedBuild(e.target.value)}
+                    className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                  >
+                    <option value="">Select Build</option>
+                    {buildOptions.map(build => (
+                      <option key={build} value={build}>{build}</option>
+                    ))}
+                  </select>
+                </th>
+                <th className="px-6 py-2">
+                  <select
+                    value={selectedThoughts}
+                    onChange={(e) => setSelectedThoughts(e.target.value)}
+                    className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                  >
+                    <option value="">Select Thoughts</option>
+                    {thoughtsOptions.map(thought => (
+                      <option key={thought} value={thought}>{thought}</option>
+                    ))}
+                  </select>
+                </th>
               </tr>
               {/* Column header row */}
               <tr>
@@ -432,9 +432,9 @@ function App() {
                 <th className="px-4 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Rank</th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Skill 2</th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Skill 3</th>
-                <th className="px-6 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Mick's Thoughts</th>
-                <th className="px-6 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Skill Based Build</th>
                 <th className="px-4 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Ranking</th>
+                <th className="px-6 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Skill Based Build</th>
+                <th className="px-6 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Mick's Thoughts</th>
               </tr>
             </thead>
             <tbody className="bg-gray-800/80">
@@ -469,19 +469,30 @@ function App() {
                     <div className="flex justify-center">
                       {artist.skills[1] ? (
                         <span
-                          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                          className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs shadow-sm transition-all duration-200 ${
                             artist.skills[1].toLowerCase().includes('damage to player')
-                              ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-yellow-300 shadow-lg border border-yellow-300 font-bold'
+                              ? 'damage-to-player bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg'
+                              : artist.skills[1].trim() === '60% Basic Attack Damage'
+                              ? 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg'
                               : artist.skills[1].trim() === '50% Basic Attack Damage'
-                              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-green-400 shadow-sm border border-green-400/60 font-semibold'
+                              ? 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm'
                               : [
-                                  '20% Skill Damage', 
-                                  '12% Reduction Normal Attack Damage',
+                                  '180/DPS Attacking Group Center, Club, Landmark',
+                                  '30% Damage World Building Guard',
+                                  '180/DPS Attacking Enemy Company',
+                                  '20% Damage WG / 50% Drive Speed',
+                                  '40% Gold Brick Gathering Speed',
+                                  '75% Drive Speed'
+                                ].includes(artist.skills[1].trim())
+                                ? 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40'
+                                : [
+                                  '20% Skill Damage',
+                                  '30% Skill Damage',
                                   '12% Skill Damage Reduction'
                                 ].includes(artist.skills[1].trim())
-                                ? artist.skills[1].trim() === '20% Skill Damage'
-                                  ? 'bg-gradient-to-r from-emerald-400 to-green-600 text-white shadow-sm border border-emerald-300/60 font-semibold'
-                                  : 'bg-gradient-to-r from-teal-400 to-cyan-600 text-white shadow-sm border border-cyan-300/50'
+                                ? artist.skills[1].trim() === '20% Skill Damage' || artist.skills[1].trim() === '30% Skill Damage'
+                                  ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'
+                                  : 'skill-good bg-gradient-to-r from-teal-400 to-cyan-600 shadow-sm'
                                 : 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-100 border border-slate-500/40'
                           }`}
                         >
@@ -496,19 +507,30 @@ function App() {
                     <div className="flex justify-center">
                       {artist.skills[2] ? (
                         <span
-                          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                          className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs shadow-sm transition-all duration-200 ${
                             artist.skills[2].toLowerCase().includes('damage to player')
-                              ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-yellow-300 shadow-lg border border-yellow-300 font-bold'
+                              ? 'damage-to-player bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg'
+                              : artist.skills[2].trim() === '60% Basic Attack Damage'
+                              ? 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg'
                               : artist.skills[2].trim() === '50% Basic Attack Damage'
-                              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-green-400 shadow-sm border border-green-400/60 font-semibold'
+                              ? 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm'
                               : [
-                                  '20% Skill Damage', 
-                                  '12% Reduction Normal Attack Damage',
+                                  '180/DPS Attacking Group Center, Club, Landmark',
+                                  '30% Damage World Building Guard',
+                                  '180/DPS Attacking Enemy Company',
+                                  '20% Damage WG / 50% Drive Speed',
+                                  '40% Gold Brick Gathering Speed',
+                                  '75% Drive Speed'
+                                ].includes(artist.skills[2].trim())
+                                ? 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40'
+                                : [
+                                  '20% Skill Damage',
+                                  '30% Skill Damage',
                                   '12% Skill Damage Reduction'
                                 ].includes(artist.skills[2].trim())
-                                ? artist.skills[2].trim() === '20% Skill Damage'
-                                  ? 'bg-gradient-to-r from-emerald-400 to-green-600 text-white shadow-sm border border-emerald-300/60 font-semibold'
-                                  : 'bg-gradient-to-r from-teal-400 to-cyan-600 text-white shadow-sm border border-cyan-300/50'
+                                ? artist.skills[2].trim() === '20% Skill Damage' || artist.skills[2].trim() === '30% Skill Damage'
+                                  ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'
+                                  : 'skill-good bg-gradient-to-r from-teal-400 to-cyan-600 shadow-sm'
                                 : 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-100 border border-slate-500/40'
                           }`}
                         >
@@ -518,6 +540,28 @@ function App() {
                         <span className="text-white/50 text-xs">-</span>
                       )}
                     </div>
+                  </td>
+                  <td className="px-4 py-4 whitespace-nowrap">
+                    <div className="text-sm font-bold text-center" title={`Points: ${calculateArtistPoints(artist)}`}>
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 ${
+                        getLetterGrade(calculateArtistPoints(artist)) === 'A' ? 'ranking-a' :
+                        getLetterGrade(calculateArtistPoints(artist)) === 'B' ? 'ranking-b' :
+                        getLetterGrade(calculateArtistPoints(artist)) === 'C' ? 'ranking-c' :
+                        getLetterGrade(calculateArtistPoints(artist)) === 'D' ? 'ranking-d' :
+                        getLetterGrade(calculateArtistPoints(artist)) === 'F' ? 'ranking-f' :
+                        'text-white'
+                      }`}>
+                        {getLetterGrade(calculateArtistPoints(artist))}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-center">
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                      artist.build === 'Skill Build' ? 'bg-gradient-to-r from-sky-500 to-indigo-600 text-white shadow-sm' :
+                      'bg-gradient-to-r from-purple-500 to-fuchsia-600 text-white shadow-sm'
+                    }`}>
+                      {artist.build || 'N/A'}
+                    </span>
                   </td>
                   <td className="px-4 py-4 text-center">
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
@@ -530,33 +574,43 @@ function App() {
                       {artist.thoughts || 'N/A'}
                     </span>
                   </td>
-                  <td className="px-4 py-4 text-center">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                      artist.build === 'Skill Build' ? 'bg-gradient-to-r from-sky-500 to-indigo-600 text-white shadow-sm' :
-                      'bg-gradient-to-r from-purple-500 to-fuchsia-600 text-white shadow-sm'
-                    }`}>
-                      {artist.build || 'N/A'}
-                    </span>
-                  </td>
-                  <td className="px-4 py-4 whitespace-nowrap">
-                    <div className="text-sm font-bold text-center" title={`Points: ${calculateArtistPoints(artist)}`}>
-                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-bold ${
-                        getLetterGrade(calculateArtistPoints(artist)) === 'A' ? 'bg-gradient-to-r from-emerald-400 to-green-600 text-white' :
-                        getLetterGrade(calculateArtistPoints(artist)) === 'B' ? 'bg-gradient-to-r from-blue-400 to-cyan-600 text-white' :
-                        getLetterGrade(calculateArtistPoints(artist)) === 'C' ? 'bg-gradient-to-r from-slate-400 to-slate-600 text-white' :
-                        getLetterGrade(calculateArtistPoints(artist)) === 'D' ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white' :
-                        'bg-gradient-to-r from-red-600 to-pink-700 text-white'
-                      }`}>
-                        {getLetterGrade(calculateArtistPoints(artist))}
-                      </span>
-                    </div>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </main>
+
+      {/* Legend */}
+      <div className="mt-8 mb-4 px-6 py-4 bg-gray-800/60 backdrop-blur-sm rounded-lg border border-fuchsia-400/30 shadow-lg relative z-10 w-full max-w-4xl" style={{marginLeft: 'auto', marginRight: 'auto'}}>
+        <h3 className="text-lg font-semibold text-pink-100 mb-3 text-center" style={{color: '#ffffff'}}>Skill Color Legend</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 damage-to-player">
+              Gold&#9;
+            </span>
+            <span className="text-white text-sm" style={{color: '#ffffff'}}>Best Skills (Damage to Player, 60% Basic Attack Damage)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-700 to-slate-800 skill-good">
+              Green&#9;
+            </span>
+            <span className="text-white text-sm" style={{color: '#ffffff'}}>Good Skills (50% BA Damage, Skill Damage variants, Reductions)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-terrible">
+              Red&#9;
+            </span>
+            <span className="text-white text-sm" style={{color: '#ffffff'}}>Terrible Skills (DPS variants, Drive Speed, etc.)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700" style={{color: '#ffffff', fontWeight: '700'}}>
+              White&#9;
+            </span>
+            <span className="text-white text-sm font-bold" style={{color: '#ffffff'}}>All Other Skills</span>
+          </div>
+        </div>
+      </div>
 
       {/* Footer */}
       <footer className="mt-8 py-4 w-full flex justify-center items-center text-sm relative z-10">

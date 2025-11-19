@@ -2,6 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom damage-to-player highlight style */
+.damage-to-player {
+  color: #fde047 !important;
+  border-color: #fde047 !important;
+  font-weight: 700 !important;
+}
+
+/* Custom 60% Basic Attack Damage highlight style */
+.basic-attack-60 {
+  color: #fde047 !important;
+  border-color: #fde047 !important;
+  font-weight: 700 !important;
+}
+
+/* Custom 50% Basic Attack Damage highlight style */
+.basic-attack-50 {
+  color: #4ade80 !important;
+  border-color: #4ade80 !important;
+  font-weight: 600 !important;
+}
+
+/* Custom 20% Skill Damage highlight style */
+.skill-damage-20 {
+  color: #4ade80 !important;
+  border-color: #6ee7b7 !important;
+  font-weight: 600 !important;
+}
+
+/* Custom good skill category highlight style */
+.skill-good {
+  color: #4ade80 !important;
+  border-color: #4ade80 !important;
+  font-weight: 600 !important;
+}
+
+/* Custom terrible skill category highlight style */
+.skill-terrible {
+  color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  font-weight: 600 !important;
+}
+
+/* Custom specific terrible skills highlight style */
+.skill-specific-terrible {
+  color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  font-weight: 600 !important;
+}
+
+/* Custom ranking styles */
+.ranking-a {
+  color: #fde047 !important;
+  border-color: #fde047 !important;
+  font-weight: 700 !important;
+}
+
+.ranking-b {
+  color: #4ade80 !important;
+  border-color: #4ade80 !important;
+  font-weight: 700 !important;
+}
+
+.ranking-c {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.ranking-d {
+  color: #fb923c !important;
+  border-color: #fb923c !important;
+  font-weight: 700 !important;
+}
+
+.ranking-f {
+  color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  font-weight: 700 !important;
+}
+
 /* Reset and base styles */
 *,
 *::before,
@@ -101,7 +181,7 @@ html {
 
 /* Force table text white but exclude form controls to preserve option visibility */
 .table-force-white,
-.table-force-white :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400) {
+.table-force-white :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400):not(.damage-to-player):not(.basic-attack-50):not(.basic-attack-60):not(.skill-damage-20):not(.skill-good):not(.skill-terrible):not(.skill-specific-terrible):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(.ranking-d):not(.ranking-f) {
   color: #fff !important;
 }
 

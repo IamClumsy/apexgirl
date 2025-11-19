@@ -100,8 +100,7 @@ function App() {
   // Group skills for dropdown headers
   const isGoodBuff = (skill: string) => {
     const t = (skill || '').toLowerCase();
-    return t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage') ||
-           t.includes('driving speed');
+    return t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage');
   };
   const isTerribleSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
@@ -111,7 +110,8 @@ function App() {
     
     return t.includes('180/dps') || t.includes('200/dps') || 
            t.includes('world building guard') || t.includes('damage wg') ||
-           (t.includes('10 sec') && !t.includes('sec/')) || t.includes('10/sec');
+           (t.includes('10 sec') && !t.includes('sec/')) || t.includes('10/sec') ||
+           t.includes('driving speed');
   };
   const isWorstSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();

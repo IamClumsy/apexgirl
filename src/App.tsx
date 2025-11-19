@@ -582,32 +582,34 @@ function App() {
       </main>
 
       {/* Legend */}
-      <div className="mt-8 mb-4 px-6 py-4 bg-gray-800/60 backdrop-blur-sm rounded-lg border border-fuchsia-400/30 shadow-lg relative z-10 w-full max-w-4xl" style={{marginLeft: 'auto', marginRight: 'auto'}}>
-        <h3 className="text-lg font-semibold text-pink-100 mb-3 text-center" style={{color: '#ffffff'}}>Skill Color Legend</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 damage-to-player">
-              Gold&#9;
-            </span>
-            <span className="text-white text-sm" style={{color: '#ffffff'}}>Best Skills (Damage to Player, 60% Basic Attack Damage)</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-700 to-slate-800 skill-good">
-              Green&#9;
-            </span>
-            <span className="text-white text-sm" style={{color: '#ffffff'}}>Good Skills (50% BA Damage, Skill Damage variants, Reductions)</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-terrible">
-              Red&#9;
-            </span>
-            <span className="text-white text-sm" style={{color: '#ffffff'}}>Terrible Skills (DPS variants, Drive Speed, etc.)</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700" style={{color: '#ffffff', fontWeight: '700'}}>
-              White&#9;
-            </span>
-            <span className="text-white text-sm font-bold" style={{color: '#ffffff'}}>All Other Skills</span>
+      <div className="w-full flex justify-center px-4">
+        <div className="mt-8 mb-4 px-6 py-4 bg-gray-800/60 backdrop-blur-sm rounded-lg border border-fuchsia-400/30 shadow-lg relative z-10 max-w-4xl">
+          <h3 className="text-lg font-semibold text-pink-100 mb-3 text-center" style={{color: '#ffffff'}}>Skill Color Legend</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 damage-to-player">
+                Gold&#9;
+              </span>
+              <span className="text-white text-sm" style={{color: '#ffffff'}}>Best Skills (Damage to Player, 60% Basic Attack Damage)</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-700 to-slate-800 skill-good">
+                Green&#9;
+              </span>
+              <span className="text-white text-sm" style={{color: '#ffffff'}}>Good Skills (50% BA Damage, Skill Damage variants, Reductions)</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-terrible">
+                Red&#9;
+              </span>
+              <span className="text-white text-sm" style={{color: '#ffffff'}}>Terrible Skills (DPS variants, Drive Speed, etc.)</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700" style={{color: '#ffffff', fontWeight: '700'}}>
+                White&#9;
+              </span>
+              <span className="text-white text-sm font-bold" style={{color: '#ffffff'}}>All Other Skills</span>
+            </div>
           </div>
         </div>
       </div>

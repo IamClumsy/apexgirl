@@ -95,7 +95,7 @@ function App() {
   const rankOptions = [...new Set(artists.map(artist => artist.rank))];
   const roles = [...new Set(artists.map(artist => artist.position))];
   const genres = [...new Set(artists.map(artist => artist.genre))];
-  const allSkills = [...new Set(artists.flatMap(artist => artist.skills).filter(Boolean))];
+  const allSkills = [...new Set(artists.map(artist => artist.skills[1]).filter(Boolean))]; // Only Skill 2
   const skills = allSkills; // Alias for backward compatibility
   // Group skills for dropdown headers
   const isGoodBuff = (skill: string) => {

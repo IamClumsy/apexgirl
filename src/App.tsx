@@ -213,7 +213,7 @@ function App() {
       
       {/* Page Title */}
       <header className="flex flex-col items-center gap-4 app-header">
-        <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight text-center" style={{ color: '#ffffff' }}>JustMick's Awesome Artist Helper</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse" style={{ color: '#ffffff' }}>JustMick's Awesome Artist Helper</h1>
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -261,20 +261,20 @@ function App() {
       
       {/* Search Filter */}
       <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4">
-        <div className="relative w-full">
+        <div className="relative w-full group">
           <input
             type="text"
             placeholder="Search artists..."
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent shadow-md transition-all duration-200 text-center"
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border-2 border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <FaSearch className="absolute right-3 top-3 text-gray-400" />
+          <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
         </div>
       </div>
 
       {/* Main Content */}
-      <main className="mx-auto w-fit bg-gradient-to-br from-violet-700/80 via-fuchsia-700/75 to-pink-600/80 rounded-2xl text-white shadow-[0_0_25px_rgba(219,39,119,0.4)] border border-pink-400/40 backdrop-blur-md ring-1 ring-fuchsia-400/30">
+      <main className="mx-auto w-fit bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
         <div className="overflow-x-auto">
           <table className="mx-auto table-auto table-force-white table-with-spacing italic">
             <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
@@ -583,8 +583,8 @@ function App() {
 
       {/* Legend */}
       <div className="flex flex-col items-center w-full max-w-4xl mx-auto px-4">
-        <div className="mt-8 mb-4 px-6 py-4 bg-gray-800/95 backdrop-blur-sm rounded-lg border border-fuchsia-400/30 shadow-lg relative z-10 w-full">
-          <h3 className="text-lg font-semibold text-pink-100 mb-3 text-center" style={{color: '#ffffff'}}>Skill Color Legend</h3>
+        <div className="mt-8 mb-4 px-6 py-4 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm rounded-xl border-2 border-fuchsia-400/40 shadow-[0_0_30px_rgba(192,38,211,0.4)] relative z-10 w-full hover:shadow-[0_0_40px_rgba(192,38,211,0.6)] hover:border-pink-400/60 transition-all duration-300">
+          <h3 className="text-xl font-bold text-pink-100 mb-4 text-center drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]" style={{color: '#ffffff'}}>Skill Color Legend</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 damage-to-player">

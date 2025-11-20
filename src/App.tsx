@@ -28,7 +28,6 @@ function App() {
   // Skill 2 and Skill 3 independent filters
   const [selectedSkill, setSelectedSkill] = useState(''); // Skill 2
   const [selectedSkill3, setSelectedSkill3] = useState(''); // Skill 3
-  const [selectedThoughts, setSelectedThoughts] = useState('');
   const [selectedBuild, setSelectedBuild] = useState('');
   const [selectedRanking, setSelectedRanking] = useState('');
   const [selectedPhotos, setSelectedPhotos] = useState('');
@@ -157,11 +156,19 @@ function App() {
     let points = 0;
     artist.skills.forEach((skill, index) => {
       if (!skill || index === 0) return; // Skip skill 1
-      if (bestSkills.includes(skill)) points += 5;
-      else if (goodSkills.includes(skill)) points += 3;
-      else if (okaySkills.includes(skill)) points += 1;
-      else if (worstSkills.includes(skill)) points += 0;
-      else if (terribleSkills.includes(skill)) points += -1;
+      
+      // Use appropriate skill arrays based on index
+      const isBest = index === 1 ? bestSkills.includes(skill) : bestSkills3.includes(skill);
+      const isGood = index === 1 ? goodSkills.includes(skill) : goodSkills3.includes(skill);
+      const isOkay = index === 1 ? okaySkills.includes(skill) : okaySkills3.includes(skill);
+      const isWorst = index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
+      const isTerrible = index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
+      
+      if (isBest) points += 5;
+      else if (isGood) points += 3;
+      else if (isOkay) points += 1;
+      else if (isWorst) points += 0;
+      else if (isTerrible) points += -1;
     });
     return points;
   };
@@ -175,7 +182,6 @@ function App() {
     return 'F';
   };
   
-  const thoughtsOptions = [...new Set(artists.map(artist => artist.thoughts).filter(Boolean))];
   const buildOptions = [...new Set(artists.map(artist => artist.build).filter(Boolean))];
   const photosOptions = [...new Set(artists.map(artist => artist.photos).filter(Boolean))];
 
@@ -192,14 +198,13 @@ function App() {
     const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
     const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
     const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3; // Skill 3 filter
-    const matchesThoughts = selectedThoughts === '' || artist.thoughts === selectedThoughts;
     const matchesBuild = selectedBuild === '' || 
       (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
     const matchesRanking = selectedRanking === '' || 
       getLetterGrade(calculateArtistPoints(artist)) === selectedRanking;
     const matchesPhotos = selectedPhotos === '' || artist.photos === selectedPhotos;
     
-    return matchesSearch && matchesRank && matchesRole && matchesGenre && matchesSkill && matchesSkill3 && matchesThoughts && matchesBuild && matchesRanking && matchesPhotos;
+    return matchesSearch && matchesRank && matchesRole && matchesGenre && matchesSkill && matchesSkill3 && matchesBuild && matchesRanking && matchesPhotos;
   }).sort((a, b) => {
     const aIsUR = a.rank.startsWith('UR');
     const bIsUR = b.rank.startsWith('UR');
@@ -217,7 +222,7 @@ function App() {
       
       {/* Page Title */}
       <header className="flex flex-col items-center gap-4 app-header">
-        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse" style={{ color: '#ffffff' }}>JustMick's Awesome Artist Helper</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse" style={{ color: '#ffffff' }}>Mick's Awesome Artist Helper</h1>
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -427,18 +432,6 @@ function App() {
                     ))}
                   </select>
                 </th>
-                <th className="px-6 py-2">
-                  <select
-                    value={selectedThoughts}
-                    onChange={(e) => setSelectedThoughts(e.target.value)}
-                    className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                  >
-                    <option value="">Select Thoughts</option>
-                    {thoughtsOptions.map(thought => (
-                      <option key={thought} value={thought}>{thought}</option>
-                    ))}
-                  </select>
-                </th>
               </tr>
               {/* Column header row */}
               <tr>
@@ -450,8 +443,7 @@ function App() {
                 <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Skill 3</th>
                 <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Ranking</th>
                 <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Photos</th>
-                <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Skill Based Build</th>
-                <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Mick's Thoughts</th>
+                <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">Skill Build</th>
               </tr>
             </thead>
             <tbody className="bg-gray-800/80">
@@ -583,17 +575,6 @@ function App() {
                       'bg-gradient-to-r from-purple-500 to-fuchsia-600 text-white shadow-sm'
                     }`}>
                       {artist.build || 'N/A'}
-                    </span>
-                  </td>
-                  <td className="px-2 py-3 text-center">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                      artist.thoughts === 'Yes' ? 'bg-gradient-to-r from-green-400 to-emerald-600 text-white shadow-sm' :
-                      artist.thoughts === 'No' ? 'bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-sm' :
-                      artist.thoughts === 'If Nothing Better' ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-white shadow-sm' :
-                      artist.thoughts === 'Bad' ? 'bg-gradient-to-r from-rose-700 to-red-800 text-white shadow-sm' :
-                      'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-100'
-                    }`}>
-                      {artist.thoughts || 'N/A'}
                     </span>
                   </td>
                 </tr>

@@ -92,6 +92,36 @@ function App() {
     }
   }, [artists]);
 
+  // Ensure legend width matches table width so it centers visually under the table
+  useEffect(() => {
+    const updateLegendWidth = () => {
+      const table = document.querySelector('table');
+      const legend = document.getElementById('skill-legend');
+      const main = document.querySelector('main');
+      if (table && legend && main) {
+        const tableRect = (table as HTMLElement).getBoundingClientRect();
+        const mainRect = (main as HTMLElement).getBoundingClientRect();
+        const width = Math.round(tableRect.width);
+        const leftOffset = Math.round(tableRect.left - mainRect.left);
+        const legendEl = legend as HTMLElement;
+        legendEl.style.boxSizing = 'border-box';
+        legendEl.style.width = `${width}px`;
+        // override mx-auto to position directly under table
+        legendEl.style.marginLeft = `${leftOffset}px`;
+        // helpful debug info in console
+        // eslint-disable-next-line no-console
+        console.log('[legend-align] tableWidth=', width, 'leftOffset=', leftOffset);
+      }
+    };
+    // Run after a tick to ensure layout settled
+    const t = setTimeout(updateLegendWidth, 50);
+    window.addEventListener('resize', updateLegendWidth);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('resize', updateLegendWidth);
+    };
+  }, [artists]);
+
   // Get unique values for filters
   const rankOptions = [...new Set(artists.map(artist => artist.rank))];
   const roles = [...new Set(artists.map(artist => artist.position))];
@@ -283,7 +313,7 @@ function App() {
       </div>
 
       {/* Main Content */}
-      <main className="w-fit bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
+      <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
         <div className="overflow-x-auto">
           <table className="table-auto table-force-white table-with-spacing italic">
             <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
@@ -582,11 +612,9 @@ function App() {
             </tbody>
           </table>
         </div>
-      </main>
-
-      {/* Legend */}
-      <div className="mt-8 mb-4 px-6 py-4 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm rounded-xl border-2 border-fuchsia-400/40 shadow-[0_0_30px_rgba(192,38,211,0.4)] relative z-10 w-fit hover:shadow-[0_0_40px_rgba(192,38,211,0.6)] hover:border-pink-400/60 transition-all duration-300">
-        <h3 className="text-xl font-bold text-pink-100 mb-4 text-center drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]" style={{color: '#ffffff'}}>Skill Color Legend</h3>
+        {/* Legend (moved inside main to align with table width) */}
+        <div id="skill-legend" className="mt-8 mb-4 px-6 py-4 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm rounded-xl border-2 border-fuchsia-400/40 shadow-[0_0_30px_rgba(192,38,211,0.4)] relative z-10 w-fit mx-auto hover:shadow-[0_0_40px_rgba(192,38,211,0.6)] hover:border-pink-400/60 transition-all duration-300">
+          <h3 className="text-xl font-bold text-pink-100 mb-4 text-center drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]" style={{color: '#ffffff'}}>Skill Color Legend</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 damage-to-player">
@@ -614,6 +642,9 @@ function App() {
             </div>
           </div>
         </div>
+      </main>
+
+      
 
       {/* Footer */}
       <footer className="mt-8 py-4 w-full flex justify-center items-center text-sm relative z-10">

@@ -105,7 +105,7 @@
     "rating": null,
     "thoughts": "Bad",
     "build": "No",
-    "photos": "Own Photos"
+    "photos": "Universal"
   },
   {
     "id": 7,
@@ -537,7 +537,7 @@
     "rating": null,
     "thoughts": "Yes",
     "build": "Yes",
-    "photos": "Own Photos"
+    "photos": "Universal"
   },
   {
     "id": 31,

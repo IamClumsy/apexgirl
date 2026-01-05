@@ -682,5 +682,77 @@
     "thoughts": "Yes",
     "build": "No",
     "photos": "Universal"
+  },
+  {
+    "id": 51,
+    "name": "Haruki",
+    "group": "Rina",
+    "rank": "SSR",
+    "position": "Center",
+    "genre": "Hip Hop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "60% Basic Attack Damage",
+      "12% Fan Capacity"
+    ],
+    "description": "Haruki is a talented Center from Rina.",
+    "rating": null,
+    "thoughts": "Yes",
+    "build": "Yes",
+    "photos": "Universal"
+  },
+  {
+    "id": 52,
+    "name": "Mellissa",
+    "group": "No Group",
+    "rank": "SSR",
+    "position": "Center",
+    "genre": "Rock",
+    "skills": [
+      "10 sec/1800 Damage",
+      "50% Basic Attack Damage",
+      "10% Fan Capacity"
+    ],
+    "description": "Mellissa is a talented Center from No Group.",
+    "rating": null,
+    "thoughts": "Yes",
+    "build": "Yes",
+    "photos": "Universal"
+  },
+  {
+    "id": 53,
+    "name": "Riku",
+    "group": "Rina",
+    "rank": "SSR",
+    "position": "Vocalist",
+    "genre": "Rock",
+    "skills": [
+      "10 sec/1800 Damage",
+      "15% Reduction Normal Attack Damage",
+      "25% Damage to Player"
+    ],
+    "description": "Riku is a talented Vocalist from Rina.",
+    "rating": null,
+    "thoughts": "Yes",
+    "build": "Yes",
+    "photos": "Universal"
+  },
+  {
+    "id": 54,
+    "name": "Miyuki",
+    "group": "Rina",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "Electronic",
+    "skills": [
+      "10 sec/1800 Damage",
+      "15% Reduction Normal Attack Damage",
+      "60% Basic Attack Damage"
+    ],
+    "description": "Miyuki is a talented Dancer from Rina.",
+    "rating": null,
+    "thoughts": "Yes",
+    "build": "Yes",
+    "photos": "Universal"
   }
 ]

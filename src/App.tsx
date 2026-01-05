@@ -252,7 +252,7 @@ function App() {
       
       {/* Page Title */}
       <header className="flex flex-col items-center gap-4 app-header">
-        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse" style={{ color: '#ffffff' }}>Mick's Awesome Artist Helper</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse" style={{ color: '#ffffff' }}>Mick's Awesome SSR Artist Helper</h1>
         <div className="flex items-center gap-3">
           <button
             type="button"

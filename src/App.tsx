@@ -614,6 +614,12 @@ function App() {
               </span>
               <span className="text-white text-sm font-bold" style={{color: '#ffffff'}}>All Other Skills</span>
             </div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 gold-text">
+                  Orange&#9;
+                </span>
+                <span className="text-white text-sm" style={{color: '#fb923c', fontWeight: 700}}>Gold Gathering Skill</span>
+              </div>
           </div>
         </div>
       </main>

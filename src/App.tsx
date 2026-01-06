@@ -180,7 +180,7 @@ function App() {
   const goodSkills3 = allSkills3.filter(isGoodBuff);
   const okaySkills3 = allSkills3.filter(s => !bestSkills3.includes(s) && !goodSkills3.includes(s) && !worstSkills3.includes(s) && !terribleSkills3.includes(s));
   
-  // Calculate artist points: Best=5, Good=3, Okay=1, Worst=0, Terrible=-1
+  // Calculate artist points: Best=10, Good=6, Okay=3, Worst=0, Terrible=-1
   // Skip skill 1 (index 0) when calculating ranking
   const calculateArtistPoints = (artist: Artist) => {
     let points = 0;
@@ -194,9 +194,9 @@ function App() {
       const isWorst = index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
       const isTerrible = index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
       
-      if (isBest) points += 5;
-      else if (isGood) points += 3;
-      else if (isOkay) points += 1;
+      if (isBest) points += 10;
+      else if (isGood) points += 6;
+      else if (isOkay) points += 3;
       else if (isWorst) points += 0;
       else if (isTerrible) points += -1;
     });

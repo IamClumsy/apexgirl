@@ -515,6 +515,8 @@ function App() {
                               ? 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg'
                               : artist.skills[1].trim() === '50% Basic Attack Damage'
                               ? 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm'
+                              : artist.skills[1].toLowerCase().includes('gold brick gathering speed')
+                              ? 'bg-gradient-to-r from-orange-400 to-orange-600 text-white shadow-sm border border-orange-500/40'
                               : [
                                   '180/DPS Attacking Group Center, Club, Landmark',
                                   '30% Damage World Building Guard',
@@ -553,6 +555,8 @@ function App() {
                               ? 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg'
                               : artist.skills[2].trim() === '50% Basic Attack Damage'
                               ? 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm'
+                              : artist.skills[2].toLowerCase().includes('gold brick gathering speed')
+                              ? 'bg-gradient-to-r from-orange-400 to-orange-600 text-white shadow-sm border border-orange-500/40'
                               : [
                                   '180/DPS Attacking Group Center, Club, Landmark',
                                   '30% Damage World Building Guard',

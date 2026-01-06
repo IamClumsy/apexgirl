@@ -203,10 +203,10 @@ function App() {
     return points;
   };
   
-  // Convert points to letter grade: 13+=S, 8-12=A, 4-7=B, 0-4=C, -1=F
+  // Convert points to letter grade: 14+=S, 9-13=A, 4-7=B, 0-4=C, -1=F
   const getLetterGrade = (points: number) => {
-    if (points >= 13) return 'S';
-    if (points >= 8) return 'A';
+    if (points >= 14) return 'S';
+    if (points >= 9) return 'A';
     if (points >= 4) return 'B';
     if (points >= 0) return 'C';
     return 'F';

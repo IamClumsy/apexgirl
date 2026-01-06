@@ -51,6 +51,13 @@
   font-weight: 600 !important;
 }
 
+/* Gold Brick text (forced exception from table white rule) */
+.gold-text {
+  color: #fb923c !important;
+  border-color: #fb923c !important;
+  font-weight: 600 !important;
+}
+
 /* Custom ranking styles */
 .ranking-a {
   color: #fde047 !important;
@@ -178,7 +185,7 @@ html {
 
 /* Force table text white but exclude form controls to preserve option visibility */
 .table-force-white,
-.table-force-white :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400):not(.damage-to-player):not(.basic-attack-50):not(.basic-attack-60):not(.skill-damage-20):not(.skill-good):not(.skill-terrible):not(.skill-specific-terrible):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(.ranking-d):not(.ranking-f) {
+.table-force-white :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400):not(.damage-to-player):not(.basic-attack-50):not(.basic-attack-60):not(.skill-damage-20):not(.skill-good):not(.skill-terrible):not(.skill-specific-terrible):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(.ranking-d):not(.ranking-f):not(.gold-text) {
   color: #fff !important;
 }
 

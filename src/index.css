@@ -58,6 +58,13 @@
   font-weight: 600 !important;
 }
 
+/* Blue text (forced exception from table white rule) */
+.blue-text {
+  color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  font-weight: 600 !important;
+}
+
 /* Force legend labels white when necessary */
 .legend-white {
   color: #ffffff !important;
@@ -190,7 +197,7 @@ html {
 
 /* Force table text white but exclude form controls to preserve option visibility */
 .table-force-white,
-.table-force-white :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400):not(.damage-to-player):not(.basic-attack-50):not(.basic-attack-60):not(.skill-damage-20):not(.skill-good):not(.skill-terrible):not(.skill-specific-terrible):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(.ranking-d):not(.ranking-f):not(.gold-text) {
+.table-force-white :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400):not(.damage-to-player):not(.basic-attack-50):not(.basic-attack-60):not(.skill-damage-20):not(.skill-good):not(.skill-terrible):not(.skill-specific-terrible):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(.ranking-d):not(.ranking-f):not(.gold-text):not(.blue-text) {
   color: #fff !important;
 }
 

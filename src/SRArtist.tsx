@@ -439,8 +439,13 @@ function SRArtist() {
     }
     if (t.includes('reduce') && (t.includes('normal damage taken') || t.includes('skill damage taken')))
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
-    if (t.includes('fan capacity') && !t.includes('rally'))
+    if (t.includes('fan capacity') && !t.includes('rally')) {
+      // 2% Fan Capacity should be white text
+      if (t.includes('2% fan capacity')) {
+        return 'bg-gradient-to-r from-slate-600 to-slate-700 text-white border border-slate-500/40';
+      }
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
+    }
     return 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-100 border border-slate-500/40';
   };
 

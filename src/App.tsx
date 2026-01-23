@@ -567,7 +567,7 @@ function App() {
                 </tr>
                 {/* Search bar row */}
                 <tr>
-                  <th colSpan={9} className="px-2 py-2">
+                  <th className="px-2 py-2">
                     <div className="relative group">
                       <input
                         type="text"
@@ -579,6 +579,7 @@ function App() {
                       <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
                     </div>
                   </th>
+                  <th colSpan={8} className="px-2 py-2"></th>
                 </tr>
                 {/* Column header row */}
                 <tr>

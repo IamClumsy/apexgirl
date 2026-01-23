@@ -473,7 +473,7 @@ function App() {
                       </optgroup>
                     </select>
                   </th>
-                  <th className="px-6 py-2">
+                  <th className="px-2 py-2">
                     <select
                       value={selectedSkill3}
                       onChange={(e) => setSelectedSkill3(e.target.value)}
@@ -517,7 +517,7 @@ function App() {
                       </optgroup>
                     </select>
                   </th>
-                  <th className="px-4 py-2">
+                  <th className="px-2 py-2">
                     <select
                       value={selectedRanking}
                       onChange={(e) => setSelectedRanking(e.target.value)}

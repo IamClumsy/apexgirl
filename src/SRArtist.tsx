@@ -439,6 +439,11 @@ function SRArtist() {
       );
     })
     .sort((a, b) => {
+      // Sort SR artists before R artists
+      const aIsSR = a.rank === 'SR';
+      const bIsSR = b.rank === 'SR';
+      if (aIsSR !== bIsSR) return aIsSR ? -1 : 1; // SR first, then R
+      
       const aIsUR = a.rank.startsWith('UR');
       const bIsUR = b.rank.startsWith('UR');
       if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom

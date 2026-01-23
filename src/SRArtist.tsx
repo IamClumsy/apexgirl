@@ -505,7 +505,7 @@ function SRArtist() {
             className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse"
             style={{ color: '#ffffff' }}
           >
-            {showAddForm ? 'Add New Artist' : "Mick's Awesome non-SSR Artist Helper"}
+            {showAddForm ? 'Add New Artist' : "Mick's Awesome Non-SSR Artist Helper"}
           </h1>
           <div className="flex items-center gap-3">
             <button

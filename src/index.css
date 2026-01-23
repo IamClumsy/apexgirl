@@ -232,17 +232,17 @@ footer * {
 /* Table spacing - force horizontal gaps between columns */
 .table-with-spacing {
   border-collapse: separate !important;
-  border-spacing: 1rem 0 !important;
+  border-spacing: 0.25rem 0 !important;
 }
 
 @media (min-width: 768px) {
   .table-with-spacing {
-    border-spacing: 1.5rem 0 !important;
+    border-spacing: 0.375rem 0 !important;
   }
 }
 
 @media (min-width: 1024px) {
   .table-with-spacing {
-    border-spacing: 2rem 0 !important;
+    border-spacing: 0.5rem 0 !important;
   }
 }

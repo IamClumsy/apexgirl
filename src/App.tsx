@@ -565,19 +565,25 @@ function App() {
                     </select>
                   </th>
                 </tr>
-                {/* Column header row */}
+                {/* Search bar row */}
                 <tr>
-                  <th className="px-2 py-3">
+                  <th colSpan={9} className="px-2 py-2">
                     <div className="relative group">
                       <input
                         type="text"
                         placeholder="Search artists..."
-                        className="w-full px-2 py-1 rounded-md bg-gray-800/90 border border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] text-xs"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border-2 border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                       />
-                      <FaSearch className="absolute right-2 top-1.5 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" style={{ fontSize: '0.75rem' }} />
+                      <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
                     </div>
+                  </th>
+                </tr>
+                {/* Column header row */}
+                <tr>
+                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                    Artist
                   </th>
                   <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Genre

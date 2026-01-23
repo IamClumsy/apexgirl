@@ -73,7 +73,7 @@ interface CsvRow {
   'Skill 2': string;
   'Skill 3': string;
   'Micks Thoughts are they Good': string;
-  'Skill Build Worthy': string;
+  'Skill Build Worthy'?: string;
 }
 
 function CreateArtist() {
@@ -92,7 +92,7 @@ function CreateArtist() {
   useEffect(() => {
     const loadCsvData = async () => {
       try {
-        const response = await fetch('/src/data/artists-and-records-1.9.csv');
+        const response = await fetch('/src/data/artists-SR-only-1.1.csv');
         const csvText = await response.text();
         const records: CsvRow[] = parseCSV(csvText);
 
@@ -104,7 +104,7 @@ function CreateArtist() {
           ].filter(Boolean);
 
           const thoughts = row['Micks Thoughts are they Good'] || '';
-          const buildWorthy = row['Skill Build Worthy'] === 'Yes' ? 'Yes' : 'No';
+          const buildWorthy = row['Skill Build Worthy'] ? row['Skill Build Worthy'] === 'Yes' : false;
 
           return {
             id: index + 1,
@@ -117,7 +117,7 @@ function CreateArtist() {
             description: `${row.Name} is a talented ${row.Position} from ${row.Group === 'No Group' ? 'None' : row.Group}.`,
             rating: null,
             thoughts: thoughts,
-            build: buildWorthy === 'Yes' ? 'Skill Build' : '',
+            build: buildWorthy ? 'Skill Build' : '',
             photos: 'Universal',
           };
         });

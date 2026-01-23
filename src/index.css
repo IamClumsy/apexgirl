@@ -121,6 +121,12 @@ body,
   padding: 0;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 body {
   min-height: 100vh;
   display: flex;

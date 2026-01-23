@@ -76,7 +76,7 @@ interface CsvRow {
   'Skill Build Worthy'?: string;
 }
 
-function CreateArtist() {
+function SRArtist() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
@@ -1031,4 +1031,4 @@ function CreateArtist() {
   );
 }
 
-export default CreateArtist;
+export default SRArtist;

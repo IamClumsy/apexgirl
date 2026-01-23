@@ -8,9 +8,44 @@ import {
   FaUserTie,
   FaMusic,
   FaDownload,
+  FaArrowLeft,
 } from 'react-icons/fa';
-import artistsData from './data/artists.json';
-// File saving functionality would be implemented here in a production environment
+// CSV parsing function
+function parseCSV(csvText: string): CsvRow[] {
+  const lines = csvText.trim().split('\n');
+  const headers = lines[0].split(',').map((h) => h.trim());
+  const rows: CsvRow[] = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i];
+    const values: string[] = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let j = 0; j < line.length; j++) {
+      const char = line[j];
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        values.push(current.trim());
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    values.push(current.trim());
+
+    if (values.length === headers.length) {
+      const row: any = {};
+      headers.forEach((header, index) => {
+        row[header] = values[index] || '';
+      });
+      rows.push(row as CsvRow);
+    }
+  }
+
+  return rows;
+}
 
 interface Artist {
   id: number;
@@ -28,80 +63,75 @@ interface Artist {
   photos?: string;
 }
 
-function App() {
+interface CsvRow {
+  Name: string;
+  Group: string;
+  Rank: string;
+  Position: string;
+  Genre: string;
+  'Skill 1': string;
+  'Skill 2': string;
+  'Skill 3': string;
+  'Micks Thoughts are they Good': string;
+  'Skill Build Worthy': string;
+}
+
+function CreateArtist() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  // Skill 2 and Skill 3 independent filters
-  const [selectedSkill, setSelectedSkill] = useState(''); // Skill 2
-  const [selectedSkill3, setSelectedSkill3] = useState(''); // Skill 3
+  const [selectedSkill, setSelectedSkill] = useState('');
+  const [selectedSkill3, setSelectedSkill3] = useState('');
   const [selectedBuild, setSelectedBuild] = useState('');
   const [selectedRanking, setSelectedRanking] = useState('');
   const [selectedPhotos, setSelectedPhotos] = useState('');
 
-  // Save artists to JSON file
-  const saveArtists = async (updatedArtists: Artist[]) => {
-    try {
-      // In a real app, you would send this to a backend API
-      // For this example, we'll just update the state
-      setArtists(updatedArtists);
-
-      // In a real Electron app, you could use the following:
-      // await writeFile(
-      //   './src/data/artists.json',
-      //   JSON.stringify(updatedArtists, null, 2)
-      // );
-
-      console.log('Artists saved successfully!');
-    } catch (error) {
-      console.error('Error saving artists:', error);
-    }
-  };
-
-  // Handle adding a new artist
-  const handleAddArtist = (artistData: Artist) => {
-    const updatedArtists = [...artists, artistData];
-    saveArtists(updatedArtists);
-  };
-
-  // Load artists data on component mount
+  // Load CSV data
   useEffect(() => {
-    try {
-      // Always load from artistsData to ensure we have the latest data
-      setArtists(artistsData);
-      // Save to localStorage
-      localStorage.setItem('apexArtists', JSON.stringify(artistsData));
-    } catch (error) {
-      console.error('Error loading artists:', error);
-      // Fall back to initial data if there's an error
-      setArtists(artistsData);
-    }
+    const loadCsvData = async () => {
+      try {
+        const response = await fetch('/src/data/artists-and-records-1.9.csv');
+        const csvText = await response.text();
+        const records: CsvRow[] = parseCSV(csvText);
 
-    // Listen for messages from the add-artist window
-    const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'ADD_ARTIST') {
-        handleAddArtist(event.data.artist);
+        const processedArtists: Artist[] = records.map((row, index) => {
+          const skills = [
+            row['Skill 1'],
+            row['Skill 2'],
+            row['Skill 3'],
+          ].filter(Boolean);
+
+          const thoughts = row['Micks Thoughts are they Good'] || '';
+          const buildWorthy = row['Skill Build Worthy'] === 'Yes' ? 'Yes' : 'No';
+
+          return {
+            id: index + 1,
+            name: row.Name,
+            group: row.Group === 'No Group' ? 'None' : row.Group,
+            rank: row.Rank,
+            position: row.Position,
+            genre: row.Genre,
+            skills: skills,
+            description: `${row.Name} is a talented ${row.Position} from ${row.Group === 'No Group' ? 'None' : row.Group}.`,
+            rating: null,
+            thoughts: thoughts,
+            build: buildWorthy === 'Yes' ? 'Skill Build' : '',
+            photos: 'Universal',
+          };
+        });
+
+        setArtists(processedArtists);
+      } catch (error) {
+        console.error('Error loading CSV data:', error);
       }
     };
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    loadCsvData();
   }, []);
 
-  // Save to localStorage whenever artists change
-  useEffect(() => {
-    if (artists.length > 0) {
-      try {
-        localStorage.setItem('apexArtists', JSON.stringify(artists));
-      } catch (error) {
-        console.error('Error saving artists to localStorage:', error);
-      }
-    }
-  }, [artists]);
-
-  // Ensure legend width matches table width so it centers visually under the table
+  // Ensure legend width matches table width
   useEffect(() => {
     const updateLegendWidth = () => {
       const table = document.querySelector('table');
@@ -115,14 +145,9 @@ function App() {
         const legendEl = legend as HTMLElement;
         legendEl.style.boxSizing = 'border-box';
         legendEl.style.width = 'auto';
-        // position under table
         legendEl.style.marginLeft = `${leftOffset}px`;
-        // helpful debug info in console
-        // eslint-disable-next-line no-console
-        console.log('[legend-align] tableWidth=', width, 'leftOffset=', leftOffset);
       }
     };
-    // Run after a tick to ensure layout settled
     const t = setTimeout(updateLegendWidth, 50);
     window.addEventListener('resize', updateLegendWidth);
     return () => {
@@ -135,15 +160,14 @@ function App() {
   const rankOptions = [...new Set(artists.map((artist) => artist.rank))];
   const roles = [...new Set(artists.map((artist) => artist.position))];
   const genres = [...new Set(artists.map((artist) => artist.genre))];
-  const allSkills = [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))]; // Only Skill 2
-  const skills = allSkills; // Alias for backward compatibility
-  const allSkills3 = [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))]; // Only Skill 3
-  // Group skills for dropdown headers
+  const allSkills = [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))];
+  const skills = allSkills;
+  const allSkills3 = [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))];
+
+  // Skill categorization functions (same as App.tsx)
   const isGoodBuff = (skill: string) => {
     const t = (skill || '').toLowerCase();
-    // Exclude 60% basic attack damage (moved to BEST)
     if (t.includes('60%') && t.includes('basic attack damage')) return false;
-    // Exclude reduction skills (they get 3 points as Okay)
     if (t.includes('reduc')) return false;
     return (
       t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage')
@@ -151,11 +175,8 @@ function App() {
   };
   const isTerribleSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
-    // Exclude damage-dealing skills like "10 sec/1800 Damage"
     const isDamageSkill = t.includes('damage') && (t.includes('sec/') || /\d+\s*damage/.test(t));
     if (isDamageSkill) return false;
-
-    // Exclude 200/DPS defending buildings (HQ, GH, Club, LM)
     const is200DpsDefending =
       t.includes('200/dps') &&
       (t.includes('defending') ||
@@ -164,7 +185,6 @@ function App() {
         t.includes('club') ||
         t.includes('lm'));
     if (is200DpsDefending) return false;
-
     return (
       t.includes('180/dps') ||
       t.includes('200/dps') ||
@@ -185,9 +205,7 @@ function App() {
   };
   const isDirectDamage = (skill: string) => {
     const t = (skill || '').toLowerCase();
-    // Include 60% basic attack damage as BEST
     if (t.includes('60%') && t.includes('basic attack damage')) return true;
-    // Direct damage: time-based or explicit damage that isn't a reduction/taken modifier and not the Good buffs
     const mentionsDamage = t.includes('damage') && !t.includes('reduc') && !t.includes('taken');
     const timeBased = t.includes(' sec/') || /\bsec\b/.test(t);
     return (
@@ -209,7 +227,6 @@ function App() {
       !terribleSkills.includes(s)
   );
 
-  // Skill 3 categorization
   const terribleSkills3 = allSkills3.filter(isTerribleSkill);
   const worstSkills3 = allSkills3.filter(isWorstSkill);
   const bestSkills3 = allSkills3.filter(isDirectDamage);
@@ -222,21 +239,16 @@ function App() {
       !terribleSkills3.includes(s)
   );
 
-  // Calculate artist points: Best=10, Good=6, Okay=3, Worst=0, Terrible=-1
-  // Skip skill 1 (index 0) when calculating ranking
   const calculateArtistPoints = (artist: Artist) => {
     let points = 0;
     artist.skills.forEach((skill, index) => {
-      if (!skill || index === 0) return; // Skip skill 1
-
-      // Use appropriate skill arrays based on index
+      if (!skill || index === 0) return;
       const isBest = index === 1 ? bestSkills.includes(skill) : bestSkills3.includes(skill);
       const isGood = index === 1 ? goodSkills.includes(skill) : goodSkills3.includes(skill);
       const isOkay = index === 1 ? okaySkills.includes(skill) : okaySkills3.includes(skill);
       const isWorst = index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
       const isTerrible =
         index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
-
       if (isBest) points += 10;
       else if (isGood) points += 6;
       else if (isOkay) points += 3;
@@ -246,7 +258,6 @@ function App() {
     return points;
   };
 
-  // Convert points to letter grade: 14+=S, 10-13=A, 5-9=B, 0-4=C, -1=F
   const getLetterGrade = (points: number) => {
     if (points >= 14) return 'S';
     if (points >= 10) return 'A';
@@ -258,7 +269,6 @@ function App() {
   const buildOptions = [...new Set(artists.map((artist) => artist.build).filter(Boolean))];
   const photosOptions = [...new Set(artists.map((artist) => artist.photos).filter(Boolean))];
 
-  // Filter artists
   const filteredArtists = artists
     .filter((artist: Artist) => {
       const searchLower = searchTerm.toLowerCase();
@@ -266,19 +276,17 @@ function App() {
         artist.name.toLowerCase().includes(searchLower) ||
         artist.group?.toLowerCase().includes(searchLower) ||
         artist.skills.some((skill: string) => skill && skill.toLowerCase().includes(searchLower));
-
       const matchesRank = selectedRank === '' || artist.rank === selectedRank;
       const matchesRole = selectedRole === '' || artist.position === selectedRole;
       const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
-      const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
-      const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3; // Skill 3 filter
+      const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill;
+      const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3;
       const matchesBuild =
         selectedBuild === '' ||
         (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
       const matchesRanking =
         selectedRanking === '' || getLetterGrade(calculateArtistPoints(artist)) === selectedRanking;
       const matchesPhotos = selectedPhotos === '' || artist.photos === selectedPhotos;
-
       return (
         matchesSearch &&
         matchesRank &&
@@ -294,7 +302,7 @@ function App() {
     .sort((a, b) => {
       const aIsUR = a.rank.startsWith('UR');
       const bIsUR = b.rank.startsWith('UR');
-      if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom
+      if (aIsUR !== bIsUR) return aIsUR ? 1 : -1;
       const genreCompare = a.genre.localeCompare(b.genre);
       if (genreCompare !== 0) return genreCompare;
       const roleCompare = a.position.localeCompare(b.position);
@@ -302,7 +310,6 @@ function App() {
       return a.name.localeCompare(b.name);
     });
 
-  // Function to get skill badge class
   const getSkillClass = (skill: string) => {
     if (!skill) return 'bg-blue-500 text-white';
     const trimmed = skill.trim();
@@ -343,40 +350,18 @@ function App() {
             className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse"
             style={{ color: '#ffffff' }}
           >
-            Mick's Awesome SSR Artist Helper
+            Create Artist Page (CSV Data)
           </h1>
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => {
-                console.log('Add Artist button clicked');
-                (window as any).__artistData = {
-                  roles: roles,
-                  genres: genres,
-                  allSkills: skills,
-                  nextId: Math.max(0, ...artists.map((a) => a.id)) + 1,
-                };
-                window.open(
-                  '/add-artist.html',
-                  'AddArtistModal',
-                  'width=500,height=700,resizable=yes,scrollbars=yes'
-                );
+                window.location.href = '/';
               }}
-              className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
-              title="Add New Artist"
+              className="p-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-full hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
+              title="Back to Main"
             >
-              <FaMusic size={24} />
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                window.location.href = '/?page=create';
-              }}
-              className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full hover:from-purple-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform opacity-20 hover:opacity-100"
-              title="Create Artist Page (Hidden)"
-              style={{ opacity: 0.1 }}
-            >
-              <FaUserTie size={24} />
+              <FaArrowLeft size={24} />
             </button>
             <button
               type="button"
@@ -387,18 +372,17 @@ function App() {
                   const url = URL.createObjectURL(blob);
                   const a = document.createElement('a');
                   a.href = url;
-                  a.download = 'artist-and-records-1.9.json';
+                  a.download = 'artists-from-csv.json';
                   document.body.appendChild(a);
                   a.click();
                   document.body.removeChild(a);
                   URL.revokeObjectURL(url);
-                  console.log('Exported artist-and-records-1.9.json');
                 } catch (err) {
                   console.error('Failed to export artists', err);
                 }
               }}
               className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
-              title="Download artist-and-records-1.9.json"
+              title="Download JSON"
             >
               <FaDownload size={22} />
             </button>
@@ -564,10 +548,10 @@ function App() {
                       className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Ranking</option>
+                      <option value="S">S</option>
                       <option value="A">A</option>
                       <option value="B">B</option>
                       <option value="C">C</option>
-                      <option value="D">D</option>
                       <option value="F">F</option>
                     </select>
                   </th>
@@ -730,7 +714,7 @@ function App() {
               </tbody>
             </table>
           </div>
-          {/* Legend (moved inside main to align with table width) */}
+          {/* Legend */}
           <div
             id="skill-legend"
             className="mt-8 mb-4 px-6 py-4 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm rounded-xl border-2 border-fuchsia-400/40 shadow-[0_0_30px_rgba(192,38,211,0.4)] relative z-10 w-fit mx-auto hover:shadow-[0_0_40px_rgba(192,38,211,0.6)] hover:border-pink-400/60 transition-all duration-300"
@@ -804,4 +788,4 @@ function App() {
   );
 }
 
-export default App;
+export default CreateArtist;

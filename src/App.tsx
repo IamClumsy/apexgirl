@@ -351,21 +351,10 @@ function App() {
               onClick={() => {
                 window.location.href = '/?page=create';
               }}
-              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-semibold"
+              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-bold text-lg"
               title="SR Artists"
             >
               SR
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                window.location.href = '/?page=create';
-              }}
-              className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full hover:from-purple-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform opacity-20 hover:opacity-100"
-              title="Create Artist Page (Hidden)"
-              style={{ opacity: 0.1 }}
-            >
-              <FaUserTie size={24} />
             </button>
             <button
               type="button"

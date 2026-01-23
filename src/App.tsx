@@ -331,7 +331,7 @@ function App() {
 
   return (
     <div className="w-full min-h-screen bg-gray-900 text-white flex flex-col items-center">
-      <div className="w-full flex flex-col items-center py-8 text-white gap-8">
+      <div className="w-full max-w-full flex flex-col items-center py-8 text-white gap-8 px-4">
         {/* Page Title */}
         <header className="flex flex-col items-center gap-4 app-header">
           <h1

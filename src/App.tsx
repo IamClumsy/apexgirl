@@ -349,18 +349,7 @@ function App() {
             <button
               type="button"
               onClick={() => {
-                console.log('Add Artist button clicked');
-                (window as any).__artistData = {
-                  roles: roles,
-                  genres: genres,
-                  allSkills: skills,
-                  nextId: Math.max(0, ...artists.map((a) => a.id)) + 1,
-                };
-                window.open(
-                  '/add-artist.html',
-                  'AddArtistModal',
-                  'width=500,height=700,resizable=yes,scrollbars=yes'
-                );
+                window.location.href = '/?page=create&mode=add';
               }}
               className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
               title="Add New Artist"

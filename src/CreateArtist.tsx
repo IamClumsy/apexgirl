@@ -87,9 +87,48 @@ function CreateArtist() {
   const [selectedBuild, setSelectedBuild] = useState('');
   const [selectedRanking, setSelectedRanking] = useState('');
   const [selectedPhotos, setSelectedPhotos] = useState('');
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    group: '',
+    position: '',
+    rank: '',
+    genre: '',
+    skill1: '',
+    skill2: '',
+    skill3: '',
+    description: '',
+    thoughts: '',
+    build: '',
+    photos: 'Universal',
+  });
+
+  // Load existing artists for form dropdowns
+  useEffect(() => {
+    if (!showAddForm) return;
+    try {
+      const stored = localStorage.getItem('apexArtists');
+      if (stored) {
+        const existingArtists: Artist[] = JSON.parse(stored);
+        setArtists(existingArtists);
+      }
+    } catch (error) {
+      console.error('Error loading existing artists:', error);
+    }
+  }, [showAddForm]);
+
+  // Check if we're in "add" mode
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    if (mode === 'add') {
+      setShowAddForm(true);
+    }
+  }, []);
 
   // Load CSV data
   useEffect(() => {
+    if (showAddForm) return; // Don't load CSV if showing add form
     const loadCsvData = async () => {
       try {
         const response = await fetch('/src/data/artists-SR-only-1.1.csv');
@@ -129,7 +168,7 @@ function CreateArtist() {
     };
 
     loadCsvData();
-  }, []);
+  }, [showAddForm]);
 
   // Ensure legend width matches table width
   useEffect(() => {
@@ -160,6 +199,12 @@ function CreateArtist() {
   const rankOptions = [...new Set(artists.map((artist) => artist.rank))];
   const roles = [...new Set(artists.map((artist) => artist.position))];
   const genres = [...new Set(artists.map((artist) => artist.genre))];
+  // Get all skills from all artists (flatten all skills arrays)
+  const allSkillsFromArtists = [
+    ...new Set(
+      artists.flatMap((artist) => artist.skills).filter(Boolean)
+    ),
+  ];
   const allSkills = [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))];
   const skills = allSkills;
   const allSkills3 = [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))];
@@ -350,19 +395,34 @@ function CreateArtist() {
             className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse"
             style={{ color: '#ffffff' }}
           >
-            Create Artist Page (CSV Data)
+            {showAddForm ? 'Add New Artist' : 'Create Artist Page (CSV Data)'}
           </h1>
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => {
-                window.location.href = '/';
+                if (showAddForm) {
+                  setShowAddForm(false);
+                  window.location.href = '/?page=create';
+                } else {
+                  window.location.href = '/';
+                }
               }}
               className="p-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-full hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
-              title="Back to Main"
+              title="Back"
             >
               <FaArrowLeft size={24} />
             </button>
+            {!showAddForm && (
+              <button
+                type="button"
+                onClick={() => setShowAddForm(true)}
+                className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
+                title="Add New Artist"
+              >
+                <FaMusic size={24} />
+              </button>
+            )}
             <button
               type="button"
               onClick={() => {
@@ -389,8 +449,166 @@ function CreateArtist() {
           </div>
         </header>
 
+        {/* Add Artist Form */}
+        {showAddForm && (
+          <div className="w-full max-w-2xl mx-auto px-4">
+            <div className="bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl p-6 shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const newArtist: Artist = {
+                    id: Math.max(0, ...artists.map((a) => a.id)) + 1,
+                    name: formData.name,
+                    group: formData.group === 'No Group' ? 'None' : formData.group,
+                    position: formData.position,
+                    rank: formData.rank,
+                    genre: formData.genre,
+                    skills: [formData.skill1, formData.skill2, formData.skill3].filter(Boolean),
+                    description: formData.description || `${formData.name} is a talented ${formData.position} from ${formData.group === 'No Group' ? 'None' : formData.group}.`,
+                    rating: null,
+                    thoughts: formData.thoughts,
+                    build: formData.build,
+                    photos: formData.photos,
+                  };
+
+                  // Save to localStorage
+                  const updatedArtists = [...artists, newArtist];
+                  localStorage.setItem('apexArtists', JSON.stringify(updatedArtists));
+
+                  // Notify parent window if opened from main app
+                  if (window.opener) {
+                    window.opener.postMessage({ type: 'ADD_ARTIST', artist: newArtist }, '*');
+                  }
+
+                  // Redirect back to main page
+                  window.location.href = '/';
+                }}
+                className="space-y-4"
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-pink-100 mb-1">Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-pink-100 mb-1">Group</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.group}
+                      onChange={(e) => setFormData({ ...formData, group: e.target.value })}
+                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-pink-100 mb-1">Position</label>
+                    <select
+                      required
+                      value={formData.position}
+                      onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
+                    >
+                      <option value="">Select Position</option>
+                      {roles.map((role) => (
+                        <option key={role} value={role}>
+                          {role}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-pink-100 mb-1">Rank</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.rank}
+                      onChange={(e) => setFormData({ ...formData, rank: e.target.value })}
+                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-pink-100 mb-1">Genre</label>
+                  <select
+                    required
+                    value={formData.genre}
+                    onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
+                    className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
+                  >
+                    <option value="">Select Genre</option>
+                    {genres.map((genre) => (
+                      <option key={genre} value={genre}>
+                        {genre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-pink-100 mb-1">Skills</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[1, 2, 3].map((num) => (
+                      <select
+                        key={num}
+                        value={formData[`skill${num}` as keyof typeof formData] as string}
+                        onChange={(e) =>
+                          setFormData({ ...formData, [`skill${num}`]: e.target.value } as any)
+                        }
+                        className="px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70 text-xs"
+                      >
+                        <option value="">Skill {num}</option>
+                        {allSkillsFromArtists.map((skill) => (
+                          <option key={skill} value={skill}>
+                            {skill}
+                          </option>
+                        ))}
+                      </select>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-pink-100 mb-1">Description</label>
+                  <textarea
+                    required
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    rows={3}
+                    className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
+                  />
+                </div>
+                <div className="flex justify-end gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAddForm(false);
+                      window.location.href = '/?page=create';
+                    }}
+                    className="px-4 py-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-colors"
+                  >
+                    Add Artist
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
         {/* Search Filter */}
-        <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4">
+        {!showAddForm && (
+          <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4">
           <div className="relative w-full group">
             <input
               type="text"
@@ -402,9 +620,11 @@ function CreateArtist() {
             <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
           </div>
         </div>
+        )}
 
         {/* Main Content */}
-        <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
+        {!showAddForm && (
+          <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
           <div className="overflow-x-auto">
             <table className="table-auto table-force-white table-with-spacing italic">
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
@@ -778,6 +998,7 @@ function CreateArtist() {
             </div>
           </div>
         </main>
+        )}
 
         {/* Footer */}
         <footer className="mt-8 py-4 w-full flex justify-center items-center text-sm relative z-10">

@@ -351,10 +351,10 @@ function App() {
               onClick={() => {
                 window.location.href = '/?page=create';
               }}
-              className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
+              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-semibold"
               title="SR Artists"
             >
-              <FaMusic size={24} />
+              SR
             </button>
             <button
               type="button"

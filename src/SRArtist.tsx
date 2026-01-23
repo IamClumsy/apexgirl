@@ -128,11 +128,20 @@ function SRArtist() {
     if (showAddForm) return; // Don't load CSV if showing add form
     const loadCsvData = async () => {
       try {
-        const response = await fetch('/artists-SR-only-1.1.csv');
-        const csvText = await response.text();
-        const records: CsvRow[] = parseCSV(csvText);
+        // Load both SR and R artists
+        const [srResponse, rResponse] = await Promise.all([
+          fetch('/artists-SR-only-1.1.csv'),
+          fetch('/artists-R-only-1.1.csv'),
+        ]);
+        
+        const srCsvText = await srResponse.text();
+        const rCsvText = await rResponse.text();
+        
+        const srRecords: CsvRow[] = parseCSV(srCsvText);
+        const rRecords: CsvRow[] = parseCSV(rCsvText);
 
-        const processedArtists: Artist[] = records.map((row, index) => {
+        // Process SR artists
+        const processedSRArtists: Artist[] = srRecords.map((row, index) => {
           const skills = [
             row['Skill 1'],
             row['Skill 2'],
@@ -166,9 +175,47 @@ function SRArtist() {
           };
         });
 
-        setArtists(processedArtists);
+        // Process R artists
+        const processedRArtists: Artist[] = rRecords.map((row, index) => {
+          const skills = [
+            row['Skill 1'],
+            row['Skill 2'],
+            row['Skill 3'],
+          ].filter(Boolean);
+
+          const thoughts = row['Micks Thoughts are they Good'] || '';
+          const buildWorthy = row['Skill Build Worthy'] ? row['Skill Build Worthy'] === 'Yes' : false;
+          
+          // Check if any skill contains "gold brick"
+          const hasGoldBrickSkill = skills.some(
+            (skill) => skill && skill.toLowerCase().includes('gold brick')
+          );
+          
+          // Set build to "Gold Gathering" if artist has gold brick skill
+          const build = hasGoldBrickSkill ? 'Gold Gathering' : buildWorthy ? 'Skill Build' : '';
+
+          return {
+            id: processedSRArtists.length + index + 1,
+            name: row.Name,
+            group: row.Group === 'No Group' ? 'None' : row.Group,
+            rank: row.Rank,
+            position: row.Position,
+            genre: row.Genre,
+            skills: skills,
+            description: `${row.Name} is a talented ${row.Position} from ${row.Group === 'No Group' ? 'None' : row.Group}.`,
+            rating: null,
+            thoughts: thoughts,
+            build: build,
+            photos: 'Universal',
+          };
+        });
+
+        // Merge both sets of artists
+        const allArtists = [...processedSRArtists, ...processedRArtists];
+
+        setArtists(allArtists);
         // Save to localStorage
-        localStorage.setItem('apexArtistsSR', JSON.stringify(processedArtists));
+        localStorage.setItem('apexArtistsSR', JSON.stringify(allArtists));
       } catch (error) {
         console.error('Error loading CSV data:', error);
       }

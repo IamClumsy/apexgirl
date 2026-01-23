@@ -8,8 +8,8 @@ import {
   FaUserTie,
   FaMusic,
   FaDownload,
-  FaArrowLeft,
 } from 'react-icons/fa';
+
 // CSV parsing function
 function parseCSV(csvText: string): CsvRow[] {
   const lines = csvText.trim().split('\n');
@@ -82,53 +82,15 @@ function CreateArtist() {
   const [selectedRank, setSelectedRank] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  const [selectedSkill, setSelectedSkill] = useState('');
-  const [selectedSkill3, setSelectedSkill3] = useState('');
+  // Skill 2 and Skill 3 independent filters
+  const [selectedSkill, setSelectedSkill] = useState(''); // Skill 2
+  const [selectedSkill3, setSelectedSkill3] = useState(''); // Skill 3
   const [selectedBuild, setSelectedBuild] = useState('');
   const [selectedRanking, setSelectedRanking] = useState('');
   const [selectedPhotos, setSelectedPhotos] = useState('');
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    group: '',
-    position: '',
-    rank: '',
-    genre: '',
-    skill1: '',
-    skill2: '',
-    skill3: '',
-    description: '',
-    thoughts: '',
-    build: '',
-    photos: 'Universal',
-  });
 
-  // Load existing artists for form dropdowns
+  // Load artists data from CSV on component mount
   useEffect(() => {
-    if (!showAddForm) return;
-    try {
-      const stored = localStorage.getItem('apexArtists');
-      if (stored) {
-        const existingArtists: Artist[] = JSON.parse(stored);
-        setArtists(existingArtists);
-      }
-    } catch (error) {
-      console.error('Error loading existing artists:', error);
-    }
-  }, [showAddForm]);
-
-  // Check if we're in "add" mode
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const mode = urlParams.get('mode');
-    if (mode === 'add') {
-      setShowAddForm(true);
-    }
-  }, []);
-
-  // Load CSV data
-  useEffect(() => {
-    if (showAddForm) return; // Don't load CSV if showing add form
     const loadCsvData = async () => {
       try {
         const response = await fetch('/src/data/artists-SR-only-1.1.csv');
@@ -162,15 +124,28 @@ function CreateArtist() {
         });
 
         setArtists(processedArtists);
+        // Save to localStorage
+        localStorage.setItem('apexArtistsSR', JSON.stringify(processedArtists));
       } catch (error) {
         console.error('Error loading CSV data:', error);
       }
     };
 
     loadCsvData();
-  }, [showAddForm]);
+  }, []);
 
-  // Ensure legend width matches table width
+  // Save to localStorage whenever artists change
+  useEffect(() => {
+    if (artists.length > 0) {
+      try {
+        localStorage.setItem('apexArtistsSR', JSON.stringify(artists));
+      } catch (error) {
+        console.error('Error saving artists to localStorage:', error);
+      }
+    }
+  }, [artists]);
+
+  // Ensure legend width matches table width so it centers visually under the table
   useEffect(() => {
     const updateLegendWidth = () => {
       const table = document.querySelector('table');
@@ -184,9 +159,14 @@ function CreateArtist() {
         const legendEl = legend as HTMLElement;
         legendEl.style.boxSizing = 'border-box';
         legendEl.style.width = 'auto';
+        // position under table
         legendEl.style.marginLeft = `${leftOffset}px`;
+        // helpful debug info in console
+        // eslint-disable-next-line no-console
+        console.log('[legend-align] tableWidth=', width, 'leftOffset=', leftOffset);
       }
     };
+    // Run after a tick to ensure layout settled
     const t = setTimeout(updateLegendWidth, 50);
     window.addEventListener('resize', updateLegendWidth);
     return () => {
@@ -199,20 +179,15 @@ function CreateArtist() {
   const rankOptions = [...new Set(artists.map((artist) => artist.rank))];
   const roles = [...new Set(artists.map((artist) => artist.position))];
   const genres = [...new Set(artists.map((artist) => artist.genre))];
-  // Get all skills from all artists (flatten all skills arrays)
-  const allSkillsFromArtists = [
-    ...new Set(
-      artists.flatMap((artist) => artist.skills).filter(Boolean)
-    ),
-  ];
-  const allSkills = [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))];
-  const skills = allSkills;
-  const allSkills3 = [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))];
-
-  // Skill categorization functions (same as App.tsx)
+  const allSkills = [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))]; // Only Skill 2
+  const skills = allSkills; // Alias for backward compatibility
+  const allSkills3 = [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))]; // Only Skill 3
+  // Group skills for dropdown headers
   const isGoodBuff = (skill: string) => {
     const t = (skill || '').toLowerCase();
+    // Exclude 60% basic attack damage (moved to BEST)
     if (t.includes('60%') && t.includes('basic attack damage')) return false;
+    // Exclude reduction skills (they get 3 points as Okay)
     if (t.includes('reduc')) return false;
     return (
       t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage')
@@ -220,8 +195,11 @@ function CreateArtist() {
   };
   const isTerribleSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
+    // Exclude damage-dealing skills like "10 sec/1800 Damage"
     const isDamageSkill = t.includes('damage') && (t.includes('sec/') || /\d+\s*damage/.test(t));
     if (isDamageSkill) return false;
+
+    // Exclude 200/DPS defending buildings (HQ, GH, Club, LM)
     const is200DpsDefending =
       t.includes('200/dps') &&
       (t.includes('defending') ||
@@ -230,6 +208,7 @@ function CreateArtist() {
         t.includes('club') ||
         t.includes('lm'));
     if (is200DpsDefending) return false;
+
     return (
       t.includes('180/dps') ||
       t.includes('200/dps') ||
@@ -250,7 +229,9 @@ function CreateArtist() {
   };
   const isDirectDamage = (skill: string) => {
     const t = (skill || '').toLowerCase();
+    // Include 60% basic attack damage as BEST
     if (t.includes('60%') && t.includes('basic attack damage')) return true;
+    // Direct damage: time-based or explicit damage that isn't a reduction/taken modifier and not the Good buffs
     const mentionsDamage = t.includes('damage') && !t.includes('reduc') && !t.includes('taken');
     const timeBased = t.includes(' sec/') || /\bsec\b/.test(t);
     return (
@@ -272,6 +253,7 @@ function CreateArtist() {
       !terribleSkills.includes(s)
   );
 
+  // Skill 3 categorization
   const terribleSkills3 = allSkills3.filter(isTerribleSkill);
   const worstSkills3 = allSkills3.filter(isWorstSkill);
   const bestSkills3 = allSkills3.filter(isDirectDamage);
@@ -284,16 +266,21 @@ function CreateArtist() {
       !terribleSkills3.includes(s)
   );
 
+  // Calculate artist points: Best=10, Good=6, Okay=3, Worst=0, Terrible=-1
+  // Skip skill 1 (index 0) when calculating ranking
   const calculateArtistPoints = (artist: Artist) => {
     let points = 0;
     artist.skills.forEach((skill, index) => {
-      if (!skill || index === 0) return;
+      if (!skill || index === 0) return; // Skip skill 1
+
+      // Use appropriate skill arrays based on index
       const isBest = index === 1 ? bestSkills.includes(skill) : bestSkills3.includes(skill);
       const isGood = index === 1 ? goodSkills.includes(skill) : goodSkills3.includes(skill);
       const isOkay = index === 1 ? okaySkills.includes(skill) : okaySkills3.includes(skill);
       const isWorst = index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
       const isTerrible =
         index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
+
       if (isBest) points += 10;
       else if (isGood) points += 6;
       else if (isOkay) points += 3;
@@ -303,6 +290,7 @@ function CreateArtist() {
     return points;
   };
 
+  // Convert points to letter grade: 14+=S, 10-13=A, 5-9=B, 0-4=C, -1=F
   const getLetterGrade = (points: number) => {
     if (points >= 14) return 'S';
     if (points >= 10) return 'A';
@@ -314,6 +302,7 @@ function CreateArtist() {
   const buildOptions = [...new Set(artists.map((artist) => artist.build).filter(Boolean))];
   const photosOptions = [...new Set(artists.map((artist) => artist.photos).filter(Boolean))];
 
+  // Filter artists
   const filteredArtists = artists
     .filter((artist: Artist) => {
       const searchLower = searchTerm.toLowerCase();
@@ -321,17 +310,19 @@ function CreateArtist() {
         artist.name.toLowerCase().includes(searchLower) ||
         artist.group?.toLowerCase().includes(searchLower) ||
         artist.skills.some((skill: string) => skill && skill.toLowerCase().includes(searchLower));
+
       const matchesRank = selectedRank === '' || artist.rank === selectedRank;
       const matchesRole = selectedRole === '' || artist.position === selectedRole;
       const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
-      const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill;
-      const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3;
+      const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
+      const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3; // Skill 3 filter
       const matchesBuild =
         selectedBuild === '' ||
         (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
       const matchesRanking =
         selectedRanking === '' || getLetterGrade(calculateArtistPoints(artist)) === selectedRanking;
       const matchesPhotos = selectedPhotos === '' || artist.photos === selectedPhotos;
+
       return (
         matchesSearch &&
         matchesRank &&
@@ -347,7 +338,7 @@ function CreateArtist() {
     .sort((a, b) => {
       const aIsUR = a.rank.startsWith('UR');
       const bIsUR = b.rank.startsWith('UR');
-      if (aIsUR !== bIsUR) return aIsUR ? 1 : -1;
+      if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom
       const genreCompare = a.genre.localeCompare(b.genre);
       if (genreCompare !== 0) return genreCompare;
       const roleCompare = a.position.localeCompare(b.position);
@@ -355,6 +346,7 @@ function CreateArtist() {
       return a.name.localeCompare(b.name);
     });
 
+  // Function to get skill badge class
   const getSkillClass = (skill: string) => {
     if (!skill) return 'bg-blue-500 text-white';
     const trimmed = skill.trim();
@@ -395,34 +387,19 @@ function CreateArtist() {
             className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse"
             style={{ color: '#ffffff' }}
           >
-            {showAddForm ? 'Add New Artist' : 'Create Artist Page (CSV Data)'}
+            Mick's Awesome SSR Artist Helper (SR Only)
           </h1>
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => {
-                if (showAddForm) {
-                  setShowAddForm(false);
-                  window.location.href = '/?page=create';
-                } else {
-                  window.location.href = '/';
-                }
+                window.location.href = '/';
               }}
               className="p-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-full hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
-              title="Back"
+              title="Back to Main"
             >
-              <FaArrowLeft size={24} />
+              <FaUserTie size={24} />
             </button>
-            {!showAddForm && (
-              <button
-                type="button"
-                onClick={() => setShowAddForm(true)}
-                className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
-                title="Add New Artist"
-              >
-                <FaMusic size={24} />
-              </button>
-            )}
             <button
               type="button"
               onClick={() => {
@@ -432,183 +409,26 @@ function CreateArtist() {
                   const url = URL.createObjectURL(blob);
                   const a = document.createElement('a');
                   a.href = url;
-                  a.download = 'artists-from-csv.json';
+                  a.download = 'artists-SR-only-1.1.json';
                   document.body.appendChild(a);
                   a.click();
                   document.body.removeChild(a);
                   URL.revokeObjectURL(url);
+                  console.log('Exported artists-SR-only-1.1.json');
                 } catch (err) {
                   console.error('Failed to export artists', err);
                 }
               }}
               className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
-              title="Download JSON"
+              title="Download artists-SR-only-1.1.json"
             >
               <FaDownload size={22} />
             </button>
           </div>
         </header>
 
-        {/* Add Artist Form */}
-        {showAddForm && (
-          <div className="w-full max-w-2xl mx-auto px-4">
-            <div className="bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl p-6 shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const newArtist: Artist = {
-                    id: Math.max(0, ...artists.map((a) => a.id)) + 1,
-                    name: formData.name,
-                    group: formData.group === 'No Group' ? 'None' : formData.group,
-                    position: formData.position,
-                    rank: formData.rank,
-                    genre: formData.genre,
-                    skills: [formData.skill1, formData.skill2, formData.skill3].filter(Boolean),
-                    description: formData.description || `${formData.name} is a talented ${formData.position} from ${formData.group === 'No Group' ? 'None' : formData.group}.`,
-                    rating: null,
-                    thoughts: formData.thoughts,
-                    build: formData.build,
-                    photos: formData.photos,
-                  };
-
-                  // Save to localStorage
-                  const updatedArtists = [...artists, newArtist];
-                  localStorage.setItem('apexArtists', JSON.stringify(updatedArtists));
-
-                  // Notify parent window if opened from main app
-                  if (window.opener) {
-                    window.opener.postMessage({ type: 'ADD_ARTIST', artist: newArtist }, '*');
-                  }
-
-                  // Redirect back to main page
-                  window.location.href = '/';
-                }}
-                className="space-y-4"
-              >
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-pink-100 mb-1">Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-pink-100 mb-1">Group</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.group}
-                      onChange={(e) => setFormData({ ...formData, group: e.target.value })}
-                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
-                    />
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-pink-100 mb-1">Position</label>
-                    <select
-                      required
-                      value={formData.position}
-                      onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
-                    >
-                      <option value="">Select Position</option>
-                      {roles.map((role) => (
-                        <option key={role} value={role}>
-                          {role}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-pink-100 mb-1">Rank</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.rank}
-                      onChange={(e) => setFormData({ ...formData, rank: e.target.value })}
-                      className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-pink-100 mb-1">Genre</label>
-                  <select
-                    required
-                    value={formData.genre}
-                    onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
-                    className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
-                  >
-                    <option value="">Select Genre</option>
-                    {genres.map((genre) => (
-                      <option key={genre} value={genre}>
-                        {genre}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-pink-100 mb-1">Skills</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {[1, 2, 3].map((num) => (
-                      <select
-                        key={num}
-                        value={formData[`skill${num}` as keyof typeof formData] as string}
-                        onChange={(e) =>
-                          setFormData({ ...formData, [`skill${num}`]: e.target.value } as any)
-                        }
-                        className="px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70 text-xs"
-                      >
-                        <option value="">Skill {num}</option>
-                        {allSkillsFromArtists.map((skill) => (
-                          <option key={skill} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </select>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-pink-100 mb-1">Description</label>
-                  <textarea
-                    required
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    rows={3}
-                    className="w-full px-3 py-2 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-400/70"
-                  />
-                </div>
-                <div className="flex justify-end gap-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowAddForm(false);
-                      window.location.href = '/?page=create';
-                    }}
-                    className="px-4 py-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-colors"
-                  >
-                    Add Artist
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
-
         {/* Search Filter */}
-        {!showAddForm && (
-          <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4">
+        <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4">
           <div className="relative w-full group">
             <input
               type="text"
@@ -620,11 +440,9 @@ function CreateArtist() {
             <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
           </div>
         </div>
-        )}
 
         {/* Main Content */}
-        {!showAddForm && (
-          <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
+        <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
           <div className="overflow-x-auto">
             <table className="table-auto table-force-white table-with-spacing italic">
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
@@ -934,7 +752,7 @@ function CreateArtist() {
               </tbody>
             </table>
           </div>
-          {/* Legend */}
+          {/* Legend (moved inside main to align with table width) */}
           <div
             id="skill-legend"
             className="mt-8 mb-4 px-6 py-4 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm rounded-xl border-2 border-fuchsia-400/40 shadow-[0_0_30px_rgba(192,38,211,0.4)] relative z-10 w-fit mx-auto hover:shadow-[0_0_40px_rgba(192,38,211,0.6)] hover:border-pink-400/60 transition-all duration-300"
@@ -998,7 +816,6 @@ function CreateArtist() {
             </div>
           </div>
         </main>
-        )}
 
         {/* Footer */}
         <footer className="mt-8 py-4 w-full flex justify-center items-center text-sm relative z-10">

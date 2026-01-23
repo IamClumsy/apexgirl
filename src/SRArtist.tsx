@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
   FaStar,
-  FaSearch,
   FaMedal,
   FaMicrophone,
   FaShoePrints,
@@ -408,11 +407,7 @@ function SRArtist() {
   // Filter artists
   const filteredArtists = artists
     .filter((artist: Artist) => {
-      const searchLower = searchTerm.toLowerCase();
-      const matchesSearch =
-        artist.name.toLowerCase().includes(searchLower) ||
-        artist.group?.toLowerCase().includes(searchLower) ||
-        artist.skills.some((skill: string) => skill && skill.toLowerCase().includes(searchLower));
+      const matchesSearch = searchTerm === '' || artist.name === searchTerm;
 
       const matchesRank = selectedRank === '' || artist.rank === selectedRank;
       const matchesRole = selectedRole === '' || artist.position === selectedRole;
@@ -712,36 +707,33 @@ function SRArtist() {
           </div>
         )}
 
-        {/* Search Filter */}
-        {!showAddForm && (
-          <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4">
-          <div className="relative w-full group">
-            <input
-              type="text"
-              placeholder="Search artists..."
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border-2 border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
-          </div>
-        </div>
-        )}
-
         {/* Main Content */}
         {!showAddForm && (
-          <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
-          <div className="overflow-x-auto">
-            <table className="table-auto table-force-white table-with-spacing italic">
+          <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300 mx-auto">
+          <div className="overflow-x-auto w-full">
+            <table className="table-fixed table-force-white table-with-spacing italic">
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
                 {/* Filter row */}
                 <tr className="align-middle bg-gradient-to-r from-violet-800/70 via-fuchsia-800/70 to-pink-700/70">
-                  <th className="px-2 py-2"></th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
+                    <select
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                    >
+                      <option value="">Select Artist</option>
+                      {[...new Set(artists.map((artist) => artist.name))].sort().map((name) => (
+                        <option key={name} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                    </select>
+                  </th>
+                  <th className="px-1 py-2">
                     <select
                       value={selectedGenre}
                       onChange={(e) => setSelectedGenre(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Genre</option>
                       {genres.map((genre) => (
@@ -751,11 +743,11 @@ function SRArtist() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedRole}
                       onChange={(e) => setSelectedRole(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Role</option>
                       {roles.map((role) => (
@@ -765,11 +757,11 @@ function SRArtist() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedRank}
                       onChange={(e) => setSelectedRank(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Rank</option>
                       {rankOptions.map((rank) => (
@@ -779,11 +771,11 @@ function SRArtist() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedSkill}
                       onChange={(e) => setSelectedSkill(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Skill 2</option>
                       <optgroup label="Best">
@@ -827,7 +819,7 @@ function SRArtist() {
                     <select
                       value={selectedSkill3}
                       onChange={(e) => setSelectedSkill3(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Skill 3</option>
                       <optgroup label="Best">
@@ -867,11 +859,11 @@ function SRArtist() {
                       </optgroup>
                     </select>
                   </th>
-                  <th className="px-4 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedRanking}
                       onChange={(e) => setSelectedRanking(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Ranking</option>
                       <option value="S">S</option>
@@ -881,11 +873,11 @@ function SRArtist() {
                       <option value="F">F</option>
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedPhotos}
                       onChange={(e) => setSelectedPhotos(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Photos</option>
                       {photosOptions.map((photo) => (
@@ -895,11 +887,11 @@ function SRArtist() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedBuild}
                       onChange={(e) => setSelectedBuild(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Build</option>
                       {buildOptions.map((build) => (
@@ -912,31 +904,31 @@ function SRArtist() {
                 </tr>
                 {/* Column header row */}
                 <tr>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Artist
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Genre
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Role
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Rank
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Skill 2
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Skill 3
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Ranking
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Photos
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Best Usage
                   </th>
                 </tr>
@@ -947,22 +939,22 @@ function SRArtist() {
                     key={artist.id}
                     className="hover:bg-amber-400/10 transition-colors duration-200"
                   >
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div className="text-sm font-medium text-white" title={artist.name}>
                         {artist.name}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div className="text-sm text-amber-100" title={artist.genre}>
                         {artist.genre}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div className="text-sm text-white text-center" title={artist.position}>
                         {artist.position}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div
                         className="text-sm font-medium text-white text-center"
                         title={artist.rank}
@@ -975,7 +967,7 @@ function SRArtist() {
                         )}
                       </div>
                     </td>
-                    <td className="px-2 py-3">
+                    <td className="px-1 py-2">
                       <div className="flex justify-center">
                         {artist.skills[1] ? (
                           <span
@@ -988,7 +980,7 @@ function SRArtist() {
                         )}
                       </div>
                     </td>
-                    <td className="px-2 py-3">
+                    <td className="px-1 py-2">
                       <div className="flex justify-center">
                         {artist.skills[2] ? (
                           <span
@@ -1001,7 +993,7 @@ function SRArtist() {
                         )}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div
                         className="text-sm font-bold text-center"
                         title={`Points: ${calculateArtistPoints(artist)}`}
@@ -1025,10 +1017,10 @@ function SRArtist() {
                         </span>
                       </div>
                     </td>
-                    <td className="px-2 py-3 text-center">
+                    <td className="px-1 py-2 text-center">
                       <span className="text-white text-sm">{artist.photos || 'N/A'}</span>
                     </td>
-                    <td className="px-2 py-3 text-center">
+                    <td className="px-1 py-2 text-center">
                       <span
                         className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-500 to-fuchsia-600 text-white shadow-sm`}
                       >

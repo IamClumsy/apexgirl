@@ -391,7 +391,8 @@ function App() {
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
                 {/* Search Filter Row */}
                 <tr>
-                  <th colSpan={9} className="px-2 py-4">
+                  <th className="px-2 py-2"></th>
+                  <th colSpan={8} className="px-2 py-2">
                     <div className="relative group">
                       <input
                         type="text"

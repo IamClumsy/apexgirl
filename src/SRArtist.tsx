@@ -221,20 +221,24 @@ function SRArtist() {
   const allSkills = [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))]; // Only Skill 2
   const skills = allSkills; // Alias for backward compatibility
   const allSkills3 = [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))]; // Only Skill 3
-  // Group skills for dropdown headers
+  // Group skills for dropdown headers (updated for SR and SSR skills)
   const isGoodBuff = (skill: string) => {
     const t = (skill || '').toLowerCase();
     // Exclude 60% basic attack damage (moved to BEST)
-    if (t.includes('60%') && t.includes('basic attack damage')) return false;
+    if (t.includes('60%') && (t.includes('basic attack damage') || t.includes('normal attack damage'))) return false;
     // Exclude reduction skills (they get 3 points as Okay)
     if (t.includes('reduc')) return false;
     return (
-      t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage')
+      t.includes('skill damage') ||
+      t.includes('basic attack damage') ||
+      t.includes('normal attack damage') ||
+      t.includes('basic damage') ||
+      t.includes('normal damage')
     );
   };
   const isTerribleSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
-    // Exclude damage-dealing skills like "10 sec/1800 Damage"
+    // Exclude damage-dealing skills like "10 sec/800 Damage" or "10 sec/1800 Damage"
     const isDamageSkill = t.includes('damage') && (t.includes('sec/') || /\d+\s*damage/.test(t));
     if (isDamageSkill) return false;
 
@@ -253,9 +257,11 @@ function SRArtist() {
       t.includes('200/dps') ||
       t.includes('world building guard') ||
       t.includes('damage wg') ||
+      t.includes('damage increase world building guard') ||
       (t.includes('10 sec') && !t.includes('sec/')) ||
       t.includes('10/sec') ||
-      t.includes('driving speed')
+      t.includes('driving speed') ||
+      t.includes('drive speed increase')
     );
   };
   const isWorstSkill = (skill: string) => {
@@ -263,15 +269,18 @@ function SRArtist() {
     return (
       !isTerribleSkill(skill) &&
       (t.includes('gold brick gathering') ||
-        (t.includes('fan capacity') && !t.includes('10% rally fan capacity')))
+        t.includes('gold brick gather speed') ||
+        (t.includes('fan capacity') && !t.includes('10% rally fan capacity') && !t.includes('rally')))
     );
   };
   const isDirectDamage = (skill: string) => {
     const t = (skill || '').toLowerCase();
-    // Include 60% basic attack damage as BEST
-    if (t.includes('60%') && t.includes('basic attack damage')) return true;
+    // Include 60% basic/normal attack damage as BEST
+    if (t.includes('60%') && (t.includes('basic attack damage') || t.includes('normal attack damage'))) return true;
+    // Include "Damage to Player" as BEST
+    if (t.includes('damage to player')) return true;
     // Direct damage: time-based or explicit damage that isn't a reduction/taken modifier and not the Good buffs
-    const mentionsDamage = t.includes('damage') && !t.includes('reduc') && !t.includes('taken');
+    const mentionsDamage = t.includes('damage') && !t.includes('reduc') && !t.includes('taken') && !t.includes('increase');
     const timeBased = t.includes(' sec/') || /\bsec\b/.test(t);
     return (
       (mentionsDamage || timeBased) &&
@@ -385,19 +394,21 @@ function SRArtist() {
       return a.name.localeCompare(b.name);
     });
 
-  // Function to get skill badge class
+  // Function to get skill badge class (updated for SR and SSR skills)
   const getSkillClass = (skill: string) => {
     if (!skill) return 'bg-blue-500 text-white';
     const trimmed = skill.trim();
-    if (trimmed.toLowerCase().includes('damage to player'))
+    const t = trimmed.toLowerCase();
+    
+    if (t.includes('damage to player'))
       return 'damage-to-player bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
-    if (trimmed === '60% Basic Attack Damage')
+    if (trimmed === '60% Basic Attack Damage' || trimmed === '60% Normal Attack Damage')
       return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
-    if (trimmed === '50% Basic Attack Damage')
+    if (trimmed === '50% Basic Attack Damage' || trimmed === '50% Normal Attack Damage' || trimmed === '20% Normal Attack Damage')
       return 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm';
-    if (trimmed.includes('Gold Brick'))
+    if (t.includes('gold brick'))
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
-    if (trimmed.includes('Reduction Basic Attack Damage'))
+    if (t.includes('reduction') && (t.includes('basic attack damage') || t.includes('normal attack damage')))
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
     if (
       [
@@ -406,14 +417,22 @@ function SRArtist() {
         '180/DPS Attacking Enemy Company',
         '20% Damage WG / 50% Drive Speed',
         '75% Drive Speed',
-      ].includes(trimmed)
+        '40% Drive Speed Increase',
+        '15% Damage Increase World Building Guard',
+      ].includes(trimmed) ||
+      t.includes('drive speed increase') ||
+      t.includes('damage increase world building guard')
     )
       return 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
-    if (['20% Skill Damage', '30% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
-      return trimmed === '20% Skill Damage' || trimmed === '30% Skill Damage'
+    if (['20% Skill Damage', '30% Skill Damage', '10% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
+      return trimmed === '20% Skill Damage' || trimmed === '30% Skill Damage' || trimmed === '10% Skill Damage'
         ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'
         : 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
     }
+    if (t.includes('reduce') && (t.includes('normal damage taken') || t.includes('skill damage taken')))
+      return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
+    if (t.includes('fan capacity') && !t.includes('rally'))
+      return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
     return 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-100 border border-slate-500/40';
   };
 

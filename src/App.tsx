@@ -386,7 +386,20 @@ function App() {
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
                 {/* Filter row */}
                 <tr className="align-middle bg-gradient-to-r from-violet-800/70 via-fuchsia-800/70 to-pink-700/70">
-                  <th className="px-2 py-2"></th>
+                  <th className="px-2 py-2">
+                    <select
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                    >
+                      <option value="">Select Artist</option>
+                      {[...new Set(artists.map((artist) => artist.name))].sort().map((name) => (
+                        <option key={name} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                    </select>
+                  </th>
                   <th className="px-2 py-2">
                     <select
                       value={selectedGenre}
@@ -559,24 +572,6 @@ function App() {
                       ))}
                     </select>
                   </th>
-                </tr>
-                {/* Search bar row */}
-                <tr>
-                  <th className="px-2 py-2">
-                    <select
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Artist</option>
-                      {[...new Set(artists.map((artist) => artist.name))].sort().map((name) => (
-                        <option key={name} value={name}>
-                          {name}
-                        </option>
-                      ))}
-                    </select>
-                  </th>
-                  <th colSpan={8} className="px-2 py-2"></th>
                 </tr>
                 {/* Column header row */}
                 <tr>

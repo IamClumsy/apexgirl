@@ -351,7 +351,8 @@ function App() {
               onClick={() => {
                 window.location.href = '/?page=create';
               }}
-              className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-bold text-2xl w-[46px] h-[46px] flex items-center justify-center"
+              className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-bold flex items-center justify-center aspect-square w-12 h-12"
+              style={{ fontSize: '22px' }}
               title="SR Artists"
             >
               SR
@@ -375,7 +376,7 @@ function App() {
                   console.error('Failed to export artists', err);
                 }
               }}
-              className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform"
+              className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform flex items-center justify-center aspect-square w-12 h-12"
               title="Download artist-and-records-1.9.json"
             >
               <FaDownload size={22} />

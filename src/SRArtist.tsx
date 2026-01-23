@@ -141,6 +141,14 @@ function SRArtist() {
 
           const thoughts = row['Micks Thoughts are they Good'] || '';
           const buildWorthy = row['Skill Build Worthy'] ? row['Skill Build Worthy'] === 'Yes' : false;
+          
+          // Check if any skill contains "gold brick"
+          const hasGoldBrickSkill = skills.some(
+            (skill) => skill && skill.toLowerCase().includes('gold brick')
+          );
+          
+          // Set build to "Gold Gathering" if artist has gold brick skill
+          const build = hasGoldBrickSkill ? 'Gold Gathering' : buildWorthy ? 'Skill Build' : '';
 
           return {
             id: index + 1,
@@ -153,7 +161,7 @@ function SRArtist() {
             description: `${row.Name} is a talented ${row.Position} from ${row.Group === 'No Group' ? 'None' : row.Group}.`,
             rating: null,
             thoughts: thoughts,
-            build: buildWorthy ? 'Skill Build' : '',
+            build: build,
             photos: 'Universal',
           };
         });

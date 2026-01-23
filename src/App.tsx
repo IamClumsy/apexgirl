@@ -389,22 +389,6 @@ function App() {
           <div className="overflow-x-auto w-full">
             <table className="table-auto table-force-white table-with-spacing italic">
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
-                {/* Search Filter Row */}
-                <tr className="align-middle">
-                  <th className="px-2 py-2"></th>
-                  <th colSpan={8} className="px-2 py-2">
-                    <div className="relative group">
-                      <input
-                        type="text"
-                        placeholder="Search artists..."
-                        className="w-full px-2 py-1 rounded-md bg-gray-800/90 border border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] text-xs"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
-                      <FaSearch className="absolute right-2 top-1.5 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" style={{ fontSize: '0.75rem' }} />
-                    </div>
-                  </th>
-                </tr>
                 {/* Filter row */}
                 <tr className="align-middle bg-gradient-to-r from-violet-800/70 via-fuchsia-800/70 to-pink-700/70">
                   <th className="px-2 py-2"></th>
@@ -583,8 +567,17 @@ function App() {
                 </tr>
                 {/* Column header row */}
                 <tr>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Artist
+                  <th className="px-2 py-3">
+                    <div className="relative group">
+                      <input
+                        type="text"
+                        placeholder="Search artists..."
+                        className="w-full px-2 py-1 rounded-md bg-gray-800/90 border border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] text-xs"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                      />
+                      <FaSearch className="absolute right-2 top-1.5 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" style={{ fontSize: '0.75rem' }} />
+                    </div>
                   </th>
                   <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Genre

@@ -386,22 +386,24 @@ function App() {
 
         {/* Main Content */}
         <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300">
-          {/* Search Filter */}
-          <div className="w-full py-4 px-2">
-            <div className="relative group">
-              <input
-                type="text"
-                placeholder="Search artists..."
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border-2 border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
-            </div>
-          </div>
           <div className="overflow-x-auto w-full">
             <table className="table-auto table-force-white table-with-spacing italic">
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
+                {/* Search Filter Row */}
+                <tr>
+                  <th colSpan={9} className="px-2 py-4">
+                    <div className="relative group">
+                      <input
+                        type="text"
+                        placeholder="Search artists..."
+                        className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border-2 border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                      />
+                      <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
+                    </div>
+                  </th>
+                </tr>
                 {/* Filter row */}
                 <tr className="align-middle bg-gradient-to-r from-violet-800/70 via-fuchsia-800/70 to-pink-700/70">
                   <th className="px-2 py-2"></th>

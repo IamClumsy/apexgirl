@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
   FaStar,
-  FaSearch,
   FaMedal,
   FaMicrophone,
   FaShoePrints,
@@ -261,11 +260,7 @@ function App() {
   // Filter artists
   const filteredArtists = artists
     .filter((artist: Artist) => {
-      const searchLower = searchTerm.toLowerCase();
-      const matchesSearch =
-        artist.name.toLowerCase().includes(searchLower) ||
-        artist.group?.toLowerCase().includes(searchLower) ||
-        artist.skills.some((skill: string) => skill && skill.toLowerCase().includes(searchLower));
+      const matchesSearch = searchTerm === '' || artist.name === searchTerm;
 
       const matchesRank = selectedRank === '' || artist.rank === selectedRank;
       const matchesRole = selectedRole === '' || artist.position === selectedRole;
@@ -568,16 +563,18 @@ function App() {
                 {/* Search bar row */}
                 <tr>
                   <th className="px-2 py-2">
-                    <div className="relative group">
-                      <input
-                        type="text"
-                        placeholder="Search artists..."
-                        className="w-full px-4 py-3 rounded-xl bg-gray-800/90 border-2 border-amber-500/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-200 text-center hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
-                      <FaSearch className="absolute right-3 top-3 text-amber-400 group-hover:text-pink-400 transition-colors duration-200" />
-                    </div>
+                    <select
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                    >
+                      <option value="">Select Artist</option>
+                      {[...new Set(artists.map((artist) => artist.name))].sort().map((name) => (
+                        <option key={name} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                    </select>
                   </th>
                   <th colSpan={8} className="px-2 py-2"></th>
                 </tr>

@@ -386,11 +386,11 @@ function App() {
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
                 {/* Filter row */}
                 <tr className="align-middle bg-gradient-to-r from-violet-800/70 via-fuchsia-800/70 to-pink-700/70">
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Artist</option>
                       {[...new Set(artists.map((artist) => artist.name))].sort().map((name) => (
@@ -400,11 +400,11 @@ function App() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedGenre}
                       onChange={(e) => setSelectedGenre(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Genre</option>
                       {genres.map((genre) => (
@@ -414,11 +414,11 @@ function App() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedRole}
                       onChange={(e) => setSelectedRole(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Role</option>
                       {roles.map((role) => (
@@ -428,11 +428,11 @@ function App() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedRank}
                       onChange={(e) => setSelectedRank(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Rank</option>
                       {rankOptions.map((rank) => (
@@ -442,11 +442,11 @@ function App() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedSkill}
                       onChange={(e) => setSelectedSkill(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Skill 2</option>
                       <optgroup label="Best">
@@ -486,11 +486,11 @@ function App() {
                       </optgroup>
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedSkill3}
                       onChange={(e) => setSelectedSkill3(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Skill 3</option>
                       <optgroup label="Best">
@@ -530,11 +530,11 @@ function App() {
                       </optgroup>
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedRanking}
                       onChange={(e) => setSelectedRanking(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Ranking</option>
                       <option value="A">A</option>
@@ -544,11 +544,11 @@ function App() {
                       <option value="F">F</option>
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedPhotos}
                       onChange={(e) => setSelectedPhotos(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Photos</option>
                       {photosOptions.map((photo) => (
@@ -558,11 +558,11 @@ function App() {
                       ))}
                     </select>
                   </th>
-                  <th className="px-2 py-2">
+                  <th className="px-1 py-2">
                     <select
                       value={selectedBuild}
                       onChange={(e) => setSelectedBuild(e.target.value)}
-                      className="w-full px-2 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
                       <option value="">Select Build</option>
                       {buildOptions.map((build) => (
@@ -575,31 +575,31 @@ function App() {
                 </tr>
                 {/* Column header row */}
                 <tr>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Artist
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Genre
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Role
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Rank
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Skill 2
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Skill 3
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Ranking
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Photos
                   </th>
-                  <th className="px-2 py-3 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Best Usage
                   </th>
                 </tr>
@@ -610,22 +610,22 @@ function App() {
                     key={artist.id}
                     className="hover:bg-amber-400/10 transition-colors duration-200"
                   >
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div className="text-sm font-medium text-white" title={artist.name}>
                         {artist.name}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div className="text-sm text-amber-100" title={artist.genre}>
                         {artist.genre}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div className="text-sm text-white text-center" title={artist.position}>
                         {artist.position}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div
                         className="text-sm font-medium text-white text-center"
                         title={artist.rank}
@@ -664,7 +664,7 @@ function App() {
                         )}
                       </div>
                     </td>
-                    <td className="px-2 py-3 whitespace-nowrap">
+                    <td className="px-1 py-2 whitespace-nowrap">
                       <div
                         className="text-sm font-bold text-center"
                         title={`Points: ${calculateArtistPoints(artist)}`}

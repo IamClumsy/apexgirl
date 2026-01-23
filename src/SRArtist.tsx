@@ -128,7 +128,7 @@ function SRArtist() {
     if (showAddForm) return; // Don't load CSV if showing add form
     const loadCsvData = async () => {
       try {
-        const response = await fetch('/src/data/artists-SR-only-1.1.csv');
+        const response = await fetch('/artists-SR-only-1.1.csv');
         const csvText = await response.text();
         const records: CsvRow[] = parseCSV(csvText);
 

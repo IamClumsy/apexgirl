@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import SRArtist from './SRArtist';
 import './index.css';
 
-// Check for hidden route parameter
-const urlParams = new URLSearchParams(window.location.search);
-const showCreatePage =
-  urlParams.get('page') === 'create' ||
-  window.location.hash === '#create' ||
-  urlParams.get('mode') === 'add';
+function Router() {
+  const [currentPage, setCurrentPage] = useState<'app' | 'sr'>('app');
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>{showCreatePage ? <SRArtist /> : <App />}</React.StrictMode>
-);
+  useEffect(() => {
+    const checkRoute = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const hash = window.location.hash;
+      const shouldShowSR =
+        urlParams.get('page') === 'create' ||
+        hash === '#create' ||
+        urlParams.get('mode') === 'add';
+      setCurrentPage(shouldShowSR ? 'sr' : 'app');
+    };
+
+    // Check on mount
+    checkRoute();
+
+    // Listen for URL changes
+    window.addEventListener('popstate', checkRoute);
+    window.addEventListener('hashchange', checkRoute);
+
+    // Also check periodically in case of programmatic navigation
+    const interval = setInterval(checkRoute, 100);
+
+    return () => {
+      window.removeEventListener('popstate', checkRoute);
+      window.removeEventListener('hashchange', checkRoute);
+      clearInterval(interval);
+    };
+  }, []);
+
+  return <React.StrictMode>{currentPage === 'sr' ? <SRArtist /> : <App />}</React.StrictMode>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<Router />);

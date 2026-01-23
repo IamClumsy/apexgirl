@@ -20,11 +20,7 @@ const data = xlsx.utils.sheet_to_json(worksheet);
 // Process the data to match our application's structure
 const processedData = data.map((row, index) => {
   // Create skills array from Skill 1, 2, 3
-  const skills = [
-    row['Skill 1'],
-    row['Skill 2'],
-    row['Skill 3']
-  ].filter(Boolean); // Remove empty skills
+  const skills = [row['Skill 1'], row['Skill 2'], row['Skill 3']].filter(Boolean); // Remove empty skills
 
   return {
     id: index + 1,
@@ -34,11 +30,13 @@ const processedData = data.map((row, index) => {
     position: row['Position'] || '',
     genre: row['Genre'] || 'Various',
     skills: skills,
-    description: row['Micks Thoughts'] || `A talented ${row['Position'] || 'artist'} from ${row['Group'] || 'various groups'}.`,
+    description:
+      row['Micks Thoughts'] ||
+      `A talented ${row['Position'] || 'artist'} from ${row['Group'] || 'various groups'}.`,
     // Calculate a rating based on rank (assuming lower rank is better)
-    rating: row['Rank'] ? Math.max(1, 5 - (row['Rank'] * 0.5)) : 3.5,
+    rating: row['Rank'] ? Math.max(1, 5 - row['Rank'] * 0.5) : 3.5,
     // Generate a placeholder image with the artist's name
-    image: `https://via.placeholder.com/200x200?text=${encodeURIComponent((row['Name'] || 'Artist').charAt(0))}`
+    image: `https://via.placeholder.com/200x200?text=${encodeURIComponent((row['Name'] || 'Artist').charAt(0))}`,
   };
 });
 

@@ -56,25 +56,25 @@ Putri,No Group,UR Bali,Dancer,Pop,10 sec/1800 Damage,20% Damage to Player,10% Fa
 // Parse the CSV data
 const records = parse(csvData, {
   columns: true,
-  skip_empty_lines: true
+  skip_empty_lines: true,
 });
 
 // Process the data to match the application's structure
 const processedData = records.map((row, index) => {
   // Create skills array from Skill 1, 2, 3
-  const skills = [
-    row['Skill 1'],
-    row['Skill 2'],
-    row['Skill 3']
-  ].filter(Boolean); // Remove empty skills
+  const skills = [row['Skill 1'], row['Skill 2'], row['Skill 3']].filter(Boolean); // Remove empty skills
 
   // Map thoughts to a more structured format
   const thoughts = row['Micks Thoughts are they Good'] || '';
-  const isGood = /yes/i.test(thoughts) ? 'Yes' : 
-                /no/i.test(thoughts) ? 'No' : 
-                /if nothing better/i.test(thoughts) ? 'If Nothing Better' : 
-                /bad/i.test(thoughts) ? 'Bad' : 
-                thoughts;
+  const isGood = /yes/i.test(thoughts)
+    ? 'Yes'
+    : /no/i.test(thoughts)
+      ? 'No'
+      : /if nothing better/i.test(thoughts)
+        ? 'If Nothing Better'
+        : /bad/i.test(thoughts)
+          ? 'Bad'
+          : thoughts;
 
   return {
     id: index + 1,
@@ -88,7 +88,7 @@ const processedData = records.map((row, index) => {
     rating: null,
     image: `https://via.placeholder.com/200x200?text=${row['Name'].charAt(0)}`,
     thoughts: isGood,
-    build: row['Skill Build Worthy'] === 'Yes' ? 'Skill Build' : 'Standard Build'
+    build: row['Skill Build Worthy'] === 'Yes' ? 'Skill Build' : 'Standard Build',
   };
 });
 

@@ -15,13 +15,13 @@ const idMap = new Map();
 const nameMap = new Map();
 const duplicates = [];
 
-artists.forEach(artist => {
+artists.forEach((artist) => {
   // Check duplicate IDs
   if (idMap.has(artist.id)) {
     duplicates.push({
       type: 'ID',
       value: artist.id,
-      entries: [idMap.get(artist.id), artist.name]
+      entries: [idMap.get(artist.id), artist.name],
     });
   } else {
     idMap.set(artist.id, artist.name);
@@ -33,7 +33,7 @@ artists.forEach(artist => {
     duplicates.push({
       type: 'Name',
       value: artist.name,
-      entries: [nameMap.get(lowerName), artist.group]
+      entries: [nameMap.get(lowerName), artist.group],
     });
   } else {
     nameMap.set(lowerName, artist.group);

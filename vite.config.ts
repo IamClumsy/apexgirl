@@ -39,7 +39,7 @@ export default defineConfig({
   },
   define: {
     'process.env': {},
-    global: 'globalThis'
+    global: 'globalThis',
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
@@ -49,5 +49,5 @@ export default defineConfig({
         global: 'globalThis',
       },
     },
-  }
+  },
 });

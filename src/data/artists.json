@@ -660,5 +660,19 @@
     "thoughts": "No",
     "build": "",
     "photos": "Universal"
+  },
+  {
+    "id": 56,
+    "name": "Ningsih",
+    "group": "None",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "Hip Hop",
+    "skills": ["10 sec/1800 Damage", "240/DPS Attacking Enemy Company", "12% Fan Capacity"],
+    "description": "Ningsih is a talented Dancer from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "",
+    "photos": "Universal"
   }
 ]

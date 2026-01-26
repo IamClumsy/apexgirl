@@ -334,9 +334,13 @@ function SRArtist() {
         t.includes('club') ||
         t.includes('lm'));
     
+    // Include 240/DPS Attacking Enemy Company
+    const is240DpsAttacking = t.includes('240/dps') && t.includes('attacking enemy company');
+    
     return (
       !isWorstSkill(skill) &&
       (isDefendingDps ||
+        is240DpsAttacking ||
         t.includes('gold brick gathering') ||
         t.includes('gold brick gather speed') ||
         (t.includes('fan capacity') && !t.includes('10% rally fan capacity') && !t.includes('rally')))

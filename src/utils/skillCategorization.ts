@@ -54,9 +54,13 @@ export const isBadSkill = (skill: string): boolean => {
       t.includes('club') ||
       t.includes('lm'));
   
+  // Include 240/DPS Attacking Enemy Company
+  const is240DpsAttacking = t.includes('240/dps') && t.includes('attacking enemy company');
+  
   return (
     !isWorstSkill(skill) &&
     (isDefendingDps ||
+      is240DpsAttacking ||
       t.includes('gold brick gathering') ||
       (t.includes('fan capacity') && !t.includes('10% rally fan capacity')))
   );

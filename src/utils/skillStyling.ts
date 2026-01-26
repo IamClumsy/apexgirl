@@ -24,6 +24,8 @@ export const getSkillClass = (skill: string): string => {
       '36% Damage to World Building Guard',
       '36% Damage World Building Guard',
       '180/DPS Attacking Enemy Company',
+      '200/DPS Defending HQ, GH, Club, LM',
+      '240/DPS Defending HQ, GH, Club, LM',
       '20% Damage WG / 50% Drive Speed',
       '75% Drive Speed',
       '10% Drive Speed',
@@ -31,7 +33,8 @@ export const getSkillClass = (skill: string): string => {
       '40% Drive Speed Increase',
     ].includes(trimmed) ||
     trimmed.toLowerCase().includes('drive speed increase') ||
-    (trimmed.toLowerCase().includes('drive speed') && !trimmed.toLowerCase().includes('reduction'))
+    (trimmed.toLowerCase().includes('drive speed') && !trimmed.toLowerCase().includes('reduction')) ||
+    (trimmed.toLowerCase().includes('dps') && trimmed.toLowerCase().includes('defending') && trimmed.toLowerCase().includes('hq'))
   )
     return 'skill-specific-worst bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
   if (['20% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {

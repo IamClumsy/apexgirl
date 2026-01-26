@@ -280,6 +280,10 @@ function SRArtist() {
     const t = (skill || '').toLowerCase();
     // Exclude 60% basic attack damage (moved to BEST)
     if (t.includes('60%') && (t.includes('basic attack damage') || t.includes('normal attack damage'))) return false;
+    // Exclude 30% skill damage (moved to BEST)
+    if (t.includes('30%') && t.includes('skill damage')) return false;
+    // Exclude 24% skill damage (moved to BEST)
+    if (t.includes('24%') && t.includes('skill damage')) return false;
     // Exclude reduction skills (they get 3 points as Okay)
     if (t.includes('reduc')) return false;
     return (
@@ -331,6 +335,10 @@ function SRArtist() {
     const t = (skill || '').toLowerCase();
     // Include 60% basic/normal attack damage as BEST
     if (t.includes('60%') && (t.includes('basic attack damage') || t.includes('normal attack damage'))) return true;
+    // Include 30% skill damage as BEST
+    if (t.includes('30%') && t.includes('skill damage')) return true;
+    // Include 24% skill damage as BEST
+    if (t.includes('24%') && t.includes('skill damage')) return true;
     // Include "Damage to Player" as BEST
     if (t.includes('damage to player')) return true;
     // Direct damage: time-based or explicit damage that isn't a reduction/taken modifier and not the Good buffs
@@ -461,6 +469,8 @@ function SRArtist() {
       return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
     if (trimmed === '24% Skill Damage')
       return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
+    if (trimmed === '30% Skill Damage')
+      return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
     if (trimmed === '50% Basic Attack Damage' || trimmed === '50% Normal Attack Damage' || trimmed === '20% Normal Attack Damage')
       return 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm';
     if (t.includes('gold brick'))
@@ -482,8 +492,8 @@ function SRArtist() {
       t.includes('damage increase world building guard')
     )
       return 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
-    if (['20% Skill Damage', '30% Skill Damage', '10% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
-      return trimmed === '20% Skill Damage' || trimmed === '30% Skill Damage' || trimmed === '10% Skill Damage'
+    if (['20% Skill Damage', '10% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
+      return trimmed === '20% Skill Damage' || trimmed === '10% Skill Damage'
         ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'
         : 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
     }

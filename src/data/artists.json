@@ -668,7 +668,7 @@
   {
     "id": 56,
     "name": "Ningsih",
-    "group": "None",
+    "group": "Breezara",
     "rank": "SSR",
     "position": "Dancer",
     "genre": "Hip Hop",
@@ -686,7 +686,7 @@
   {
     "id": 57,
     "name": "Dewi",
-    "group": "None",
+    "group": "Breezara",
     "rank": "SSR",
     "position": "Center",
     "genre": "R&B",
@@ -696,6 +696,24 @@
       "24% Skill Damage"
     ],
     "description": "Dewi is a talented Center from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "",
+    "photos": "Universal"
+  },
+  {
+    "id": 58,
+    "name": "Lestari",
+    "group": "Breezara",
+    "rank": "SSR",
+    "position": "Vocalist",
+    "genre": "Pop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "240/DPS when defending HQ, GH, Club, LM",
+      "36% Damage to World Building Guard"
+    ],
+    "description": "Lestari is a talented Vocalist from Breezara.",
     "rating": null,
     "thoughts": "No",
     "build": "",

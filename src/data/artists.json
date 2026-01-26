@@ -677,7 +677,7 @@
       "240/DPS Attacking Enemy Company",
       "12% Fan Capacity"
     ],
-    "description": "Ningsih is a talented Dancer from None.",
+    "description": "Ningsih is a talented Dancer from Breezara.",
     "rating": null,
     "thoughts": "No",
     "build": "",
@@ -695,7 +695,7 @@
       "60% Basic Attack Damage",
       "24% Skill Damage"
     ],
-    "description": "Dewi is a talented Center from None.",
+    "description": "Dewi is a talented Center from Breezara.",
     "rating": null,
     "thoughts": "No",
     "build": "",
@@ -716,7 +716,7 @@
     "description": "Lestari is a talented Vocalist from Breezara.",
     "rating": null,
     "thoughts": "No",
-    "build": "",
+    "build": "HQ Defense",
     "photos": "Universal"
   }
 ]

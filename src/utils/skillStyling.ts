@@ -17,10 +17,11 @@ export const getSkillClass = (skill: string): string => {
     return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
   if (trimmed.includes('Reduction Basic Attack Damage'))
     return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
-  // DPS Defending HQ skills - violet styling
+  // DPS Defending HQ skills and 240/DPS Attacking Enemy Company - violet styling
   if (
     trimmed === '200/DPS Defending HQ, GH, Club, LM' ||
     trimmed === '240/DPS Defending HQ, GH, Club, LM' ||
+    trimmed === '240/DPS Attacking Enemy Company' ||
     (trimmed.toLowerCase().includes('dps') && trimmed.toLowerCase().includes('defending') && trimmed.toLowerCase().includes('hq'))
   )
     return 'bg-gradient-to-r from-slate-600 to-slate-700 text-violet-400 border border-violet-500/40 violet-text';

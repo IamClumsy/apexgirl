@@ -492,10 +492,11 @@ function SRArtist() {
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
     if (t.includes('reduction') && (t.includes('basic attack damage') || t.includes('normal attack damage')))
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
-    // DPS Defending HQ skills - violet styling
+    // DPS Defending HQ skills and 240/DPS Attacking Enemy Company - violet styling
     if (
       trimmed === '200/DPS Defending HQ, GH, Club, LM' ||
       trimmed === '240/DPS Defending HQ, GH, Club, LM' ||
+      trimmed === '240/DPS Attacking Enemy Company' ||
       (t.includes('dps') && t.includes('defending') && t.includes('hq'))
     )
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-violet-400 border border-violet-500/40 violet-text';

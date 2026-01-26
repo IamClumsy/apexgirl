@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   FaStar,
   FaMedal,
@@ -60,10 +60,10 @@ function App() {
   };
 
   // Handle adding a new artist
-  const handleAddArtist = (artistData: Artist) => {
+  const handleAddArtist = useCallback((artistData: Artist) => {
     const updatedArtists = [...artists, artistData];
     saveArtists(updatedArtists);
-  };
+  }, [artists]);
 
   // Load artists data on component mount
   useEffect(() => {
@@ -87,7 +87,7 @@ function App() {
 
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  }, [handleAddArtist]);
 
   // Save to localStorage whenever artists change
   useEffect(() => {
@@ -130,13 +130,13 @@ function App() {
     };
   }, [artists]);
 
-  // Get unique values for filters
-  const rankOptions = [...new Set(artists.map((artist) => artist.rank))];
-  const roles = [...new Set(artists.map((artist) => artist.position))];
-  const genres = [...new Set(artists.map((artist) => artist.genre))];
-  const allSkills = [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))]; // Only Skill 2
+  // Get unique values for filters - memoized to avoid recalculation
+  const rankOptions = useMemo(() => [...new Set(artists.map((artist) => artist.rank))], [artists]);
+  const roles = useMemo(() => [...new Set(artists.map((artist) => artist.position))], [artists]);
+  const genres = useMemo(() => [...new Set(artists.map((artist) => artist.genre))], [artists]);
+  const allSkills = useMemo(() => [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))], [artists]); // Only Skill 2
   const skills = allSkills; // Alias for backward compatibility
-  const allSkills3 = [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))]; // Only Skill 3
+  const allSkills3 = useMemo(() => [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))], [artists]); // Only Skill 3
   // Group skills for dropdown headers
   const isGoodBuff = (skill: string) => {
     const t = (skill || '').toLowerCase();
@@ -196,34 +196,35 @@ function App() {
       !isTerribleSkill(skill)
     );
   };
-  const terribleSkills = skills.filter(isTerribleSkill);
-  const worstSkills = skills.filter(isWorstSkill);
-  const bestSkills = skills.filter(isDirectDamage);
-  const goodSkills = skills.filter(isGoodBuff);
-  const okaySkills = skills.filter(
+  // Skill categorization - memoized to avoid recalculation
+  const terribleSkills = useMemo(() => skills.filter(isTerribleSkill), [skills]);
+  const worstSkills = useMemo(() => skills.filter(isWorstSkill), [skills]);
+  const bestSkills = useMemo(() => skills.filter(isDirectDamage), [skills]);
+  const goodSkills = useMemo(() => skills.filter(isGoodBuff), [skills]);
+  const okaySkills = useMemo(() => skills.filter(
     (s) =>
       !bestSkills.includes(s) &&
       !goodSkills.includes(s) &&
       !worstSkills.includes(s) &&
       !terribleSkills.includes(s)
-  );
+  ), [skills, bestSkills, goodSkills, worstSkills, terribleSkills]);
 
   // Skill 3 categorization
-  const terribleSkills3 = allSkills3.filter(isTerribleSkill);
-  const worstSkills3 = allSkills3.filter(isWorstSkill);
-  const bestSkills3 = allSkills3.filter(isDirectDamage);
-  const goodSkills3 = allSkills3.filter(isGoodBuff);
-  const okaySkills3 = allSkills3.filter(
+  const terribleSkills3 = useMemo(() => allSkills3.filter(isTerribleSkill), [allSkills3]);
+  const worstSkills3 = useMemo(() => allSkills3.filter(isWorstSkill), [allSkills3]);
+  const bestSkills3 = useMemo(() => allSkills3.filter(isDirectDamage), [allSkills3]);
+  const goodSkills3 = useMemo(() => allSkills3.filter(isGoodBuff), [allSkills3]);
+  const okaySkills3 = useMemo(() => allSkills3.filter(
     (s) =>
       !bestSkills3.includes(s) &&
       !goodSkills3.includes(s) &&
       !worstSkills3.includes(s) &&
       !terribleSkills3.includes(s)
-  );
+  ), [allSkills3, bestSkills3, goodSkills3, worstSkills3, terribleSkills3]);
 
   // Calculate artist points: Best=10, Good=6, Okay=3, Worst=0, Terrible=-1
   // Skip skill 1 (index 0) when calculating ranking
-  const calculateArtistPoints = (artist: Artist) => {
+  const calculateArtistPoints = useCallback((artist: Artist) => {
     let points = 0;
     artist.skills.forEach((skill, index) => {
       if (!skill || index === 0) return; // Skip skill 1
@@ -243,59 +244,62 @@ function App() {
       else if (isTerrible) points += -1;
     });
     return points;
-  };
+  }, [bestSkills, goodSkills, okaySkills, worstSkills, terribleSkills, bestSkills3, goodSkills3, okaySkills3, worstSkills3, terribleSkills3]);
 
   // Convert points to letter grade: 14+=S, 10-13=A, 5-9=B, 0-4=C, -1=F
-  const getLetterGrade = (points: number) => {
+  const getLetterGrade = useCallback((points: number) => {
     if (points >= 14) return 'S';
     if (points >= 10) return 'A';
     if (points >= 5) return 'B';
     if (points >= 0) return 'C';
     return 'F';
-  };
+  }, []);
 
-  const buildOptions = [...new Set(artists.map((artist) => artist.build).filter(Boolean))];
-  const photosOptions = [...new Set(artists.map((artist) => artist.photos).filter(Boolean))];
+  const buildOptions = useMemo(() => [...new Set(artists.map((artist) => artist.build).filter(Boolean))], [artists]);
+  const photosOptions = useMemo(() => [...new Set(artists.map((artist) => artist.photos).filter(Boolean))], [artists]);
 
-  // Filter artists
-  const filteredArtists = artists
-    .filter((artist: Artist) => {
-      const matchesSearch = searchTerm === '' || artist.name === searchTerm;
+  // Filter artists - memoized to avoid recalculation on every render
+  const filteredArtists = useMemo(() => {
+    return artists
+      .filter((artist: Artist) => {
+        const matchesSearch = searchTerm === '' || artist.name === searchTerm;
 
-      const matchesRank = selectedRank === '' || artist.rank === selectedRank;
-      const matchesRole = selectedRole === '' || artist.position === selectedRole;
-      const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
-      const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
-      const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3; // Skill 3 filter
-      const matchesBuild =
-        selectedBuild === '' ||
-        (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
-      const matchesRanking =
-        selectedRanking === '' || getLetterGrade(calculateArtistPoints(artist)) === selectedRanking;
-      const matchesPhotos = selectedPhotos === '' || artist.photos === selectedPhotos;
+        const matchesRank = selectedRank === '' || artist.rank === selectedRank;
+        const matchesRole = selectedRole === '' || artist.position === selectedRole;
+        const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
+        const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
+        const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3; // Skill 3 filter
+        const matchesBuild =
+          selectedBuild === '' ||
+          (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
+        // Only calculate points if ranking filter is active
+        const matchesRanking =
+          selectedRanking === '' || getLetterGrade(calculateArtistPoints(artist)) === selectedRanking;
+        const matchesPhotos = selectedPhotos === '' || artist.photos === selectedPhotos;
 
-      return (
-        matchesSearch &&
-        matchesRank &&
-        matchesRole &&
-        matchesGenre &&
-        matchesSkill &&
-        matchesSkill3 &&
-        matchesBuild &&
-        matchesRanking &&
-        matchesPhotos
-      );
-    })
-    .sort((a, b) => {
-      const aIsUR = a.rank.startsWith('UR');
-      const bIsUR = b.rank.startsWith('UR');
-      if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom
-      const genreCompare = a.genre.localeCompare(b.genre);
-      if (genreCompare !== 0) return genreCompare;
-      const roleCompare = a.position.localeCompare(b.position);
-      if (roleCompare !== 0) return roleCompare;
-      return a.name.localeCompare(b.name);
-    });
+        return (
+          matchesSearch &&
+          matchesRank &&
+          matchesRole &&
+          matchesGenre &&
+          matchesSkill &&
+          matchesSkill3 &&
+          matchesBuild &&
+          matchesRanking &&
+          matchesPhotos
+        );
+      })
+      .sort((a, b) => {
+        const aIsUR = a.rank.startsWith('UR');
+        const bIsUR = b.rank.startsWith('UR');
+        if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom
+        const genreCompare = a.genre.localeCompare(b.genre);
+        if (genreCompare !== 0) return genreCompare;
+        const roleCompare = a.position.localeCompare(b.position);
+        if (roleCompare !== 0) return roleCompare;
+        return a.name.localeCompare(b.name);
+      });
+  }, [artists, searchTerm, selectedRank, selectedRole, selectedGenre, selectedSkill, selectedSkill3, selectedBuild, selectedRanking, selectedPhotos, getLetterGrade, calculateArtistPoints]);
 
   // Function to get skill badge class
   const getSkillClass = (skill: string) => {

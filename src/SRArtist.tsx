@@ -325,9 +325,19 @@ function SRArtist() {
   };
   const isBadSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
+    // Include defending DPS skills (200/DPS and 240/DPS defending buildings)
+    const isDefendingDps =
+      (t.includes('200/dps') || t.includes('240/dps')) &&
+      (t.includes('defending') ||
+        t.includes('hq') ||
+        t.includes('gh') ||
+        t.includes('club') ||
+        t.includes('lm'));
+    
     return (
       !isWorstSkill(skill) &&
-      (t.includes('gold brick gathering') ||
+      (isDefendingDps ||
+        t.includes('gold brick gathering') ||
         t.includes('gold brick gather speed') ||
         (t.includes('fan capacity') && !t.includes('10% rally fan capacity') && !t.includes('rally')))
     );

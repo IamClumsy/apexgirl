@@ -45,9 +45,19 @@ export const isWorstSkill = (skill: string): boolean => {
 
 export const isBadSkill = (skill: string): boolean => {
   const t = (skill || '').toLowerCase();
+  // Include defending DPS skills (200/DPS and 240/DPS defending buildings)
+  const isDefendingDps =
+    (t.includes('200/dps') || t.includes('240/dps')) &&
+    (t.includes('defending') ||
+      t.includes('hq') ||
+      t.includes('gh') ||
+      t.includes('club') ||
+      t.includes('lm'));
+  
   return (
     !isWorstSkill(skill) &&
-    (t.includes('gold brick gathering') ||
+    (isDefendingDps ||
+      t.includes('gold brick gathering') ||
       (t.includes('fan capacity') && !t.includes('10% rally fan capacity')))
   );
 };

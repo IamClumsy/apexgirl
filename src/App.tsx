@@ -303,7 +303,7 @@ function App() {
                 <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 blue-text">
                   Blue&#9;
                 </span>
-                <span className="text-white text-sm font-bold legend-white">Reduction Skills</span>
+                <span className="text-white text-sm font-bold legend-white">Basic Attack and Skill Damage Reduction</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 violet-text">

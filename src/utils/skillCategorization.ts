@@ -4,6 +4,10 @@ export const isGoodBuff = (skill: string): boolean => {
   const t = (skill || '').toLowerCase();
   // Exclude 60% basic attack damage (moved to BEST)
   if (t.includes('60%') && t.includes('basic attack damage')) return false;
+  // Exclude 30% skill damage (moved to BEST)
+  if (t.includes('30%') && t.includes('skill damage')) return false;
+  // Exclude 24% skill damage (moved to BEST)
+  if (t.includes('24%') && t.includes('skill damage')) return false;
   // Exclude reduction skills (they get 3 points as Okay)
   if (t.includes('reduc')) return false;
   return (
@@ -51,6 +55,10 @@ export const isDirectDamage = (skill: string): boolean => {
   const t = (skill || '').toLowerCase();
   // Include 60% basic attack damage as BEST
   if (t.includes('60%') && t.includes('basic attack damage')) return true;
+  // Include 30% skill damage as BEST
+  if (t.includes('30%') && t.includes('skill damage')) return true;
+  // Include 24% skill damage as BEST
+  if (t.includes('24%') && t.includes('skill damage')) return true;
   // Direct damage: time-based or explicit damage that isn't a reduction/taken modifier and not the Good buffs
   const mentionsDamage = t.includes('damage') && !t.includes('reduc') && !t.includes('taken');
   const timeBased = t.includes(' sec/') || /\bsec\b/.test(t);

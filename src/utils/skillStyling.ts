@@ -9,6 +9,8 @@ export const getSkillClass = (skill: string): string => {
     return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
   if (trimmed === '24% Skill Damage')
     return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
+  if (trimmed === '30% Skill Damage')
+    return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
   if (trimmed === '50% Basic Attack Damage')
     return 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm';
   if (trimmed.includes('Gold Brick'))
@@ -26,8 +28,8 @@ export const getSkillClass = (skill: string): string => {
     ].includes(trimmed)
   )
     return 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
-  if (['20% Skill Damage', '30% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
-    return trimmed === '20% Skill Damage' || trimmed === '30% Skill Damage'
+  if (['20% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
+    return trimmed === '20% Skill Damage'
       ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'
       : 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
   }

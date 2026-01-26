@@ -335,7 +335,7 @@ function App() {
                   White&#9;
                 </span>
                 <span className="text-white text-sm font-bold" style={{ color: '#ffffff' }}>
-                  All Other Skills
+                  Capacity Increase Skills
                 </span>
               </div>
             </div>

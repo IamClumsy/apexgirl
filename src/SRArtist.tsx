@@ -319,6 +319,7 @@ function SRArtist() {
       (t.includes('10 sec') && !t.includes('sec/')) ||
       t.includes('10/sec') ||
       t.includes('driving speed') ||
+      t.includes('drive speed') ||
       t.includes('drive speed increase')
     );
   };

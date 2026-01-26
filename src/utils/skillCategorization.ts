@@ -38,7 +38,8 @@ export const isTerribleSkill = (skill: string): boolean => {
     t.includes('damage wg') ||
     (t.includes('10 sec') && !t.includes('sec/')) ||
     t.includes('10/sec') ||
-    t.includes('driving speed')
+    t.includes('driving speed') ||
+    t.includes('drive speed')
   );
 };
 

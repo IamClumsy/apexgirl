@@ -25,7 +25,10 @@ export const getSkillClass = (skill: string): string => {
       '180/DPS Attacking Enemy Company',
       '20% Damage WG / 50% Drive Speed',
       '75% Drive Speed',
-    ].includes(trimmed)
+      '10% Drive Speed Increase',
+      '40% Drive Speed Increase',
+    ].includes(trimmed) ||
+    trimmed.toLowerCase().includes('drive speed increase')
   )
     return 'skill-specific-worst bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
   if (['20% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {

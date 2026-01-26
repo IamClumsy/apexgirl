@@ -305,6 +305,8 @@ function App() {
       return 'damage-to-player bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
     if (trimmed === '60% Basic Attack Damage')
       return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
+    if (trimmed === '24% Skill Damage')
+      return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
     if (trimmed === '50% Basic Attack Damage')
       return 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm';
     if (trimmed.includes('Gold Brick'))

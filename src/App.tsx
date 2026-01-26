@@ -1,22 +1,12 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { FaDownload } from 'react-icons/fa';
 import artistsData from './data/artists.json';
-
-interface Artist {
-  id: number;
-  name: string;
-  group: string;
-  genre: string;
-  position: string;
-  rank: string;
-  rating?: number | null;
-  skills: string[];
-  description: string;
-  image?: string;
-  thoughts?: string;
-  build?: string;
-  photos?: string;
-}
+import { Artist } from './types';
+import { categorizeSkills } from './utils/skillCategorization';
+import { useArtistFilters } from './hooks/useArtistFilters';
+import { FilterRow } from './components/FilterRow';
+import { TableHeader } from './components/TableHeader';
+import { ArtistRow } from './components/ArtistRow';
 
 function App() {
   const [artists, setArtists] = useState<Artist[]>([]);
@@ -119,223 +109,56 @@ function App() {
   const roles = useMemo(() => [...new Set(artists.map((artist) => artist.position))], [artists]);
   const genres = useMemo(() => [...new Set(artists.map((artist) => artist.genre))], [artists]);
   const allSkills = useMemo(() => [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))], [artists]); // Only Skill 2
-  const skills = allSkills; // Alias for backward compatibility
   const allSkills3 = useMemo(() => [...new Set(artists.map((artist) => artist.skills[2]).filter(Boolean))], [artists]); // Only Skill 3
-  // Group skills for dropdown headers
-  const isGoodBuff = (skill: string) => {
-    const t = (skill || '').toLowerCase();
-    // Exclude 60% basic attack damage (moved to BEST)
-    if (t.includes('60%') && t.includes('basic attack damage')) return false;
-    // Exclude reduction skills (they get 3 points as Okay)
-    if (t.includes('reduc')) return false;
-    return (
-      t.includes('skill damage') || t.includes('basic attack damage') || t.includes('basic damage')
-    );
-  };
-  const isTerribleSkill = (skill: string) => {
-    const t = (skill || '').toLowerCase();
-    // Exclude damage-dealing skills like "10 sec/1800 Damage"
-    const isDamageSkill = t.includes('damage') && (t.includes('sec/') || /\d+\s*damage/.test(t));
-    if (isDamageSkill) return false;
+  
+  // Skill categorization using shared utilities
+  const skill2Categories = useMemo(() => categorizeSkills(allSkills), [allSkills]);
+  const skill3Categories = useMemo(() => categorizeSkills(allSkills3), [allSkills3]);
+  
+  const terribleSkills = skill2Categories.terribleSkills;
+  const worstSkills = skill2Categories.worstSkills;
+  const bestSkills = skill2Categories.bestSkills;
+  const goodSkills = skill2Categories.goodSkills;
+  const okaySkills = skill2Categories.okaySkills;
 
-    // Exclude 200/DPS defending buildings (HQ, GH, Club, LM)
-    const is200DpsDefending =
-      t.includes('200/dps') &&
-      (t.includes('defending') ||
-        t.includes('hq') ||
-        t.includes('gh') ||
-        t.includes('club') ||
-        t.includes('lm'));
-    if (is200DpsDefending) return false;
-
-    return (
-      t.includes('180/dps') ||
-      t.includes('200/dps') ||
-      t.includes('world building guard') ||
-      t.includes('damage wg') ||
-      (t.includes('10 sec') && !t.includes('sec/')) ||
-      t.includes('10/sec') ||
-      t.includes('driving speed')
-    );
-  };
-  const isWorstSkill = (skill: string) => {
-    const t = (skill || '').toLowerCase();
-    return (
-      !isTerribleSkill(skill) &&
-      (t.includes('gold brick gathering') ||
-        (t.includes('fan capacity') && !t.includes('10% rally fan capacity')))
-    );
-  };
-  const isDirectDamage = (skill: string) => {
-    const t = (skill || '').toLowerCase();
-    // Include 60% basic attack damage as BEST
-    if (t.includes('60%') && t.includes('basic attack damage')) return true;
-    // Direct damage: time-based or explicit damage that isn't a reduction/taken modifier and not the Good buffs
-    const mentionsDamage = t.includes('damage') && !t.includes('reduc') && !t.includes('taken');
-    const timeBased = t.includes(' sec/') || /\bsec\b/.test(t);
-    return (
-      (mentionsDamage || timeBased) &&
-      !isGoodBuff(skill) &&
-      !isWorstSkill(skill) &&
-      !isTerribleSkill(skill)
-    );
-  };
-  // Skill categorization - memoized to avoid recalculation
-  const terribleSkills = useMemo(() => skills.filter(isTerribleSkill), [skills]);
-  const worstSkills = useMemo(() => skills.filter(isWorstSkill), [skills]);
-  const bestSkills = useMemo(() => skills.filter(isDirectDamage), [skills]);
-  const goodSkills = useMemo(() => skills.filter(isGoodBuff), [skills]);
-  const okaySkills = useMemo(() => skills.filter(
-    (s) =>
-      !bestSkills.includes(s) &&
-      !goodSkills.includes(s) &&
-      !worstSkills.includes(s) &&
-      !terribleSkills.includes(s)
-  ), [skills, bestSkills, goodSkills, worstSkills, terribleSkills]);
-
-  // Skill 3 categorization
-  const terribleSkills3 = useMemo(() => allSkills3.filter(isTerribleSkill), [allSkills3]);
-  const worstSkills3 = useMemo(() => allSkills3.filter(isWorstSkill), [allSkills3]);
-  const bestSkills3 = useMemo(() => allSkills3.filter(isDirectDamage), [allSkills3]);
-  const goodSkills3 = useMemo(() => allSkills3.filter(isGoodBuff), [allSkills3]);
-  const okaySkills3 = useMemo(() => allSkills3.filter(
-    (s) =>
-      !bestSkills3.includes(s) &&
-      !goodSkills3.includes(s) &&
-      !worstSkills3.includes(s) &&
-      !terribleSkills3.includes(s)
-  ), [allSkills3, bestSkills3, goodSkills3, worstSkills3, terribleSkills3]);
-
-  // Skill point values
-  const SKILL_POINTS = {
-    BEST: 10,
-    GOOD: 6,
-    OKAY: 3,
-    WORST: 0,
-    TERRIBLE: -1,
-  } as const;
-
-  // Grade thresholds
-  const GRADE_THRESHOLDS = {
-    S: 14,
-    A: 10,
-    B: 5,
-    C: 0,
-  } as const;
-
-  // Calculate artist points: Best=10, Good=6, Okay=3, Worst=0, Terrible=-1
-  // Skip skill 1 (index 0) when calculating ranking
-  const calculateArtistPoints = useCallback((artist: Artist) => {
-    let points = 0;
-    artist.skills.forEach((skill, index) => {
-      if (!skill || index === 0) return; // Skip skill 1
-
-      // Use appropriate skill arrays based on index
-      const isBest = index === 1 ? bestSkills.includes(skill) : bestSkills3.includes(skill);
-      const isGood = index === 1 ? goodSkills.includes(skill) : goodSkills3.includes(skill);
-      const isOkay = index === 1 ? okaySkills.includes(skill) : okaySkills3.includes(skill);
-      const isWorst = index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
-      const isTerrible =
-        index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
-
-      if (isBest) points += SKILL_POINTS.BEST;
-      else if (isGood) points += SKILL_POINTS.GOOD;
-      else if (isOkay) points += SKILL_POINTS.OKAY;
-      else if (isWorst) points += SKILL_POINTS.WORST;
-      else if (isTerrible) points += SKILL_POINTS.TERRIBLE;
-    });
-    return points;
-  }, [bestSkills, goodSkills, okaySkills, worstSkills, terribleSkills, bestSkills3, goodSkills3, okaySkills3, worstSkills3, terribleSkills3]);
-
-  // Convert points to letter grade: 14+=S, 10-13=A, 5-9=B, 0-4=C, -1=F
-  const getLetterGrade = useCallback((points: number) => {
-    if (points >= GRADE_THRESHOLDS.S) return 'S';
-    if (points >= GRADE_THRESHOLDS.A) return 'A';
-    if (points >= GRADE_THRESHOLDS.B) return 'B';
-    if (points >= GRADE_THRESHOLDS.C) return 'C';
-    return 'F';
-  }, []);
+  const terribleSkills3 = skill3Categories.terribleSkills;
+  const worstSkills3 = skill3Categories.worstSkills;
+  const bestSkills3 = skill3Categories.bestSkills;
+  const goodSkills3 = skill3Categories.goodSkills;
+  const okaySkills3 = skill3Categories.okaySkills;
 
   const buildOptions = useMemo(() => [...new Set(artists.map((artist) => artist.build).filter(Boolean))], [artists]);
   const photosOptions = useMemo(() => [...new Set(artists.map((artist) => artist.photos).filter(Boolean))], [artists]);
 
-  // Filter artists - memoized to avoid recalculation on every render
-  const filteredArtists = useMemo(() => {
-    return artists
-      .filter((artist: Artist) => {
-        const matchesSearch = searchTerm === '' || artist.name === searchTerm;
+  // Use custom hook for filtering
+  const skillArrays = useMemo(() => ({
+    bestSkills,
+    goodSkills,
+    okaySkills,
+    worstSkills,
+    terribleSkills,
+    bestSkills3,
+    goodSkills3,
+    okaySkills3,
+    worstSkills3,
+    terribleSkills3,
+  }), [bestSkills, goodSkills, okaySkills, worstSkills, terribleSkills, bestSkills3, goodSkills3, okaySkills3, worstSkills3, terribleSkills3]);
 
-        const matchesRank = selectedRank === '' || artist.rank === selectedRank;
-        const matchesRole = selectedRole === '' || artist.position === selectedRole;
-        const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
-        const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
-        const matchesSkill3 = selectedSkill3 === '' || artist.skills[2] === selectedSkill3; // Skill 3 filter
-        const matchesBuild =
-          selectedBuild === '' ||
-          (artist.build && artist.build.toLowerCase().includes(selectedBuild.toLowerCase()));
-        // Only calculate points if ranking filter is active
-        const matchesRanking =
-          selectedRanking === '' || getLetterGrade(calculateArtistPoints(artist)) === selectedRanking;
-        const matchesPhotos = selectedPhotos === '' || artist.photos === selectedPhotos;
-
-        return (
-          matchesSearch &&
-          matchesRank &&
-          matchesRole &&
-          matchesGenre &&
-          matchesSkill &&
-          matchesSkill3 &&
-          matchesBuild &&
-          matchesRanking &&
-          matchesPhotos
-        );
-      })
-      .sort((a, b) => {
-        const aIsUR = a.rank.startsWith('UR');
-        const bIsUR = b.rank.startsWith('UR');
-        if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom
-        const genreCompare = a.genre.localeCompare(b.genre);
-        if (genreCompare !== 0) return genreCompare;
-        const roleCompare = a.position.localeCompare(b.position);
-        if (roleCompare !== 0) return roleCompare;
-        return a.name.localeCompare(b.name);
-      });
-  }, [artists, searchTerm, selectedRank, selectedRole, selectedGenre, selectedSkill, selectedSkill3, selectedBuild, selectedRanking, selectedPhotos, getLetterGrade, calculateArtistPoints]);
-
-  // Function to get skill badge class
-  const getSkillClass = (skill: string) => {
-    if (!skill) return 'bg-blue-500 text-white';
-    const trimmed = skill.trim();
-    if (trimmed.toLowerCase().includes('damage to player'))
-      return 'damage-to-player bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
-    if (trimmed === '60% Basic Attack Damage')
-      return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
-    if (trimmed === '24% Skill Damage')
-      return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
-    if (trimmed === '50% Basic Attack Damage')
-      return 'basic-attack-50 bg-gradient-to-r from-slate-700 to-slate-800 shadow-sm';
-    if (trimmed.includes('Gold Brick'))
-      return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
-    if (trimmed.includes('Reduction Basic Attack Damage'))
-      return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
-    if (
-      [
-        '180/DPS Attacking Group Center, Club, Landmark',
-        '30% Damage World Building Guard',
-        '36% Damage to World Building Guard',
-        '180/DPS Attacking Enemy Company',
-        '20% Damage WG / 50% Drive Speed',
-        '75% Drive Speed',
-      ].includes(trimmed)
-    )
-      return 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
-    if (['20% Skill Damage', '30% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
-      return trimmed === '20% Skill Damage' || trimmed === '30% Skill Damage'
-        ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'
-        : 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
-    }
-    return 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-100 border border-slate-500/40';
-  };
+  const { filteredArtists, calculatePoints } = useArtistFilters({
+    artists,
+    filters: {
+      searchTerm,
+      selectedRank,
+      selectedRole,
+      selectedGenre,
+      selectedSkill,
+      selectedSkill3,
+      selectedBuild,
+      selectedRanking,
+      selectedPhotos,
+    },
+    skillArrays,
+  });
 
   return (
     <div className="w-full min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
@@ -357,6 +180,7 @@ function App() {
               className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-bold flex items-center justify-center aspect-square w-12 h-12"
               style={{ fontSize: '22px' }}
               title="SR Artists"
+              aria-label="Navigate to SR Artists page"
             >
               SR
             </button>
@@ -381,8 +205,9 @@ function App() {
               }}
               className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform flex items-center justify-center aspect-square w-12 h-12"
               title="Download artist-and-records-1.9.json"
+              aria-label="Download artists data as JSON file"
             >
-              <FaDownload size={22} />
+              <FaDownload size={22} aria-hidden="true" />
             </button>
           </div>
         </header>
@@ -390,323 +215,58 @@ function App() {
         {/* Main Content */}
         <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300 mx-auto">
           <div className="overflow-x-auto w-full">
-            <table className="table-fixed table-force-white table-with-spacing italic">
+            <table
+              className="table-fixed table-force-white table-with-spacing italic"
+              role="table"
+              aria-label="SSR Artists table with filters"
+            >
               <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
-                {/* Filter row */}
-                <tr className="align-middle bg-gradient-to-r from-violet-800/70 via-fuchsia-800/70 to-pink-700/70">
-                  <th className="px-1 py-2">
-                    <select
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Artist</option>
-                      {[...new Set(artists.map((artist) => artist.name))].sort().map((name) => (
-                        <option key={name} value={name}>
-                          {name}
-                        </option>
-                      ))}
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedGenre}
-                      onChange={(e) => setSelectedGenre(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Genre</option>
-                      {genres.map((genre) => (
-                        <option key={genre} value={genre}>
-                          {genre}
-                        </option>
-                      ))}
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedRole}
-                      onChange={(e) => setSelectedRole(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Role</option>
-                      {roles.map((role) => (
-                        <option key={role} value={role}>
-                          {role}
-                        </option>
-                      ))}
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedRank}
-                      onChange={(e) => setSelectedRank(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Rank</option>
-                      {rankOptions.map((rank) => (
-                        <option key={rank} value={rank}>
-                          {rank}
-                        </option>
-                      ))}
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedSkill}
-                      onChange={(e) => setSelectedSkill(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Skill 2</option>
-                      <optgroup label="Best">
-                        {bestSkills.map((skill) => (
-                          <option key={`s2-best-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Good">
-                        {goodSkills.map((skill) => (
-                          <option key={`s2-good-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Okay">
-                        {okaySkills.map((skill) => (
-                          <option key={`s2-okay-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Worst">
-                        {worstSkills.map((skill) => (
-                          <option key={`s2-worst-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Terrible">
-                        {terribleSkills.map((skill) => (
-                          <option key={`s2-terrible-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedSkill3}
-                      onChange={(e) => setSelectedSkill3(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Skill 3</option>
-                      <optgroup label="Best">
-                        {bestSkills3.map((skill) => (
-                          <option key={`s3-best-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Good">
-                        {goodSkills3.map((skill) => (
-                          <option key={`s3-good-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Okay">
-                        {okaySkills3.map((skill) => (
-                          <option key={`s3-okay-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Worst">
-                        {worstSkills3.map((skill) => (
-                          <option key={`s3-worst-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Terrible">
-                        {terribleSkills3.map((skill) => (
-                          <option key={`s3-terrible-${skill}`} value={skill}>
-                            {skill}
-                          </option>
-                        ))}
-                      </optgroup>
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedRanking}
-                      onChange={(e) => setSelectedRanking(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Ranking</option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="C">C</option>
-                      <option value="D">D</option>
-                      <option value="F">F</option>
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedPhotos}
-                      onChange={(e) => setSelectedPhotos(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Photos</option>
-                      {photosOptions.map((photo) => (
-                        <option key={photo} value={photo}>
-                          {photo}
-                        </option>
-                      ))}
-                    </select>
-                  </th>
-                  <th className="px-1 py-2">
-                    <select
-                      value={selectedBuild}
-                      onChange={(e) => setSelectedBuild(e.target.value)}
-                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-                    >
-                      <option value="">Select Build</option>
-                      {buildOptions.map((build) => (
-                        <option key={build} value={build}>
-                          {build}
-                        </option>
-                      ))}
-                    </select>
-                  </th>
-                </tr>
-                {/* Column header row */}
-                <tr>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Artist
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Genre
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Role
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Rank
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Skill 2
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Skill 3
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Ranking
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Photos
-                  </th>
-                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Best Usage
-                  </th>
-                </tr>
+                <FilterRow
+                  artists={artists}
+                  searchTerm={searchTerm}
+                  selectedGenre={selectedGenre}
+                  selectedRole={selectedRole}
+                  selectedRank={selectedRank}
+                  selectedSkill={selectedSkill}
+                  selectedSkill3={selectedSkill3}
+                  selectedRanking={selectedRanking}
+                  selectedPhotos={selectedPhotos}
+                  selectedBuild={selectedBuild}
+                  genres={genres}
+                  roles={roles}
+                  rankOptions={rankOptions}
+                  bestSkills={bestSkills}
+                  goodSkills={goodSkills}
+                  okaySkills={okaySkills}
+                  worstSkills={worstSkills}
+                  terribleSkills={terribleSkills}
+                  bestSkills3={bestSkills3}
+                  goodSkills3={goodSkills3}
+                  okaySkills3={okaySkills3}
+                  worstSkills3={worstSkills3}
+                  terribleSkills3={terribleSkills3}
+                  buildOptions={buildOptions}
+                  photosOptions={photosOptions}
+                  onSearchChange={setSearchTerm}
+                  onGenreChange={setSelectedGenre}
+                  onRoleChange={setSelectedRole}
+                  onRankChange={setSelectedRank}
+                  onSkillChange={setSelectedSkill}
+                  onSkill3Change={setSelectedSkill3}
+                  onRankingChange={setSelectedRanking}
+                  onPhotosChange={setSelectedPhotos}
+                  onBuildChange={setSelectedBuild}
+                />
+                <TableHeader />
               </thead>
               <tbody className="bg-gray-800/80">
                 {filteredArtists.map((artist) => (
-                  <tr
+                  <ArtistRow
                     key={artist.id}
-                    className="hover:bg-amber-400/10 transition-colors duration-200"
-                  >
-                    <td className="px-1 py-2 whitespace-nowrap">
-                      <div className="text-sm font-medium text-white" title={artist.name}>
-                        {artist.name}
-                      </div>
-                    </td>
-                    <td className="px-1 py-2 whitespace-nowrap">
-                      <div className="text-sm text-amber-100" title={artist.genre}>
-                        {artist.genre}
-                      </div>
-                    </td>
-                    <td className="px-1 py-2 whitespace-nowrap">
-                      <div className="text-sm text-white text-center" title={artist.position}>
-                        {artist.position}
-                      </div>
-                    </td>
-                    <td className="px-1 py-2 whitespace-nowrap">
-                      <div
-                        className="text-sm font-medium text-white text-center"
-                        title={artist.rank}
-                      >
-                        {artist.rank}
-                        {artist.rating && artist.rating > 0 && (
-                          <span className="ml-1 text-xs text-white/80">
-                            ({(artist.rating as number).toFixed(1)})
-                          </span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-2 py-3">
-                      <div className="flex justify-center">
-                        {artist.skills[1] ? (
-                          <span
-                            className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs shadow-sm transition-all duration-200 ${getSkillClass(artist.skills[1])}`}
-                          >
-                            {artist.skills[1]}
-                          </span>
-                        ) : (
-                          <span className="text-white/50 text-xs">-</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-2 py-3">
-                      <div className="flex justify-center">
-                        {artist.skills[2] ? (
-                          <span
-                            className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs shadow-sm transition-all duration-200 ${getSkillClass(artist.skills[2])}`}
-                          >
-                            {artist.skills[2]}
-                          </span>
-                        ) : (
-                          <span className="text-white/50 text-xs">-</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-1 py-2 whitespace-nowrap">
-                      <div
-                        className="text-sm font-bold text-center"
-                        title={`Points: ${calculateArtistPoints(artist)}`}
-                      >
-                        <span
-                          className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 ${
-                            getLetterGrade(calculateArtistPoints(artist)) === 'S'
-                              ? 'ranking-a'
-                              : getLetterGrade(calculateArtistPoints(artist)) === 'A'
-                                ? 'ranking-b'
-                                : getLetterGrade(calculateArtistPoints(artist)) === 'B'
-                                  ? 'ranking-c'
-                                  : getLetterGrade(calculateArtistPoints(artist)) === 'C'
-                                    ? 'ranking-d'
-                                    : getLetterGrade(calculateArtistPoints(artist)) === 'F'
-                                      ? 'ranking-f'
-                                      : 'text-white'
-                          }`}
-                        >
-                          {getLetterGrade(calculateArtistPoints(artist))}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-2 py-3 text-center">
-                      <span className="text-white text-sm">{artist.photos || 'N/A'}</span>
-                    </td>
-                    <td className="px-2 py-3 text-center">
-                      <span
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-500 to-fuchsia-600 text-white shadow-sm`}
-                      >
-                        {artist.build || 'N/A'}
-                      </span>
-                    </td>
-                  </tr>
+                    artist={artist}
+                    calculatePoints={calculatePoints}
+                    skillArrays={skillArrays}
+                  />
                 ))}
               </tbody>
             </table>

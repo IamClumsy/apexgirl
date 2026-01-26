@@ -14,7 +14,9 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,json,css}\" \"*.{ts,js,json}\" \"scripts/**/*.{js,mjs}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,json,css}\" \"*.{ts,js,json}\" \"scripts/**/*.{js,mjs}\"",
     "type-check": "tsc --noEmit",
-    "convert-data": "node --experimental-json-modules scripts/convertExcelToJson.mjs"
+    "convert-data": "node --experimental-json-modules scripts/convertExcelToJson.mjs",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "csv-parse": "^6.1.0",
@@ -40,6 +42,11 @@
     "typescript": "^5.9.3",
     "vite": "^5.4.0",
     "vite-tsconfig-paths": "^5.1.0",
+    "vitest": "^1.0.0",
+    "@vitest/ui": "^1.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/jest-dom": "^6.1.0",
+    "jsdom": "^23.0.0",
     "xlsx": "^0.18.5"
   }
 }

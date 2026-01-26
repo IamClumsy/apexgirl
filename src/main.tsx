@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import SRArtist from './SRArtist';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import './index.css';
 
 function Router() {
@@ -35,7 +36,13 @@ function Router() {
     };
   }, []);
 
-  return <React.StrictMode>{currentPage === 'sr' ? <SRArtist /> : <App />}</React.StrictMode>;
+  return (
+    <React.StrictMode>
+      <ErrorBoundary>
+        {currentPage === 'sr' ? <SRArtist /> : <App />}
+      </ErrorBoundary>
+    </React.StrictMode>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<Router />);

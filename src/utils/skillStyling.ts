@@ -27,7 +27,7 @@ export const getSkillClass = (skill: string): string => {
       '75% Drive Speed',
     ].includes(trimmed)
   )
-    return 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
+    return 'skill-specific-worst bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
   if (['20% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
     return trimmed === '20% Skill Damage'
       ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'

@@ -52,7 +52,7 @@ export const SKILL_POINTS = {
   GOOD: 6,
   OKAY: 3,
   BAD: 0,
-  TERRIBLE: -1,
+  WORST: -1,
 } as const;
 
 export const GRADE_THRESHOLDS = {

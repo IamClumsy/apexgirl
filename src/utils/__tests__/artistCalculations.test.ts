@@ -61,7 +61,7 @@ describe('artistCalculations', () => {
         []
       );
 
-      expect(points).toBe(6); // Only good skill counted, terrible skill at index 0 skipped
+      expect(points).toBe(6); // Only good skill counted, worst skill at index 0 skipped
     });
   });
 

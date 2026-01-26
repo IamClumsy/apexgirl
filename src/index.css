@@ -37,15 +37,15 @@
   font-weight: 600 !important;
 }
 
-/* Custom terrible skill category highlight style */
-.skill-terrible {
+/* Custom worst skill category highlight style */
+.skill-worst {
   color: #ef4444 !important;
   border-color: #ef4444 !important;
   font-weight: 600 !important;
 }
 
-/* Custom specific terrible skills highlight style */
-.skill-specific-terrible {
+/* Custom specific worst skills highlight style */
+.skill-specific-worst {
   color: #ef4444 !important;
   border-color: #ef4444 !important;
   font-weight: 600 !important;
@@ -215,8 +215,8 @@ html {
   :not(select):not(option):not(input):not(textarea):not(button):not(.text-green-400):not(
     .damage-to-player
   ):not(.basic-attack-50):not(.basic-attack-60):not(.skill-damage-20):not(.skill-good):not(
-    .skill-terrible
-  ):not(.skill-specific-terrible):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(
+    .skill-worst
+  ):not(.skill-specific-worst):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(
     .ranking-d
   ):not(.ranking-f):not(.gold-text):not(.blue-text) {
   color: #fff !important;

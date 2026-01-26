@@ -115,13 +115,13 @@ function App() {
   const skill2Categories = useMemo(() => categorizeSkills(allSkills), [allSkills]);
   const skill3Categories = useMemo(() => categorizeSkills(allSkills3), [allSkills3]);
   
-  const terribleSkills = skill2Categories.terribleSkills;
+  const worstSkills = skill2Categories.worstSkills;
   const badSkills = skill2Categories.badSkills;
   const bestSkills = skill2Categories.bestSkills;
   const goodSkills = skill2Categories.goodSkills;
   const okaySkills = skill2Categories.okaySkills;
 
-  const terribleSkills3 = skill3Categories.terribleSkills;
+  const worstSkills3 = skill3Categories.worstSkills;
   const badSkills3 = skill3Categories.badSkills;
   const bestSkills3 = skill3Categories.bestSkills;
   const goodSkills3 = skill3Categories.goodSkills;
@@ -136,13 +136,13 @@ function App() {
     goodSkills,
     okaySkills,
     badSkills,
-    terribleSkills,
+    worstSkills,
     bestSkills3,
     goodSkills3,
     okaySkills3,
     badSkills3,
-    terribleSkills3,
-  }), [bestSkills, goodSkills, okaySkills, badSkills, terribleSkills, bestSkills3, goodSkills3, okaySkills3, badSkills3, terribleSkills3]);
+    worstSkills3,
+  }), [bestSkills, goodSkills, okaySkills, badSkills, worstSkills, bestSkills3, goodSkills3, okaySkills3, badSkills3, worstSkills3]);
 
   const { filteredArtists, calculatePoints } = useArtistFilters({
     artists,
@@ -239,12 +239,12 @@ function App() {
                   goodSkills={goodSkills}
                   okaySkills={okaySkills}
                   badSkills={badSkills}
-                  terribleSkills={terribleSkills}
+                  worstSkills={worstSkills}
                   bestSkills3={bestSkills3}
                   goodSkills3={goodSkills3}
                   okaySkills3={okaySkills3}
                   badSkills3={badSkills3}
-                  terribleSkills3={terribleSkills3}
+                  worstSkills3={worstSkills3}
                   buildOptions={buildOptions}
                   photosOptions={photosOptions}
                   onSearchChange={setSearchTerm}
@@ -306,11 +306,11 @@ function App() {
                 <span className="text-white text-sm font-bold legend-white">Reduction Skills</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-terrible">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-worst">
                   Red&#9;
                 </span>
                 <span className="text-white text-sm" style={{ color: '#ffffff' }}>
-                  Terrible Skills (DPS variants, Drive Speed, etc.)
+                  Worst Skills (DPS variants, Drive Speed, etc.)
                 </span>
               </div>
               <div className="flex items-center gap-3">

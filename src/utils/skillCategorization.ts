@@ -15,7 +15,7 @@ export const isGoodBuff = (skill: string): boolean => {
   );
 };
 
-export const isTerribleSkill = (skill: string): boolean => {
+export const isWorstSkill = (skill: string): boolean => {
   const t = (skill || '').toLowerCase();
   // Exclude damage-dealing skills like "10 sec/1800 Damage"
   const isDamageSkill = t.includes('damage') && (t.includes('sec/') || /\d+\s*damage/.test(t));
@@ -46,7 +46,7 @@ export const isTerribleSkill = (skill: string): boolean => {
 export const isBadSkill = (skill: string): boolean => {
   const t = (skill || '').toLowerCase();
   return (
-    !isTerribleSkill(skill) &&
+    !isWorstSkill(skill) &&
     (t.includes('gold brick gathering') ||
       (t.includes('fan capacity') && !t.includes('10% rally fan capacity')))
   );
@@ -67,12 +67,12 @@ export const isDirectDamage = (skill: string): boolean => {
     (mentionsDamage || timeBased) &&
     !isGoodBuff(skill) &&
     !isBadSkill(skill) &&
-    !isTerribleSkill(skill)
+    !isWorstSkill(skill)
   );
 };
 
 export const categorizeSkills = (skills: string[]) => {
-  const terribleSkills = skills.filter(isTerribleSkill);
+  const worstSkills = skills.filter(isWorstSkill);
   const badSkills = skills.filter(isBadSkill);
   const bestSkills = skills.filter(isDirectDamage);
   const goodSkills = skills.filter(isGoodBuff);
@@ -81,11 +81,11 @@ export const categorizeSkills = (skills: string[]) => {
       !bestSkills.includes(s) &&
       !goodSkills.includes(s) &&
       !badSkills.includes(s) &&
-      !terribleSkills.includes(s)
+      !worstSkills.includes(s)
   );
 
   return {
-    terribleSkills,
+    worstSkills,
     badSkills,
     bestSkills,
     goodSkills,

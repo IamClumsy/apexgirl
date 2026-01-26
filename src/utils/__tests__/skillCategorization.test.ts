@@ -3,7 +3,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   isGoodBuff,
-  isTerribleSkill,
+  isWorstSkill,
   isBadSkill,
   isDirectDamage,
   categorizeSkills,
@@ -29,18 +29,18 @@ describe('skillCategorization', () => {
     });
   });
 
-  describe('isTerribleSkill', () => {
-    it('should identify 180/DPS as terrible', () => {
-      expect(isTerribleSkill('180/DPS Attacking Group Center, Club, Landmark')).toBe(true);
+  describe('isWorstSkill', () => {
+    it('should identify 180/DPS as worst', () => {
+      expect(isWorstSkill('180/DPS Attacking Group Center, Club, Landmark')).toBe(true);
     });
 
-    it('should identify world building guard damage as terrible', () => {
-      expect(isTerribleSkill('30% Damage World Building Guard')).toBe(true);
-      expect(isTerribleSkill('36% Damage to World Building Guard')).toBe(true);
+    it('should identify world building guard damage as worst', () => {
+      expect(isWorstSkill('30% Damage World Building Guard')).toBe(true);
+      expect(isWorstSkill('36% Damage to World Building Guard')).toBe(true);
     });
 
     it('should exclude damage-dealing skills', () => {
-      expect(isTerribleSkill('10 sec/1800 Damage')).toBe(false);
+      expect(isWorstSkill('10 sec/1800 Damage')).toBe(false);
     });
   });
 
@@ -67,7 +67,7 @@ describe('skillCategorization', () => {
 
       expect(result.bestSkills).toContain('60% Basic Attack Damage');
       expect(result.goodSkills).toContain('20% Skill Damage');
-      expect(result.terribleSkills).toContain('180/DPS Attacking Group Center, Club, Landmark');
+      expect(result.worstSkills).toContain('180/DPS Attacking Group Center, Club, Landmark');
       expect(result.badSkills).toContain('Gold Brick Gathering');
     });
   });

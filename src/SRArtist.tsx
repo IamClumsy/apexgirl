@@ -294,7 +294,7 @@ function SRArtist() {
       t.includes('normal damage')
     );
   };
-  const isTerribleSkill = (skill: string) => {
+  const isWorstSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
     // Exclude damage-dealing skills like "10 sec/800 Damage" or "10 sec/1800 Damage"
     const isDamageSkill = t.includes('damage') && (t.includes('sec/') || /\d+\s*damage/.test(t));
@@ -326,7 +326,7 @@ function SRArtist() {
   const isBadSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
     return (
-      !isTerribleSkill(skill) &&
+      !isWorstSkill(skill) &&
       (t.includes('gold brick gathering') ||
         t.includes('gold brick gather speed') ||
         (t.includes('fan capacity') && !t.includes('10% rally fan capacity') && !t.includes('rally')))
@@ -349,10 +349,10 @@ function SRArtist() {
       (mentionsDamage || timeBased) &&
       !isGoodBuff(skill) &&
       !isBadSkill(skill) &&
-      !isTerribleSkill(skill)
+      !isWorstSkill(skill)
     );
   };
-  const terribleSkills = skills.filter(isTerribleSkill);
+  const worstSkills = skills.filter(isWorstSkill);
   const badSkills = skills.filter(isBadSkill);
   const bestSkills = skills.filter(isDirectDamage);
   const goodSkills = skills.filter(isGoodBuff);
@@ -361,11 +361,11 @@ function SRArtist() {
       !bestSkills.includes(s) &&
       !goodSkills.includes(s) &&
       !badSkills.includes(s) &&
-      !terribleSkills.includes(s)
+      !worstSkills.includes(s)
   );
 
   // Skill 3 categorization
-  const terribleSkills3 = allSkills3.filter(isTerribleSkill);
+  const worstSkills3 = allSkills3.filter(isWorstSkill);
   const badSkills3 = allSkills3.filter(isBadSkill);
   const bestSkills3 = allSkills3.filter(isDirectDamage);
   const goodSkills3 = allSkills3.filter(isGoodBuff);
@@ -374,10 +374,10 @@ function SRArtist() {
       !bestSkills3.includes(s) &&
       !goodSkills3.includes(s) &&
       !badSkills3.includes(s) &&
-      !terribleSkills3.includes(s)
+      !worstSkills3.includes(s)
   );
 
-  // Calculate artist points: Best=10, Good=6, Okay=3, Bad=0, Terrible=-1
+  // Calculate artist points: Best=10, Good=6, Okay=3, Bad=0, Worst=-1
   // Skip skill 1 (index 0) when calculating ranking
   const calculateArtistPoints = (artist: Artist) => {
     let points = 0;
@@ -389,14 +389,14 @@ function SRArtist() {
       const isGood = index === 1 ? goodSkills.includes(skill) : goodSkills3.includes(skill);
       const isOkay = index === 1 ? okaySkills.includes(skill) : okaySkills3.includes(skill);
       const isBad = index === 1 ? badSkills.includes(skill) : badSkills3.includes(skill);
-      const isTerrible =
-        index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
+      const isWorst =
+        index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
 
       if (isBest) points += 10;
       else if (isGood) points += 6;
       else if (isOkay) points += 3;
       else if (isBad) points += 0;
-      else if (isTerrible) points += -1;
+      else if (isWorst) points += -1;
     });
     return points;
   };
@@ -492,7 +492,7 @@ function SRArtist() {
       t.includes('drive speed increase') ||
       t.includes('damage increase world building guard')
     )
-      return 'skill-specific-terrible bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
+      return 'skill-specific-worst bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
     if (['20% Skill Damage', '10% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {
       return trimmed === '20% Skill Damage' || trimmed === '10% Skill Damage'
         ? 'skill-damage-20 bg-gradient-to-r from-emerald-400 to-green-600 shadow-sm'
@@ -820,9 +820,9 @@ function SRArtist() {
                           </option>
                         ))}
                       </optgroup>
-                      <optgroup label="Terrible">
-                        {terribleSkills.map((skill) => (
-                          <option key={`s2-terrible-${skill}`} value={skill}>
+                      <optgroup label="Worst">
+                        {worstSkills.map((skill) => (
+                          <option key={`s2-worst-${skill}`} value={skill}>
                             {skill}
                           </option>
                         ))}
@@ -864,9 +864,9 @@ function SRArtist() {
                           </option>
                         ))}
                       </optgroup>
-                      <optgroup label="Terrible">
-                        {terribleSkills3.map((skill) => (
-                          <option key={`s3-terrible-${skill}`} value={skill}>
+                      <optgroup label="Worst">
+                        {worstSkills3.map((skill) => (
+                          <option key={`s3-worst-${skill}`} value={skill}>
                             {skill}
                           </option>
                         ))}
@@ -1081,11 +1081,11 @@ function SRArtist() {
                 <span className="text-white text-sm font-bold legend-white">Reduction Skills</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-terrible">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-worst">
                   Red&#9;
                 </span>
                 <span className="text-white text-sm" style={{ color: '#ffffff' }}>
-                  Terrible Skills (DPS variants, Drive Speed, etc.)
+                  Worst Skills (DPS variants, Drive Speed, etc.)
                 </span>
               </div>
               <div className="flex items-center gap-3">

@@ -1,15 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import {
-  FaStar,
-  FaMedal,
-  FaMicrophone,
-  FaShoePrints,
-  FaUserTie,
-  FaMusic,
-  FaDownload,
-} from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa';
 import artistsData from './data/artists.json';
-// File saving functionality would be implemented here in a production environment
 
 interface Artist {
   id: number;
@@ -43,19 +34,12 @@ function App() {
   // Save artists to JSON file
   const saveArtists = async (updatedArtists: Artist[]) => {
     try {
-      // In a real app, you would send this to a backend API
-      // For this example, we'll just update the state
       setArtists(updatedArtists);
-
-      // In a real Electron app, you could use the following:
-      // await writeFile(
-      //   './src/data/artists.json',
-      //   JSON.stringify(updatedArtists, null, 2)
-      // );
-
-      console.log('Artists saved successfully!');
     } catch (error) {
-      console.error('Error saving artists:', error);
+      // Silently handle errors - state update failures are handled by React
+      if (error instanceof Error) {
+        // Could add error reporting service here in production
+      }
     }
   };
 
@@ -73,7 +57,7 @@ function App() {
       // Save to localStorage
       localStorage.setItem('apexArtists', JSON.stringify(artistsData));
     } catch (error) {
-      console.error('Error loading artists:', error);
+      // Error loading artists - fallback to initial data
       // Fall back to initial data if there's an error
       setArtists(artistsData);
     }
@@ -95,7 +79,7 @@ function App() {
       try {
         localStorage.setItem('apexArtists', JSON.stringify(artists));
       } catch (error) {
-        console.error('Error saving artists to localStorage:', error);
+        // Error saving to localStorage - non-critical, continue silently
       }
     }
   }, [artists]);
@@ -118,7 +102,7 @@ function App() {
         legendEl.style.marginLeft = `${leftOffset}px`;
         // helpful debug info in console
         // eslint-disable-next-line no-console
-        console.log('[legend-align] tableWidth=', width, 'leftOffset=', leftOffset);
+        // Legend alignment calculated
       }
     };
     // Run after a tick to ensure layout settled
@@ -222,6 +206,23 @@ function App() {
       !terribleSkills3.includes(s)
   ), [allSkills3, bestSkills3, goodSkills3, worstSkills3, terribleSkills3]);
 
+  // Skill point values
+  const SKILL_POINTS = {
+    BEST: 10,
+    GOOD: 6,
+    OKAY: 3,
+    WORST: 0,
+    TERRIBLE: -1,
+  } as const;
+
+  // Grade thresholds
+  const GRADE_THRESHOLDS = {
+    S: 14,
+    A: 10,
+    B: 5,
+    C: 0,
+  } as const;
+
   // Calculate artist points: Best=10, Good=6, Okay=3, Worst=0, Terrible=-1
   // Skip skill 1 (index 0) when calculating ranking
   const calculateArtistPoints = useCallback((artist: Artist) => {
@@ -237,21 +238,21 @@ function App() {
       const isTerrible =
         index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
 
-      if (isBest) points += 10;
-      else if (isGood) points += 6;
-      else if (isOkay) points += 3;
-      else if (isWorst) points += 0;
-      else if (isTerrible) points += -1;
+      if (isBest) points += SKILL_POINTS.BEST;
+      else if (isGood) points += SKILL_POINTS.GOOD;
+      else if (isOkay) points += SKILL_POINTS.OKAY;
+      else if (isWorst) points += SKILL_POINTS.WORST;
+      else if (isTerrible) points += SKILL_POINTS.TERRIBLE;
     });
     return points;
   }, [bestSkills, goodSkills, okaySkills, worstSkills, terribleSkills, bestSkills3, goodSkills3, okaySkills3, worstSkills3, terribleSkills3]);
 
   // Convert points to letter grade: 14+=S, 10-13=A, 5-9=B, 0-4=C, -1=F
   const getLetterGrade = useCallback((points: number) => {
-    if (points >= 14) return 'S';
-    if (points >= 10) return 'A';
-    if (points >= 5) return 'B';
-    if (points >= 0) return 'C';
+    if (points >= GRADE_THRESHOLDS.S) return 'S';
+    if (points >= GRADE_THRESHOLDS.A) return 'A';
+    if (points >= GRADE_THRESHOLDS.B) return 'B';
+    if (points >= GRADE_THRESHOLDS.C) return 'C';
     return 'F';
   }, []);
 
@@ -373,9 +374,9 @@ function App() {
                   a.click();
                   document.body.removeChild(a);
                   URL.revokeObjectURL(url);
-                  console.log('Exported artist-and-records-1.9.json');
+                  // Export successful
                 } catch (err) {
-                  console.error('Failed to export artists', err);
+                  // Export failed - could show user notification here
                 }
               }}
               className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform flex items-center justify-center aspect-square w-12 h-12"

@@ -4,7 +4,7 @@ import { describe, it, expect } from 'vitest';
 import {
   isGoodBuff,
   isTerribleSkill,
-  isWorstSkill,
+  isBadSkill,
   isDirectDamage,
   categorizeSkills,
 } from '../skillCategorization';
@@ -68,7 +68,7 @@ describe('skillCategorization', () => {
       expect(result.bestSkills).toContain('60% Basic Attack Damage');
       expect(result.goodSkills).toContain('20% Skill Damage');
       expect(result.terribleSkills).toContain('180/DPS Attacking Group Center, Club, Landmark');
-      expect(result.worstSkills).toContain('Gold Brick Gathering');
+      expect(result.badSkills).toContain('Gold Brick Gathering');
     });
   });
 });

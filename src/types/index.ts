@@ -51,7 +51,7 @@ export const SKILL_POINTS = {
   BEST: 10,
   GOOD: 6,
   OKAY: 3,
-  WORST: 0,
+  BAD: 0,
   TERRIBLE: -1,
 } as const;
 

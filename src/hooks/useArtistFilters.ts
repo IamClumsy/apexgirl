@@ -23,12 +23,12 @@ interface UseArtistFiltersParams {
     bestSkills: string[];
     goodSkills: string[];
     okaySkills: string[];
-    worstSkills: string[];
+    badSkills: string[];
     terribleSkills: string[];
     bestSkills3: string[];
     goodSkills3: string[];
     okaySkills3: string[];
-    worstSkills3: string[];
+    badSkills3: string[];
     terribleSkills3: string[];
   };
 }
@@ -41,12 +41,12 @@ export const useArtistFilters = ({ artists, filters, skillArrays }: UseArtistFil
         skillArrays.bestSkills,
         skillArrays.goodSkills,
         skillArrays.okaySkills,
-        skillArrays.worstSkills,
+        skillArrays.badSkills,
         skillArrays.terribleSkills,
         skillArrays.bestSkills3,
         skillArrays.goodSkills3,
         skillArrays.okaySkills3,
-        skillArrays.worstSkills3,
+        skillArrays.badSkills3,
         skillArrays.terribleSkills3
       ),
     [skillArrays]

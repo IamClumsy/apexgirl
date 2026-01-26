@@ -116,13 +116,13 @@ function App() {
   const skill3Categories = useMemo(() => categorizeSkills(allSkills3), [allSkills3]);
   
   const terribleSkills = skill2Categories.terribleSkills;
-  const worstSkills = skill2Categories.worstSkills;
+  const badSkills = skill2Categories.badSkills;
   const bestSkills = skill2Categories.bestSkills;
   const goodSkills = skill2Categories.goodSkills;
   const okaySkills = skill2Categories.okaySkills;
 
   const terribleSkills3 = skill3Categories.terribleSkills;
-  const worstSkills3 = skill3Categories.worstSkills;
+  const badSkills3 = skill3Categories.badSkills;
   const bestSkills3 = skill3Categories.bestSkills;
   const goodSkills3 = skill3Categories.goodSkills;
   const okaySkills3 = skill3Categories.okaySkills;
@@ -135,14 +135,14 @@ function App() {
     bestSkills,
     goodSkills,
     okaySkills,
-    worstSkills,
+    badSkills,
     terribleSkills,
     bestSkills3,
     goodSkills3,
     okaySkills3,
-    worstSkills3,
+    badSkills3,
     terribleSkills3,
-  }), [bestSkills, goodSkills, okaySkills, worstSkills, terribleSkills, bestSkills3, goodSkills3, okaySkills3, worstSkills3, terribleSkills3]);
+  }), [bestSkills, goodSkills, okaySkills, badSkills, terribleSkills, bestSkills3, goodSkills3, okaySkills3, badSkills3, terribleSkills3]);
 
   const { filteredArtists, calculatePoints } = useArtistFilters({
     artists,
@@ -238,12 +238,12 @@ function App() {
                   bestSkills={bestSkills}
                   goodSkills={goodSkills}
                   okaySkills={okaySkills}
-                  worstSkills={worstSkills}
+                  badSkills={badSkills}
                   terribleSkills={terribleSkills}
                   bestSkills3={bestSkills3}
                   goodSkills3={goodSkills3}
                   okaySkills3={okaySkills3}
-                  worstSkills3={worstSkills3}
+                  badSkills3={badSkills3}
                   terribleSkills3={terribleSkills3}
                   buildOptions={buildOptions}
                   photosOptions={photosOptions}

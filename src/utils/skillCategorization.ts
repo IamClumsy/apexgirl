@@ -43,7 +43,7 @@ export const isTerribleSkill = (skill: string): boolean => {
   );
 };
 
-export const isWorstSkill = (skill: string): boolean => {
+export const isBadSkill = (skill: string): boolean => {
   const t = (skill || '').toLowerCase();
   return (
     !isTerribleSkill(skill) &&
@@ -66,27 +66,27 @@ export const isDirectDamage = (skill: string): boolean => {
   return (
     (mentionsDamage || timeBased) &&
     !isGoodBuff(skill) &&
-    !isWorstSkill(skill) &&
+    !isBadSkill(skill) &&
     !isTerribleSkill(skill)
   );
 };
 
 export const categorizeSkills = (skills: string[]) => {
   const terribleSkills = skills.filter(isTerribleSkill);
-  const worstSkills = skills.filter(isWorstSkill);
+  const badSkills = skills.filter(isBadSkill);
   const bestSkills = skills.filter(isDirectDamage);
   const goodSkills = skills.filter(isGoodBuff);
   const okaySkills = skills.filter(
     (s) =>
       !bestSkills.includes(s) &&
       !goodSkills.includes(s) &&
-      !worstSkills.includes(s) &&
+      !badSkills.includes(s) &&
       !terribleSkills.includes(s)
   );
 
   return {
     terribleSkills,
-    worstSkills,
+    badSkills,
     bestSkills,
     goodSkills,
     okaySkills,

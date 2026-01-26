@@ -11,12 +11,12 @@ interface ArtistRowProps {
     bestSkills: string[];
     goodSkills: string[];
     okaySkills: string[];
-    worstSkills: string[];
+    badSkills: string[];
     terribleSkills: string[];
     bestSkills3: string[];
     goodSkills3: string[];
     okaySkills3: string[];
-    worstSkills3: string[];
+    badSkills3: string[];
     terribleSkills3: string[];
   };
 }

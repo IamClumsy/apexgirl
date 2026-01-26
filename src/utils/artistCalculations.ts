@@ -8,12 +8,12 @@ export const calculateArtistPoints = (
   bestSkills: string[],
   goodSkills: string[],
   okaySkills: string[],
-  worstSkills: string[],
+  badSkills: string[],
   terribleSkills: string[],
   bestSkills3: string[],
   goodSkills3: string[],
   okaySkills3: string[],
-  worstSkills3: string[],
+  badSkills3: string[],
   terribleSkills3: string[]
 ): number => {
   let points = 0;
@@ -24,14 +24,14 @@ export const calculateArtistPoints = (
     const isBest = index === 1 ? bestSkills.includes(skill) : bestSkills3.includes(skill);
     const isGood = index === 1 ? goodSkills.includes(skill) : goodSkills3.includes(skill);
     const isOkay = index === 1 ? okaySkills.includes(skill) : okaySkills3.includes(skill);
-    const isWorst = index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
+    const isBad = index === 1 ? badSkills.includes(skill) : badSkills3.includes(skill);
     const isTerrible =
       index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
 
     if (isBest) points += SKILL_POINTS.BEST;
     else if (isGood) points += SKILL_POINTS.GOOD;
     else if (isOkay) points += SKILL_POINTS.OKAY;
-    else if (isWorst) points += SKILL_POINTS.WORST;
+    else if (isBad) points += SKILL_POINTS.BAD;
     else if (isTerrible) points += SKILL_POINTS.TERRIBLE;
   });
   return points;

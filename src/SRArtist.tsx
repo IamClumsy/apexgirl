@@ -323,7 +323,7 @@ function SRArtist() {
       t.includes('drive speed increase')
     );
   };
-  const isWorstSkill = (skill: string) => {
+  const isBadSkill = (skill: string) => {
     const t = (skill || '').toLowerCase();
     return (
       !isTerribleSkill(skill) &&
@@ -348,36 +348,36 @@ function SRArtist() {
     return (
       (mentionsDamage || timeBased) &&
       !isGoodBuff(skill) &&
-      !isWorstSkill(skill) &&
+      !isBadSkill(skill) &&
       !isTerribleSkill(skill)
     );
   };
   const terribleSkills = skills.filter(isTerribleSkill);
-  const worstSkills = skills.filter(isWorstSkill);
+  const badSkills = skills.filter(isBadSkill);
   const bestSkills = skills.filter(isDirectDamage);
   const goodSkills = skills.filter(isGoodBuff);
   const okaySkills = skills.filter(
     (s) =>
       !bestSkills.includes(s) &&
       !goodSkills.includes(s) &&
-      !worstSkills.includes(s) &&
+      !badSkills.includes(s) &&
       !terribleSkills.includes(s)
   );
 
   // Skill 3 categorization
   const terribleSkills3 = allSkills3.filter(isTerribleSkill);
-  const worstSkills3 = allSkills3.filter(isWorstSkill);
+  const badSkills3 = allSkills3.filter(isBadSkill);
   const bestSkills3 = allSkills3.filter(isDirectDamage);
   const goodSkills3 = allSkills3.filter(isGoodBuff);
   const okaySkills3 = allSkills3.filter(
     (s) =>
       !bestSkills3.includes(s) &&
       !goodSkills3.includes(s) &&
-      !worstSkills3.includes(s) &&
+      !badSkills3.includes(s) &&
       !terribleSkills3.includes(s)
   );
 
-  // Calculate artist points: Best=10, Good=6, Okay=3, Worst=0, Terrible=-1
+  // Calculate artist points: Best=10, Good=6, Okay=3, Bad=0, Terrible=-1
   // Skip skill 1 (index 0) when calculating ranking
   const calculateArtistPoints = (artist: Artist) => {
     let points = 0;
@@ -388,14 +388,14 @@ function SRArtist() {
       const isBest = index === 1 ? bestSkills.includes(skill) : bestSkills3.includes(skill);
       const isGood = index === 1 ? goodSkills.includes(skill) : goodSkills3.includes(skill);
       const isOkay = index === 1 ? okaySkills.includes(skill) : okaySkills3.includes(skill);
-      const isWorst = index === 1 ? worstSkills.includes(skill) : worstSkills3.includes(skill);
+      const isBad = index === 1 ? badSkills.includes(skill) : badSkills3.includes(skill);
       const isTerrible =
         index === 1 ? terribleSkills.includes(skill) : terribleSkills3.includes(skill);
 
       if (isBest) points += 10;
       else if (isGood) points += 6;
       else if (isOkay) points += 3;
-      else if (isWorst) points += 0;
+      else if (isBad) points += 0;
       else if (isTerrible) points += -1;
     });
     return points;
@@ -813,9 +813,9 @@ function SRArtist() {
                           </option>
                         ))}
                       </optgroup>
-                      <optgroup label="Worst">
-                        {worstSkills.map((skill) => (
-                          <option key={`s2-worst-${skill}`} value={skill}>
+                      <optgroup label="Bad">
+                        {badSkills.map((skill) => (
+                          <option key={`s2-bad-${skill}`} value={skill}>
                             {skill}
                           </option>
                         ))}
@@ -857,9 +857,9 @@ function SRArtist() {
                           </option>
                         ))}
                       </optgroup>
-                      <optgroup label="Worst">
-                        {worstSkills3.map((skill) => (
-                          <option key={`s3-worst-${skill}`} value={skill}>
+                      <optgroup label="Bad">
+                        {badSkills3.map((skill) => (
+                          <option key={`s3-bad-${skill}`} value={skill}>
                             {skill}
                           </option>
                         ))}

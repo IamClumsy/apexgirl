@@ -19,12 +19,12 @@ interface FilterRowProps {
   bestSkills: string[];
   goodSkills: string[];
   okaySkills: string[];
-  worstSkills: string[];
+  badSkills: string[];
   terribleSkills: string[];
   bestSkills3: string[];
   goodSkills3: string[];
   okaySkills3: string[];
-  worstSkills3: string[];
+  badSkills3: string[];
   terribleSkills3: string[];
   buildOptions: string[];
   photosOptions: string[];
@@ -56,12 +56,12 @@ export const FilterRow = ({
   bestSkills,
   goodSkills,
   okaySkills,
-  worstSkills,
+  badSkills,
   terribleSkills,
   bestSkills3,
   goodSkills3,
   okaySkills3,
-  worstSkills3,
+  badSkills3,
   terribleSkills3,
   buildOptions,
   photosOptions,
@@ -168,9 +168,9 @@ export const FilterRow = ({
               </option>
             ))}
           </optgroup>
-          <optgroup label="Worst">
-            {worstSkills.map((skill) => (
-              <option key={`s2-worst-${skill}`} value={skill}>
+          <optgroup label="Bad">
+            {badSkills.map((skill) => (
+              <option key={`s2-bad-${skill}`} value={skill}>
                 {skill}
               </option>
             ))}
@@ -213,9 +213,9 @@ export const FilterRow = ({
               </option>
             ))}
           </optgroup>
-          <optgroup label="Worst">
-            {worstSkills3.map((skill) => (
-              <option key={`s3-worst-${skill}`} value={skill}>
+          <optgroup label="Bad">
+            {badSkills3.map((skill) => (
+              <option key={`s3-bad-${skill}`} value={skill}>
                 {skill}
               </option>
             ))}

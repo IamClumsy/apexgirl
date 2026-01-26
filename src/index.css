@@ -65,6 +65,13 @@
   font-weight: 600 !important;
 }
 
+/* Violet text (forced exception from table white rule) */
+.violet-text {
+  color: #a78bfa !important;
+  border-color: #a78bfa !important;
+  font-weight: 600 !important;
+}
+
 /* Force legend labels white when necessary */
 .legend-white {
   color: #ffffff !important;
@@ -218,7 +225,7 @@ html {
     .skill-worst
   ):not(.skill-specific-worst):not(.ranking-a):not(.ranking-b):not(.ranking-c):not(
     .ranking-d
-  ):not(.ranking-f):not(.gold-text):not(.blue-text) {
+  ):not(.ranking-f):not(.gold-text):not(.blue-text):not(.violet-text) {
   color: #fff !important;
 }
 

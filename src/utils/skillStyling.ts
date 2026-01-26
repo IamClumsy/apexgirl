@@ -17,6 +17,13 @@ export const getSkillClass = (skill: string): string => {
     return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
   if (trimmed.includes('Reduction Basic Attack Damage'))
     return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
+  // DPS Defending HQ skills - violet styling
+  if (
+    trimmed === '200/DPS Defending HQ, GH, Club, LM' ||
+    trimmed === '240/DPS Defending HQ, GH, Club, LM' ||
+    (trimmed.toLowerCase().includes('dps') && trimmed.toLowerCase().includes('defending') && trimmed.toLowerCase().includes('hq'))
+  )
+    return 'bg-gradient-to-r from-slate-600 to-slate-700 text-violet-400 border border-violet-500/40 violet-text';
   if (
     [
       '180/DPS Attacking Group Center, Club, Landmark',
@@ -24,8 +31,6 @@ export const getSkillClass = (skill: string): string => {
       '36% Damage to World Building Guard',
       '36% Damage World Building Guard',
       '180/DPS Attacking Enemy Company',
-      '200/DPS Defending HQ, GH, Club, LM',
-      '240/DPS Defending HQ, GH, Club, LM',
       '20% Damage WG / 50% Drive Speed',
       '75% Drive Speed',
       '10% Drive Speed',
@@ -33,8 +38,7 @@ export const getSkillClass = (skill: string): string => {
       '40% Drive Speed Increase',
     ].includes(trimmed) ||
     trimmed.toLowerCase().includes('drive speed increase') ||
-    (trimmed.toLowerCase().includes('drive speed') && !trimmed.toLowerCase().includes('reduction')) ||
-    (trimmed.toLowerCase().includes('dps') && trimmed.toLowerCase().includes('defending') && trimmed.toLowerCase().includes('hq'))
+    (trimmed.toLowerCase().includes('drive speed') && !trimmed.toLowerCase().includes('reduction'))
   )
     return 'skill-specific-worst bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
   if (['20% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {

@@ -492,6 +492,13 @@ function SRArtist() {
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-orange-500 border border-slate-500/40 gold-text';
     if (t.includes('reduction') && (t.includes('basic attack damage') || t.includes('normal attack damage')))
       return 'bg-gradient-to-r from-slate-600 to-slate-700 text-blue-500 border border-slate-500/40 blue-text';
+    // DPS Defending HQ skills - violet styling
+    if (
+      trimmed === '200/DPS Defending HQ, GH, Club, LM' ||
+      trimmed === '240/DPS Defending HQ, GH, Club, LM' ||
+      (t.includes('dps') && t.includes('defending') && t.includes('hq'))
+    )
+      return 'bg-gradient-to-r from-slate-600 to-slate-700 text-violet-400 border border-violet-500/40 violet-text';
     if (
       [
         '180/DPS Attacking Group Center, Club, Landmark',
@@ -499,16 +506,13 @@ function SRArtist() {
         '36% Damage to World Building Guard',
         '36% Damage World Building Guard',
         '180/DPS Attacking Enemy Company',
-        '200/DPS Defending HQ, GH, Club, LM',
-        '240/DPS Defending HQ, GH, Club, LM',
         '20% Damage WG / 50% Drive Speed',
         '75% Drive Speed',
         '40% Drive Speed Increase',
         '15% Damage Increase World Building Guard',
       ].includes(trimmed) ||
       t.includes('drive speed increase') ||
-      t.includes('damage increase world building guard') ||
-      (t.includes('dps') && t.includes('defending') && t.includes('hq'))
+      t.includes('damage increase world building guard')
     )
       return 'skill-specific-worst bg-gradient-to-r from-slate-600 to-slate-700 shadow-sm border border-red-500/40';
     if (['20% Skill Damage', '10% Skill Damage', '12% Skill Damage Reduction'].includes(trimmed)) {

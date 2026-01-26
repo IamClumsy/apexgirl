@@ -321,6 +321,7 @@ function App() {
       [
         '180/DPS Attacking Group Center, Club, Landmark',
         '30% Damage World Building Guard',
+        '36% Damage to World Building Guard',
         '180/DPS Attacking Enemy Company',
         '20% Damage WG / 50% Drive Speed',
         '75% Drive Speed',

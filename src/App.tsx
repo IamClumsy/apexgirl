@@ -306,6 +306,12 @@ function App() {
                 <span className="text-white text-sm font-bold legend-white">Reduction Skills</span>
               </div>
               <div className="flex items-center gap-3">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-slate-600 to-slate-700 violet-text">
+                  Violet&#9;
+                </span>
+                <span className="text-white text-sm font-bold legend-white">Okay Skills</span>
+              </div>
+              <div className="flex items-center gap-3">
                 <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-slate-600 to-slate-700 skill-specific-worst">
                   Red&#9;
                 </span>

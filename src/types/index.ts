@@ -56,8 +56,8 @@ export const SKILL_POINTS = {
 } as const;
 
 export const GRADE_THRESHOLDS = {
-  S: 15,
-  A: 10,
+  S: 16,
+  A: 11,
   B: 5,
   C: 0,
 } as const;

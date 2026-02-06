@@ -78,7 +78,7 @@ interface CsvRow {
 function SRArtist() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedRank, setSelectedRank] = useState('');
+  const [selectedGroup, setSelectedGroup] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   // Skill 2 and Skill 3 independent filters
@@ -265,7 +265,7 @@ function SRArtist() {
   }, [artists]);
 
   // Get unique values for filters
-  const rankOptions = [...new Set(artists.map((artist) => artist.rank))];
+  const groupOptions = [...new Set(artists.map((artist) => artist.group))];
   const roles = [...new Set(artists.map((artist) => artist.position))];
   const genres = [...new Set(artists.map((artist) => artist.genre))];
   // Get all skills from all artists (flatten all skills arrays) for form dropdowns
@@ -432,7 +432,7 @@ function SRArtist() {
     .filter((artist: Artist) => {
       const matchesSearch = searchTerm === '' || artist.name === searchTerm;
 
-      const matchesRank = selectedRank === '' || artist.rank === selectedRank;
+      const matchesGroup = selectedGroup === '' || artist.group === selectedGroup;
       const matchesRole = selectedRole === '' || artist.position === selectedRole;
       const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
       const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
@@ -446,7 +446,7 @@ function SRArtist() {
 
       return (
         matchesSearch &&
-        matchesRank &&
+        matchesGroup &&
         matchesRole &&
         matchesGenre &&
         matchesSkill &&
@@ -457,14 +457,8 @@ function SRArtist() {
       );
     })
     .sort((a, b) => {
-      // Sort SR artists before R artists
-      const aIsSR = a.rank === 'SR';
-      const bIsSR = b.rank === 'SR';
-      if (aIsSR !== bIsSR) return aIsSR ? -1 : 1; // SR first, then R
-      
-      const aIsUR = a.rank.startsWith('UR');
-      const bIsUR = b.rank.startsWith('UR');
-      if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom
+      const groupCompare = a.group.localeCompare(b.group);
+      if (groupCompare !== 0) return groupCompare;
       const genreCompare = a.genre.localeCompare(b.genre);
       if (genreCompare !== 0) return genreCompare;
       const roleCompare = a.position.localeCompare(b.position);
@@ -796,14 +790,14 @@ function SRArtist() {
                   </th>
                   <th className="px-1 py-2">
                     <select
-                      value={selectedRank}
-                      onChange={(e) => setSelectedRank(e.target.value)}
+                      value={selectedGroup}
+                      onChange={(e) => setSelectedGroup(e.target.value)}
                       className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
-                      <option value="">Select Rank</option>
-                      {rankOptions.map((rank) => (
-                        <option key={rank} value={rank}>
-                          {rank}
+                      <option value="">Select Group</option>
+                      {groupOptions.map((group) => (
+                        <option key={group} value={group}>
+                          {group}
                         </option>
                       ))}
                     </select>
@@ -951,7 +945,7 @@ function SRArtist() {
                     Role
                   </th>
                   <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Rank
+                    Group
                   </th>
                   <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Skill 2
@@ -994,14 +988,9 @@ function SRArtist() {
                     <td className="px-1 py-2 whitespace-nowrap">
                       <div
                         className="text-sm font-medium text-white text-center"
-                        title={artist.rank}
+                        title={artist.group}
                       >
-                        {artist.rank}
-                        {artist.rating && artist.rating > 0 && (
-                          <span className="ml-1 text-xs text-white/80">
-                            ({(artist.rating as number).toFixed(1)})
-                          </span>
-                        )}
+                        {artist.group}
                       </div>
                     </td>
                     <td className="px-1 py-2">

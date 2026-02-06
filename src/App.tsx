@@ -11,7 +11,7 @@ import { ArtistRow } from './components/ArtistRow';
 function App() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedRank, setSelectedRank] = useState('');
+  const [selectedGroup, setSelectedGroup] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   // Skill 2 and Skill 3 independent filters
@@ -105,7 +105,7 @@ function App() {
   }, [artists]);
 
   // Get unique values for filters - memoized to avoid recalculation
-  const rankOptions = useMemo(() => [...new Set(artists.map((artist) => artist.rank))], [artists]);
+  const groupOptions = useMemo(() => [...new Set(artists.map((artist) => artist.group))], [artists]);
   const roles = useMemo(() => [...new Set(artists.map((artist) => artist.position))], [artists]);
   const genres = useMemo(() => [...new Set(artists.map((artist) => artist.genre))], [artists]);
   const allSkills = useMemo(() => [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))], [artists]); // Only Skill 2
@@ -148,7 +148,7 @@ function App() {
     artists,
     filters: {
       searchTerm,
-      selectedRank,
+      selectedGroup,
       selectedRole,
       selectedGenre,
       selectedSkill,
@@ -226,7 +226,7 @@ function App() {
                   searchTerm={searchTerm}
                   selectedGenre={selectedGenre}
                   selectedRole={selectedRole}
-                  selectedRank={selectedRank}
+                  selectedGroup={selectedGroup}
                   selectedSkill={selectedSkill}
                   selectedSkill3={selectedSkill3}
                   selectedRanking={selectedRanking}
@@ -234,7 +234,7 @@ function App() {
                   selectedBuild={selectedBuild}
                   genres={genres}
                   roles={roles}
-                  rankOptions={rankOptions}
+                  groupOptions={groupOptions}
                   bestSkills={bestSkills}
                   goodSkills={goodSkills}
                   okaySkills={okaySkills}
@@ -250,7 +250,7 @@ function App() {
                   onSearchChange={setSearchTerm}
                   onGenreChange={setSelectedGenre}
                   onRoleChange={setSelectedRole}
-                  onRankChange={setSelectedRank}
+                  onGroupChange={setSelectedGroup}
                   onSkillChange={setSelectedSkill}
                   onSkill3Change={setSelectedSkill3}
                   onRankingChange={setSelectedRanking}

@@ -7,7 +7,7 @@ interface FilterRowProps {
   searchTerm: string;
   selectedGenre: string;
   selectedRole: string;
-  selectedRank: string;
+  selectedGroup: string;
   selectedSkill: string;
   selectedSkill3: string;
   selectedRanking: string;
@@ -15,7 +15,7 @@ interface FilterRowProps {
   selectedBuild: string;
   genres: string[];
   roles: string[];
-  rankOptions: string[];
+  groupOptions: string[];
   bestSkills: string[];
   goodSkills: string[];
   okaySkills: string[];
@@ -31,7 +31,7 @@ interface FilterRowProps {
   onSearchChange: (value: string) => void;
   onGenreChange: (value: string) => void;
   onRoleChange: (value: string) => void;
-  onRankChange: (value: string) => void;
+  onGroupChange: (value: string) => void;
   onSkillChange: (value: string) => void;
   onSkill3Change: (value: string) => void;
   onRankingChange: (value: string) => void;
@@ -44,7 +44,7 @@ export const FilterRow = ({
   searchTerm,
   selectedGenre,
   selectedRole,
-  selectedRank,
+  selectedGroup,
   selectedSkill,
   selectedSkill3,
   selectedRanking,
@@ -52,7 +52,7 @@ export const FilterRow = ({
   selectedBuild,
   genres,
   roles,
-  rankOptions,
+  groupOptions,
   bestSkills,
   goodSkills,
   okaySkills,
@@ -68,7 +68,7 @@ export const FilterRow = ({
   onSearchChange,
   onGenreChange,
   onRoleChange,
-  onRankChange,
+  onGroupChange,
   onSkillChange,
   onSkill3Change,
   onRankingChange,
@@ -126,15 +126,15 @@ export const FilterRow = ({
       </th>
       <th className="px-1 py-2">
         <select
-          value={selectedRank}
-          onChange={(e) => onRankChange(e.target.value)}
+          value={selectedGroup}
+          onChange={(e) => onGroupChange(e.target.value)}
           className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
-          aria-label="Filter by rank"
+          aria-label="Filter by group"
         >
-          <option value="">Select Rank</option>
-          {rankOptions.map((rank) => (
-            <option key={rank} value={rank}>
-              {rank}
+          <option value="">Select Group</option>
+          {groupOptions.map((group) => (
+            <option key={group} value={group}>
+              {group}
             </option>
           ))}
         </select>

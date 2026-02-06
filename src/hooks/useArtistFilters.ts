@@ -6,7 +6,7 @@ import { calculateArtistPoints, getLetterGrade } from '../utils/artistCalculatio
 
 interface FilterState {
   searchTerm: string;
-  selectedRank: string;
+  selectedGroup: string;
   selectedRole: string;
   selectedGenre: string;
   selectedSkill: string;
@@ -56,7 +56,7 @@ export const useArtistFilters = ({ artists, filters, skillArrays }: UseArtistFil
     return artists
       .filter((artist: Artist) => {
         const matchesSearch = filters.searchTerm === '' || artist.name === filters.searchTerm;
-        const matchesRank = filters.selectedRank === '' || artist.rank === filters.selectedRank;
+        const matchesGroup = filters.selectedGroup === '' || artist.group === filters.selectedGroup;
         const matchesRole = filters.selectedRole === '' || artist.position === filters.selectedRole;
         const matchesGenre =
           filters.selectedGenre === '' || artist.genre === filters.selectedGenre;
@@ -75,7 +75,7 @@ export const useArtistFilters = ({ artists, filters, skillArrays }: UseArtistFil
 
         return (
           matchesSearch &&
-          matchesRank &&
+          matchesGroup &&
           matchesRole &&
           matchesGenre &&
           matchesSkill &&
@@ -86,9 +86,8 @@ export const useArtistFilters = ({ artists, filters, skillArrays }: UseArtistFil
         );
       })
       .sort((a, b) => {
-        const aIsUR = a.rank.startsWith('UR');
-        const bIsUR = b.rank.startsWith('UR');
-        if (aIsUR !== bIsUR) return aIsUR ? 1 : -1; // push UR ranks to bottom
+        const groupCompare = a.group.localeCompare(b.group);
+        if (groupCompare !== 0) return groupCompare;
         const genreCompare = a.genre.localeCompare(b.genre);
         if (genreCompare !== 0) return genreCompare;
         const roleCompare = a.position.localeCompare(b.position);

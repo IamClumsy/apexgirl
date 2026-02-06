@@ -25,7 +25,7 @@ export const TableHeader = () => {
         className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider"
         scope="col"
       >
-        Rank
+        Group
       </th>
       <th
         className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider"

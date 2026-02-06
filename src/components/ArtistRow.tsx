@@ -65,14 +65,9 @@ export const ArtistRow = ({ artist, calculatePoints, skillArrays }: ArtistRowPro
       <td className="px-1 py-2 whitespace-nowrap" role="gridcell">
         <div
           className="text-sm font-medium text-white text-center"
-          title={artist.rank}
+          title={artist.group}
         >
-          {artist.rank}
-          {artist.rating && artist.rating > 0 && (
-            <span className="ml-1 text-xs text-white/80">
-              ({(artist.rating as number).toFixed(1)})
-            </span>
-          )}
+          {artist.group}
         </div>
       </td>
       <td className="px-1 py-2" role="gridcell">

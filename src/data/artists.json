@@ -56,16 +56,12 @@
   {
     "id": 4,
     "name": "Cindy",
-    "group": "No Group",
+    "group": "Luna",
     "rank": "SSR",
     "position": "Center",
     "genre": "Electronic",
-    "skills": [
-      "10 sec/1800 Damage",
-      "15% Reduction Basic Attack Damage",
-      "20% Skill Damage"
-    ],
-    "description": "Cindy is a talented Center from No Group.",
+    "skills": ["10 sec/1800 Damage", "15% Reduction Basic Attack Damage", "20% Skill Damage"],
+    "description": "Cindy is a talented Center from Luna.",
     "rating": null,
     "thoughts": "Yes",
     "build": "",
@@ -74,16 +70,12 @@
   {
     "id": 5,
     "name": "Longkui",
-    "group": "No Group",
+    "group": "Fantasy Vibes",
     "rank": "SSR AH",
     "position": "Center",
     "genre": "Electronic",
-    "skills": [
-      "10 sec/1800 Damage",
-      "30% Skill Damage",
-      "30% Damage to Player"
-    ],
-    "description": "Longkui is a talented Center from No Group.",
+    "skills": ["10 sec/1800 Damage", "30% Skill Damage", "30% Damage to Player"],
+    "description": "Longkui is a talented Center from Fantasy Vibes.",
     "rating": null,
     "thoughts": "Yes",
     "build": "",
@@ -92,7 +84,7 @@
   {
     "id": 6,
     "name": "Anya",
-    "group": "No Group",
+    "group": "DreamCatcher",
     "rank": "SSR",
     "position": "Center",
     "genre": "Electronic",
@@ -101,7 +93,7 @@
       "180/DPS Attacking Group Center, Club, Landmark",
       "10% Fan Capacity"
     ],
-    "description": "Anya is a talented Center from No Group.",
+    "description": "Anya is a talented Center from DreamCatcher.",
     "rating": null,
     "thoughts": "Bad",
     "build": "Single Car",
@@ -114,11 +106,7 @@
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "Electronic",
-    "skills": [
-      "10 sec/1800 Damage",
-      "10% Rally Fan Capacity",
-      "20% Damage to Player"
-    ],
+    "skills": ["10 sec/1800 Damage", "10% Rally Fan Capacity", "20% Damage to Player"],
     "description": "Sari is a talented Vocalist from Coral.",
     "rating": null,
     "thoughts": "Yes",
@@ -128,16 +116,12 @@
   {
     "id": 8,
     "name": "Natassaja",
-    "group": "No Group",
+    "group": "Tokyo48",
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "Electronic",
-    "skills": [
-      "10 sec/1800 Damage",
-      "10% Rally Fan Capacity",
-      "20% Damage to Player"
-    ],
-    "description": "Natassaja is a talented Vocalist from No Group.",
+    "skills": ["10 sec/1800 Damage", "10% Rally Fan Capacity", "20% Damage to Player"],
+    "description": "Natassaja is a talented Vocalist from Tokyo48.",
     "rating": null,
     "thoughts": "Yes",
     "build": "Rally",
@@ -150,11 +134,7 @@
     "rank": "SSR VIP",
     "position": "Dancer",
     "genre": "Electronic",
-    "skills": [
-      "10 sec/1800 Damage",
-      "20% Skill Damage",
-      "10% Fan Capacity"
-    ],
+    "skills": ["10 sec/1800 Damage", "20% Skill Damage", "10% Fan Capacity"],
     "description": "Caroline is a talented Dancer from Fantasy Vibes.",
     "rating": null,
     "thoughts": "No",
@@ -222,11 +202,7 @@
     "rank": "SSR VIP",
     "position": "Vocalist",
     "genre": "Hip Hop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "20% Skill Damage",
-      "10% Fan Capacity"
-    ],
+    "skills": ["10 sec/1800 Damage", "20% Skill Damage", "10% Fan Capacity"],
     "description": "Bella is a talented Vocalist from Luna.",
     "rating": null,
     "thoughts": "No",
@@ -240,11 +216,7 @@
     "rank": "SSR",
     "position": "Center",
     "genre": "Pop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "10% Rally Fan Capacity",
-      "20% Damage to Player"
-    ],
+    "skills": ["10 sec/1800 Damage", "10% Rally Fan Capacity", "20% Damage to Player"],
     "description": "Chizuru is a talented Center from Tokyo48.",
     "rating": null,
     "thoughts": "Yes",
@@ -258,11 +230,7 @@
     "rank": "SSR",
     "position": "Center",
     "genre": "Pop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "50% Basic Attack Damage",
-      "20% Skill Damage"
-    ],
+    "skills": ["10 sec/1800 Damage", "50% Basic Attack Damage", "20% Skill Damage"],
     "description": "Aurora is a talented Center from Sparkle Artists.",
     "rating": null,
     "thoughts": "Yes",
@@ -276,11 +244,7 @@
     "rank": "SSR",
     "position": "Dancer",
     "genre": "Pop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "180/DPS Attacking Enemy Company",
-      "10% Fan Capacity"
-    ],
+    "skills": ["10 sec/1800 Damage", "180/DPS Attacking Enemy Company", "10% Fan Capacity"],
     "description": "Savannah is a talented Dancer from Echo.",
     "rating": null,
     "thoughts": "No",
@@ -308,16 +272,12 @@
   {
     "id": 18,
     "name": "Monica",
-    "group": "No Group",
+    "group": "Tokyo48",
     "rank": "SSR AH",
     "position": "Center",
     "genre": "Pop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "30% Damage to Player",
-      "30% Damage to Player"
-    ],
-    "description": "Monica is a talented Center from No Group.",
+    "skills": ["10 sec/1800 Damage", "30% Damage to Player", "30% Damage to Player"],
+    "description": "Monica is a talented Center from Tokyo48.",
     "rating": null,
     "thoughts": "Yes",
     "build": "",
@@ -348,11 +308,7 @@
     "rank": "SSR",
     "position": "Center",
     "genre": "R&B",
-    "skills": [
-      "10 sec/1800 Damage",
-      "20% Damage WG / 50% Drive Speed",
-      "50% Basic Attack Damage"
-    ],
+    "skills": ["10 sec/1800 Damage", "20% Damage WG / 50% Drive Speed", "50% Basic Attack Damage"],
     "description": "Zendaya is a talented Center from Radiance.",
     "rating": null,
     "thoughts": "No",
@@ -384,11 +340,7 @@
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "R&B",
-    "skills": [
-      "10 sec/1800 Damage",
-      "20% Skill Damage",
-      "75% Drive Speed"
-    ],
+    "skills": ["10 sec/1800 Damage", "20% Skill Damage", "75% Drive Speed"],
     "description": "Julia is a talented Vocalist from Radiance.",
     "rating": null,
     "thoughts": "No",
@@ -402,11 +354,7 @@
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "R&B",
-    "skills": [
-      "10 sec/1800 Damage",
-      "50% Basic Attack Damage",
-      "10% Fan Capacity"
-    ],
+    "skills": ["10 sec/1800 Damage", "50% Basic Attack Damage", "10% Fan Capacity"],
     "description": "Sora is a talented Vocalist from Tokyo48.",
     "rating": null,
     "thoughts": "No",
@@ -416,7 +364,7 @@
   {
     "id": 24,
     "name": "Kesnia",
-    "group": "No Group",
+    "group": "Radiance",
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "R&B",
@@ -425,10 +373,10 @@
       "40% Gold Brick Gathering Speed",
       "40% Gold Brick Gathering Speed"
     ],
-    "description": "Kesnia is a talented Vocalist from No Group.",
+    "description": "Kesnia is a talented Vocalist from Radiance.",
     "rating": null,
     "thoughts": "Bad",
-    "build": "Gold Gathering",
+    "build": "",
     "photos": "Universal"
   },
   {
@@ -456,11 +404,7 @@
     "rank": "SSR",
     "position": "Center",
     "genre": "Rock",
-    "skills": [
-      "10 sec/1800 Damage",
-      "20% Skill Damage",
-      "50% Basic Attack Damage"
-    ],
+    "skills": ["10 sec/1800 Damage", "20% Skill Damage", "50% Basic Attack Damage"],
     "description": "Claire is a talented Center from Sparkle Artists.",
     "rating": null,
     "thoughts": "Yes",
@@ -510,11 +454,7 @@
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "Rock",
-    "skills": [
-      "10 sec/1800 Damage",
-      "30% Damage World Building Guard",
-      "20% Skill Damage"
-    ],
+    "skills": ["10 sec/1800 Damage", "30% Damage World Building Guard", "20% Skill Damage"],
     "description": "Skylar is a talented Vocalist from Neon.",
     "rating": null,
     "thoughts": "No",
@@ -524,16 +464,12 @@
   {
     "id": 30,
     "name": "Kasha",
-    "group": "No Group",
+    "group": "Tokyo48",
     "rank": "SSR",
     "position": "Dancer",
     "genre": "Rock",
-    "skills": [
-      "10 sec/1800 Damage",
-      "60% Basic Attack Damage",
-      "24% Damage to Player"
-    ],
-    "description": "Kasha is a talented Dancer from No Group.",
+    "skills": ["10 sec/1800 Damage", "60% Basic Attack Damage", "24% Damage to Player"],
+    "description": "Kasha is a talented Dancer from Tokyo48.",
     "rating": null,
     "thoughts": "Yes",
     "build": "",
@@ -546,11 +482,7 @@
     "rank": "SSR",
     "position": "Center",
     "genre": "Rock",
-    "skills": [
-      "10 sec/1800 Damage",
-      "50% Basic Attack Damage",
-      "10% Fan Capacity"
-    ],
+    "skills": ["10 sec/1800 Damage", "50% Basic Attack Damage", "10% Fan Capacity"],
     "description": "Talia is a talented Center from Coral.",
     "rating": null,
     "thoughts": "No",
@@ -564,11 +496,7 @@
     "rank": "SSR",
     "position": "Dancer",
     "genre": "Hip Hop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "20% Skill Damage",
-      "50% Basic Attack Damage"
-    ],
+    "skills": ["10 sec/1800 Damage", "20% Skill Damage", "50% Basic Attack Damage"],
     "description": "Leilani is a talented Dancer from Coral.",
     "rating": null,
     "thoughts": "Offensive Car",
@@ -578,16 +506,12 @@
   {
     "id": 45,
     "name": "Xenia",
-    "group": "No Group",
+    "group": "VenuLux",
     "rank": "SSR",
     "position": "Center",
     "genre": "Electronic",
-    "skills": [
-      "10 sec/1800 Damage",
-      "10% Rally Fan Capacity",
-      "20% Damage to Player"
-    ],
-    "description": "Xenia is a talented Center from No Group.",
+    "skills": ["10 sec/1800 Damage", "10% Rally Fan Capacity", "20% Damage to Player"],
+    "description": "Xenia is a talented Center from VenuLux.",
     "rating": null,
     "thoughts": "Yes",
     "build": "Rally",
@@ -596,16 +520,12 @@
   {
     "id": 46,
     "name": "Daphne",
-    "group": "No Group",
+    "group": "VenuLux",
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "Hip Hop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "20% Skill Damage",
-      "50% Basic Attack Damage"
-    ],
-    "description": "Daphne is a talented Vocalist from No Group.",
+    "skills": ["10 sec/1800 Damage", "20% Skill Damage", "50% Basic Attack Damage"],
+    "description": "Daphne is a talented Vocalist from VenuLux.",
     "rating": null,
     "thoughts": "Yes",
     "build": "",
@@ -614,16 +534,12 @@
   {
     "id": 47,
     "name": "Calliope",
-    "group": "No Group",
+    "group": "VenuLux",
     "rank": "SSR",
     "position": "Dancer",
     "genre": "Rock",
-    "skills": [
-      "10 sec/1800 Damage",
-      "50% Basic Attack Damage",
-      "10% Fan Capacity"
-    ],
-    "description": "Calliope is a talented Dancer from No Group.",
+    "skills": ["10 sec/1800 Damage", "50% Basic Attack Damage", "10% Fan Capacity"],
+    "description": "Calliope is a talented Dancer from VenuLux.",
     "rating": null,
     "thoughts": "Yes",
     "build": "Single Car",
@@ -632,7 +548,7 @@
   {
     "id": 48,
     "name": "Ariadne",
-    "group": "No Group",
+    "group": "VenuLux",
     "rank": "SSR",
     "position": "Center",
     "genre": "Pop",
@@ -641,7 +557,7 @@
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Ariadne is a talented Center from No Group.",
+    "description": "Ariadne is a talented Center from VenuLux.",
     "rating": null,
     "thoughts": "Yes",
     "build": "",
@@ -650,7 +566,7 @@
   {
     "id": 49,
     "name": "Eirene",
-    "group": "No Group",
+    "group": "VenuLux",
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "R&B",
@@ -659,7 +575,7 @@
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Eirene is a talented Dancer from No Group.",
+    "description": "Eirene is a talented Dancer from VenuLux.",
     "rating": null,
     "thoughts": "Yes",
     "build": "",
@@ -668,19 +584,15 @@
   {
     "id": 50,
     "name": "Megan",
-    "group": "No Group",
+    "group": "WildFlower",
     "rank": "SSR",
     "position": "Dancer",
     "genre": "Hip Hop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "40% Gold Brick Gathering Speed",
-      "20% Damage to Player"
-    ],
-    "description": "Megan is a talented Dancer from No Group.",
+    "skills": ["10 sec/1800 Damage", "40% Gold Brick Gathering Speed", "20% Damage to Player"],
+    "description": "Megan is a talented Dancer from WildFlower.",
     "rating": null,
     "thoughts": "Yes",
-    "build": "Gold Gathering",
+    "build": "",
     "photos": "Universal"
   },
   {
@@ -690,11 +602,7 @@
     "rank": "SSR",
     "position": "Center",
     "genre": "Hip Hop",
-    "skills": [
-      "10 sec/1800 Damage",
-      "60% Basic Attack Damage",
-      "12% Fan Capacity"
-    ],
+    "skills": ["10 sec/1800 Damage", "60% Basic Attack Damage", "12% Fan Capacity"],
     "description": "Haruki is a talented Center from Rina.",
     "rating": null,
     "thoughts": "Yes",
@@ -704,16 +612,12 @@
   {
     "id": 52,
     "name": "Mellissa",
-    "group": "No Group",
+    "group": "Neon",
     "rank": "SSR",
     "position": "Center",
     "genre": "Rock",
-    "skills": [
-      "10 sec/1800 Damage",
-      "50% Basic Attack Damage",
-      "10% Fan Capacity"
-    ],
-    "description": "Mellissa is a talented Center from No Group.",
+    "skills": ["10 sec/1800 Damage", "50% Basic Attack Damage", "10% Fan Capacity"],
+    "description": "Mellissa is a talented Center from Neon.",
     "rating": null,
     "thoughts": "Yes",
     "build": "Single Car",
@@ -726,11 +630,7 @@
     "rank": "SSR",
     "position": "Vocalist",
     "genre": "Rock",
-    "skills": [
-      "10 sec/1800 Damage",
-      "15% Reduction Basic Attack Damage",
-      "25% Damage to Player"
-    ],
+    "skills": ["10 sec/1800 Damage", "15% Reduction Basic Attack Damage", "25% Damage to Player"],
     "description": "Riku is a talented Vocalist from Rina.",
     "rating": null,
     "thoughts": "Yes",
@@ -758,7 +658,7 @@
   {
     "id": 55,
     "name": "Noora",
-    "group": "None",
+    "group": "WildFlower",
     "rank": "SSR",
     "position": "Center",
     "genre": "R&B",
@@ -767,10 +667,10 @@
       "50% Basic Attack Damage",
       "40% Gold Brick Gathering Speed"
     ],
-    "description": "Noora is a talented Center from None.",
+    "description": "Noora is a talented Center from WildFlower.",
     "rating": null,
     "thoughts": "No",
-    "build": "Gold Gathering",
+    "build": "",
     "photos": "Universal"
   },
   {
@@ -825,6 +725,60 @@
     "rating": null,
     "thoughts": "No",
     "build": "HQ Defense",
+    "photos": "Universal"
+  },
+  {
+    "id": 59,
+    "name": "Hestia",
+    "group": "WildFlower",
+    "rank": "SSR",
+    "position": "Center",
+    "genre": "Hip Hop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "10% Rally Fan Capacity",
+      "20% Damage to Player"
+    ],
+    "description": "Hestia is a talented Center from WildFlower.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "Rally",
+    "photos": "Universal"
+  },
+  {
+    "id": 60,
+    "name": "Ruby",
+    "group": "Echo",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "Pop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "50% Basic Attack Damage",
+      "20% Damage to Player"
+    ],
+    "description": "Ruby is a talented Dancer from Echo.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "",
+    "photos": "Universal"
+  },
+  {
+    "id": 61,
+    "name": "Rosemary",
+    "group": "Tokyo48",
+    "rank": "SSR",
+    "position": "Vocalist",
+    "genre": "Pop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "10% Fan Capacity",
+      "50% Basic Attack Damage"
+    ],
+    "description": "Rosemary is a talented Vocalist from Tokyo48.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "Single Car",
     "photos": "Universal"
   }
 ]

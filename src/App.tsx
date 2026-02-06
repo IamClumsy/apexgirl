@@ -105,7 +105,7 @@ function App() {
   }, [artists]);
 
   // Get unique values for filters - memoized to avoid recalculation
-  const groupOptions = useMemo(() => [...new Set(artists.map((artist) => artist.group))], [artists]);
+  const groupOptions = useMemo(() => [...new Set(artists.map((artist) => artist.group))].sort((a, b) => a.localeCompare(b)), [artists]);
   const roles = useMemo(() => [...new Set(artists.map((artist) => artist.position))], [artists]);
   const genres = useMemo(() => [...new Set(artists.map((artist) => artist.genre))], [artists]);
   const allSkills = useMemo(() => [...new Set(artists.map((artist) => artist.skills[1]).filter(Boolean))], [artists]); // Only Skill 2

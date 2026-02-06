@@ -86,13 +86,13 @@ export const useArtistFilters = ({ artists, filters, skillArrays }: UseArtistFil
         );
       })
       .sort((a, b) => {
-        const groupCompare = a.group.localeCompare(b.group);
+        const groupCompare = a.group.localeCompare(b.group, undefined, { sensitivity: 'base' });
         if (groupCompare !== 0) return groupCompare;
-        const genreCompare = a.genre.localeCompare(b.genre);
+        const genreCompare = a.genre.localeCompare(b.genre, undefined, { sensitivity: 'base' });
         if (genreCompare !== 0) return genreCompare;
-        const roleCompare = a.position.localeCompare(b.position);
+        const roleCompare = a.position.localeCompare(b.position, undefined, { sensitivity: 'base' });
         if (roleCompare !== 0) return roleCompare;
-        return a.name.localeCompare(b.name);
+        return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
       });
   }, [artists, filters, calculatePoints]);
 

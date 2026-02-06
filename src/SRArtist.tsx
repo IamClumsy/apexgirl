@@ -265,7 +265,7 @@ function SRArtist() {
   }, [artists]);
 
   // Get unique values for filters
-  const groupOptions = [...new Set(artists.map((artist) => artist.group))];
+  const groupOptions = [...new Set(artists.map((artist) => artist.group))].sort((a, b) => a.localeCompare(b));
   const roles = [...new Set(artists.map((artist) => artist.position))];
   const genres = [...new Set(artists.map((artist) => artist.genre))];
   // Get all skills from all artists (flatten all skills arrays) for form dropdowns
@@ -457,13 +457,13 @@ function SRArtist() {
       );
     })
     .sort((a, b) => {
-      const groupCompare = a.group.localeCompare(b.group);
+      const groupCompare = a.group.localeCompare(b.group, undefined, { sensitivity: 'base' });
       if (groupCompare !== 0) return groupCompare;
-      const genreCompare = a.genre.localeCompare(b.genre);
+      const genreCompare = a.genre.localeCompare(b.genre, undefined, { sensitivity: 'base' });
       if (genreCompare !== 0) return genreCompare;
-      const roleCompare = a.position.localeCompare(b.position);
+      const roleCompare = a.position.localeCompare(b.position, undefined, { sensitivity: 'base' });
       if (roleCompare !== 0) return roleCompare;
-      return a.name.localeCompare(b.name);
+      return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
     });
 
   // Function to get skill badge class (updated for SR and SSR skills)

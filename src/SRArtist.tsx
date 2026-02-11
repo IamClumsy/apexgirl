@@ -79,6 +79,7 @@ function SRArtist() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGroup, setSelectedGroup] = useState('');
+  const [selectedRank, setSelectedRank] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   // Skill 2 and Skill 3 independent filters
@@ -266,6 +267,7 @@ function SRArtist() {
 
   // Get unique values for filters
   const groupOptions = [...new Set(artists.map((artist) => artist.group))].sort((a, b) => a.localeCompare(b));
+  const rankOptions = [...new Set(artists.map((artist) => artist.rank))];
   const roles = [...new Set(artists.map((artist) => artist.position))];
   const genres = [...new Set(artists.map((artist) => artist.genre))];
   // Get all skills from all artists (flatten all skills arrays) for form dropdowns
@@ -433,6 +435,7 @@ function SRArtist() {
       const matchesSearch = searchTerm === '' || artist.name === searchTerm;
 
       const matchesGroup = selectedGroup === '' || artist.group === selectedGroup;
+      const matchesRank = selectedRank === '' || artist.rank === selectedRank;
       const matchesRole = selectedRole === '' || artist.position === selectedRole;
       const matchesGenre = selectedGenre === '' || artist.genre === selectedGenre;
       const matchesSkill = selectedSkill === '' || artist.skills[1] === selectedSkill; // Skill 2 filter
@@ -447,6 +450,7 @@ function SRArtist() {
       return (
         matchesSearch &&
         matchesGroup &&
+        matchesRank &&
         matchesRole &&
         matchesGenre &&
         matchesSkill &&
@@ -804,6 +808,20 @@ function SRArtist() {
                   </th>
                   <th className="px-1 py-2">
                     <select
+                      value={selectedRank}
+                      onChange={(e) => setSelectedRank(e.target.value)}
+                      className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
+                    >
+                      <option value="">Select Rank</option>
+                      {rankOptions.map((rank) => (
+                        <option key={rank} value={rank}>
+                          {rank}
+                        </option>
+                      ))}
+                    </select>
+                  </th>
+                  <th className="px-1 py-2">
+                    <select
                       value={selectedSkill}
                       onChange={(e) => setSelectedSkill(e.target.value)}
                       className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
@@ -948,6 +966,9 @@ function SRArtist() {
                     Group
                   </th>
                   <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
+                    Rank
+                  </th>
+                  <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Skill 2
                   </th>
                   <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
@@ -991,6 +1012,14 @@ function SRArtist() {
                         title={artist.group}
                       >
                         {artist.group}
+                      </div>
+                    </td>
+                    <td className="px-1 py-2 whitespace-nowrap">
+                      <div
+                        className="text-sm font-medium text-white text-center"
+                        title={artist.rank}
+                      >
+                        {artist.rank}
                       </div>
                     </td>
                     <td className="px-1 py-2">

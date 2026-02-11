@@ -169,7 +169,7 @@ function App() {
             className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse"
             style={{ color: '#ffffff' }}
           >
-            Mick's Awesome SSR Artist Helper
+                    JohnnyDepth's Awesome SSR Artist Helper
           </h1>
           <div className="flex items-center gap-3">
             <button
@@ -344,7 +344,7 @@ function App() {
 
         {/* Footer */}
         <footer className="mt-8 py-4 w-full flex justify-center items-center text-sm relative z-10">
-          <p className="text-white font-medium">© {new Date().getFullYear()} JustMick</p>
+                  <p className="text-white font-medium">© {new Date().getFullYear()} JustJohnnyDepth</p>
         </footer>
       </div>
     </div>

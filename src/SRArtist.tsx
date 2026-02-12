@@ -461,6 +461,11 @@ function SRArtist() {
       );
     })
     .sort((a, b) => {
+      // Push R-rank artists to the bottom
+      const aIsR = a.rank === 'R';
+      const bIsR = b.rank === 'R';
+      if (aIsR !== bIsR) return aIsR ? 1 : -1;
+
       const groupCompare = a.group.localeCompare(b.group, undefined, { sensitivity: 'base' });
       if (groupCompare !== 0) return groupCompare;
       const genreCompare = a.genre.localeCompare(b.genre, undefined, { sensitivity: 'base' });
@@ -812,7 +817,7 @@ function SRArtist() {
                       onChange={(e) => setSelectedRank(e.target.value)}
                       className="w-full px-1.5 py-1 rounded-md bg-violet-900/60 border border-fuchsia-400/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-pink-400/70 cursor-pointer hover:border-pink-300/70 hover:bg-violet-800/60 transition-colors not-italic"
                     >
-                      <option value="">Select Rank</option>
+                      <option value="">Select Level</option>
                       {rankOptions.map((rank) => (
                         <option key={rank} value={rank}>
                           {rank}
@@ -966,7 +971,7 @@ function SRArtist() {
                     Group
                   </th>
                   <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
-                    Rank
+                    Level
                   </th>
                   <th className="px-1 py-2 text-center text-sm font-semibold text-pink-100 uppercase tracking-wider">
                     Skill 2

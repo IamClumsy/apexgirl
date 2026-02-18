@@ -9,6 +9,8 @@ import { TableHeader } from './components/TableHeader';
 import { ArtistRow } from './components/ArtistRow';
 
 function App() {
+  const googleSheetUrl =
+    'https://docs.google.com/spreadsheets/d/1KJ2GMDqrE1pmFWcP38ThXLsfeV4jZl_IgKjyMnI1ztE/edit?gid=1557514537#gid=1557514537';
   const [artists, setArtists] = useState<Artist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGroup, setSelectedGroup] = useState('');
@@ -187,25 +189,11 @@ function App() {
             <button
               type="button"
               onClick={() => {
-                try {
-                  const dataStr = JSON.stringify(artists, null, 2);
-                  const blob = new Blob([dataStr], { type: 'application/json' });
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = 'artist-and-records-1.9.json';
-                  document.body.appendChild(a);
-                  a.click();
-                  document.body.removeChild(a);
-                  URL.revokeObjectURL(url);
-                  // Export successful
-                } catch (err) {
-                  // Export failed - could show user notification here
-                }
+                window.open(googleSheetUrl, '_blank', 'noopener');
               }}
               className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform flex items-center justify-center aspect-square w-12 h-12"
-              title="Download artist-and-records-1.9.json"
-              aria-label="Download artists data as JSON file"
+              title="Open artist-and-records-1.9 Google Sheet"
+              aria-label="Open artists Google Sheet"
             >
               <FaDownload size={22} aria-hidden="true" />
             </button>

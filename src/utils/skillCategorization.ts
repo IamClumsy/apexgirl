@@ -8,6 +8,8 @@ export const isGoodBuff = (skill: string): boolean => {
   if (t.includes('30%') && t.includes('skill damage')) return false;
   // Exclude 28% skill damage (treated as GOLD/BEST)
   if (t.includes('28%') && t.includes('skill damage')) return false;
+  // Exclude 70% basic attack damage so we can treat it as BEST
+  if (t.includes('70%') && t.includes('basic attack damage')) return false;
   // Exclude 24% skill damage (moved to BEST)
   if (t.includes('24%') && t.includes('skill damage')) return false;
   // Exclude reduction skills (they get 3 points as Okay)
@@ -72,6 +74,8 @@ export const isDirectDamage = (skill: string): boolean => {
   const t = (skill || '').toLowerCase();
   // Include 60% basic attack damage as BEST
   if (t.includes('60%') && t.includes('basic attack damage')) return true;
+  // Include 70% basic attack damage as BEST
+  if (t.includes('70%') && t.includes('basic attack damage')) return true;
   // Include 30% skill damage as BEST
   if (t.includes('30%') && t.includes('skill damage')) return true;
   // Include 28% skill damage as BEST

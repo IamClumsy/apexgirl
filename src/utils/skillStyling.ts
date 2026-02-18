@@ -7,6 +7,8 @@ export const getSkillClass = (skill: string): string => {
     return 'damage-to-player bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
   if (trimmed === '60% Basic Attack Damage')
     return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
+  if (trimmed === '70% Basic Attack Damage')
+    return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
   if (trimmed === '24% Skill Damage')
     return 'basic-attack-60 bg-gradient-to-r from-slate-600 to-slate-700 shadow-lg';
   if (trimmed === '28% Skill Damage')

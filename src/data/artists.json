@@ -11,8 +11,6 @@
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Kokoro is a talented Center from Tokyo48.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -28,8 +26,6 @@
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
-    "description": "Everly is a talented Center from DreamCatcher.",
-    "thoughts": "Yes",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -45,8 +41,6 @@
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Alice is a talented Vocalist from Fantasy Vibes.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -62,8 +56,6 @@
       "15% Reduction Basic Attack Damage",
       "20% Skill Damage"
     ],
-    "description": "Cindy is a talented Center from Luna.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Own Photos"
   },
@@ -79,8 +71,6 @@
       "30% Skill Damage",
       "30% Damage to Player"
     ],
-    "description": "Longkui is a talented Center from Fantasy Vibes.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Own Photos"
   },
@@ -96,8 +86,6 @@
       "180/DPS Attacking Group Center, Club, Landmark",
       "10% Fan Capacity"
     ],
-    "description": "Anya is a talented Center from DreamCatcher.",
-    "thoughts": "Bad",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -113,8 +101,6 @@
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
-    "description": "Sari is a talented Vocalist from Coral.",
-    "thoughts": "Yes",
     "build": "Rally",
     "photos": "Universal"
   },
@@ -130,8 +116,6 @@
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
-    "description": "Nastassja is a talented Vocalist from Tokyo48.",
-    "thoughts": "Yes",
     "build": "Rally",
     "photos": "Universal"
   },
@@ -147,8 +131,6 @@
       "20% Skill Damage",
       "10% Fan Capacity"
     ],
-    "description": "Caroline is a talented Dancer from Fantasy Vibes.",
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -164,8 +146,6 @@
       "30% Damage World Building Guard",
       "12% Skill Damage Reduction"
     ],
-    "description": "Audrey is a talented Center from WildFlower.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -181,8 +161,6 @@
       "12% Skill Damage Reduction",
       "12% Reduction Basic Attack Damage"
     ],
-    "description": "Avery is a talented Dancer from Luna.",
-    "thoughts": "Yes",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -198,8 +176,6 @@
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
-    "description": "Ayaka is a talented Vocalist from Tokyo48.",
-    "thoughts": "Defensive Car",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -215,8 +191,6 @@
       "20% Skill Damage",
       "10% Fan Capacity"
     ],
-    "description": "Bella is a talented Vocalist from Luna.",
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -232,8 +206,6 @@
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
-    "description": "Chizuru is a talented Center from Tokyo48.",
-    "thoughts": "Yes",
     "build": "Rally",
     "photos": "Universal"
   },
@@ -249,8 +221,6 @@
       "50% Basic Attack Damage",
       "20% Skill Damage"
     ],
-    "description": "Aurora is a talented Center from Sparkle Artists.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -266,8 +236,6 @@
       "180/DPS Attacking Enemy Company",
       "10% Fan Capacity"
     ],
-    "description": "Savannah is a talented Dancer from Echo.",
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -283,8 +251,6 @@
       "200/DPS Defending HQ, GH, Club, LM",
       "30% Damage World Building Guard"
     ],
-    "description": "Brooklyn is a talented Vocalist from Echo.",
-    "thoughts": "No",
     "build": "HQ Defense",
     "photos": "Universal"
   },
@@ -300,8 +266,6 @@
       "30% Damage to Player",
       "30% Damage to Player"
     ],
-    "description": "Monica is a talented Center from Tokyo48.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Own Photos"
   },
@@ -317,8 +281,6 @@
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
-    "description": "Moana is a talented Vocalist from Coral.",
-    "thoughts": "Defensive Car",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -334,8 +296,6 @@
       "20% Damage WG / 50% Drive Speed",
       "50% Basic Attack Damage"
     ],
-    "description": "Zendaya is a talented Center from Radiance.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -351,8 +311,6 @@
       "200/DPS Defending HQ, GH, Club, LM",
       "50% Basic Attack Damage"
     ],
-    "description": "Nova is a talented Dancer from DreamCatcher.",
-    "thoughts": "No",
     "build": "HQ Defense",
     "photos": "Universal"
   },
@@ -368,8 +326,6 @@
       "20% Skill Damage",
       "75% Drive Speed"
     ],
-    "description": "Julia is a talented Vocalist from Radiance.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -385,8 +341,6 @@
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
-    "description": "Sora is a talented Vocalist from Tokyo48.",
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -402,8 +356,6 @@
       "40% Gold Brick Gathering Speed",
       "40% Gold Brick Gathering Speed"
     ],
-    "description": "Kesnia is a talented Vocalist from Radiance.",
-    "thoughts": "Bad",
     "build": "",
     "photos": "Universal"
   },
@@ -419,8 +371,6 @@
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Ratih is a talented Dancer from Coral.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -436,8 +386,6 @@
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Claire is a talented Center from Sparkle Artists.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -453,8 +401,6 @@
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
-    "description": "Paisley is a talented Dancer from Neon.",
-    "thoughts": "Yes",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -470,8 +416,6 @@
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Yuuko is a talented Dancer from Tokyo48.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -487,8 +431,6 @@
       "30% Damage World Building Guard",
       "20% Skill Damage"
     ],
-    "description": "Skylar is a talented Vocalist from Neon.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -504,8 +446,6 @@
       "60% Basic Attack Damage",
       "24% Damage to Player"
     ],
-    "description": "Kasha is a talented Dancer from Tokyo48.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -521,8 +461,6 @@
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
-    "description": "Talia is a talented Center from Coral.",
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -538,8 +476,6 @@
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Leilani is a talented Dancer from Coral.",
-    "thoughts": "Offensive Car",
     "build": "",
     "photos": "Universal"
   },
@@ -555,8 +491,6 @@
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
-    "description": "Xenia is a talented Center from VenuLux.",
-    "thoughts": "Yes",
     "build": "Rally",
     "photos": "Universal"
   },
@@ -572,8 +506,6 @@
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Daphne is a talented Vocalist from VenuLux.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -589,8 +521,6 @@
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
-    "description": "Calliope is a talented Dancer from VenuLux.",
-    "thoughts": "Yes",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -606,8 +536,6 @@
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Ariadne is a talented Center from VenuLux.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -623,8 +551,6 @@
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
-    "description": "Eirene is a talented Dancer from VenuLux.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -640,8 +566,6 @@
       "40% Gold Brick Gathering Speed",
       "20% Damage to Player"
     ],
-    "description": "Megan is a talented Dancer from WildFlower.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -657,8 +581,6 @@
       "60% Basic Attack Damage",
       "12% Fan Capacity"
     ],
-    "description": "Haruki is a talented Center from Rina.",
-    "thoughts": "Yes",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -674,8 +596,6 @@
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
-    "description": "Mellissa is a talented Center from Neon.",
-    "thoughts": "Yes",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -691,8 +611,6 @@
       "15% Reduction Basic Attack Damage",
       "25% Damage to Player"
     ],
-    "description": "Riku is a talented Vocalist from Rina.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -708,8 +626,6 @@
       "15% Reduction Basic Attack Damage",
       "60% Basic Attack Damage"
     ],
-    "description": "Miyuki is a talented Dancer from Rina.",
-    "thoughts": "Yes",
     "build": "",
     "photos": "Universal"
   },
@@ -725,8 +641,6 @@
       "50% Basic Attack Damage",
       "40% Gold Brick Gathering Speed"
     ],
-    "description": "Noora is a talented Center from WildFlower.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -742,8 +656,6 @@
       "240/DPS Attacking Enemy Company",
       "12% Fan Capacity"
     ],
-    "description": "Ningsih is a talented Dancer from Breezara.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -759,8 +671,6 @@
       "60% Basic Attack Damage",
       "24% Skill Damage"
     ],
-    "description": "Dewi is a talented Center from Breezara.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -776,8 +686,6 @@
       "240/DPS Defending HQ, GH, Club, LM",
       "36% Damage World Building Guard"
     ],
-    "description": "Lestari is a talented Vocalist from Breezara.",
-    "thoughts": "No",
     "build": "HQ Defense",
     "photos": "Universal"
   },
@@ -793,8 +701,6 @@
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
-    "description": "Hestia is a talented Center from WildFlower.",
-    "thoughts": "No",
     "build": "Rally",
     "photos": "Universal"
   },
@@ -810,8 +716,6 @@
       "50% Basic Attack Damage",
       "20% Damage to Player"
     ],
-    "description": "Ruby is a talented Dancer from Echo.",
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -827,11 +731,9 @@
       "10% Fan Capacity",
       "50% Basic Attack Damage"
     ],
-    "description": "Rosemary is a talented Vocalist from Tokyo48.",
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
-  },  
+  },
   {
     "id": 50,
     "name": "Kelly",
@@ -844,12 +746,10 @@
       "10% Fan Capacity",
       "10% Rally Fan Capacity"
     ],
-    "description": "Kelly is a talented Vocalist from WildFlower.",
-    "thoughts": "No",
     "build": "Single Car, Rally",
     "photos": "Universal"
   },
-  { 
+  {
     "id": 51,
     "name": "Aya",
     "group": "None",
@@ -861,9 +761,6 @@
       "70% Basic Attack Damage",
       "14% Fan Capacity"
     ],
-    "description": "Aya is a talented Center from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -879,9 +776,6 @@
       "28% Damage to Player",
       "12% Reduction Basic Attack Damage"
     ],
-    "description": "Yumeno is a talented Vocalist from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -897,9 +791,6 @@
       "70% Basic Attack Damage",
       "12% Reduction Basic Attack Damage"
     ],
-    "description": "Mio is a talented Dancer from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -915,9 +806,6 @@
       "28% Damage to Player",
       "12% Skill Damage Reduction"
     ],
-    "description": "Sienna is a talented Dancer from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -933,9 +821,6 @@
       "28% Skill Damage",
       "14% Fan Capacity"
     ],
-    "description": "Margot is a talented Vocalist from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -951,9 +836,6 @@
       "14% Fan Capacity",
       "12% Reduction Basic Attack Damage"
     ],
-    "description": "Valentina is a talented Dancer from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -969,9 +851,6 @@
       "12% Fan Capacity",
       "12% Reduction Basic Attack Damage"
     ],
-    "description": "Flora is a talented Center from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -987,9 +866,6 @@
       "24% Damage to Player",
       "12% Skill Damage Reduction"
     ],
-    "description": "Isla is a talented Center from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -1005,9 +881,6 @@
       "240/DPS Attacking Enemy Company",
       "12% Fan Capacity"
     ],
-    "description": "Octavia is a talented Center from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -1023,9 +896,6 @@
       "24% Damage to Player",
       "12% Skill Damage Reduction"
     ],
-    "description": "Hikari is a talented Center from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Damage Reduction",
     "photos": "Universal"
   },
@@ -1041,9 +911,6 @@
       "24% Damage to Player",
       "12% Fan Capacity"
     ],
-    "description": "Aurelia is a talented Vocalist from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -1059,9 +926,6 @@
       "24% Skill Damage",
       "12% Fan Capacity"
     ],
-    "description": "Rin is a talented Vocalist from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -1077,9 +941,6 @@
       "240/DPS Attacking Group Center, Club, Landmark",
       "12% Fan Capacity"
     ],
-    "description": "Marina is a talented Vocalist from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
   },
@@ -1095,9 +956,6 @@
       "24% Damage to Player",
       "24% Damage to Player"
     ],
-    "description": "Claudius is a talented Vocalist from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -1113,9 +971,6 @@
       "240/DPS Defending HQ, GH, Club, LM",
       "12% Skill Damage Reduction"
     ],
-    "description": "Cornelia is a talented Dancer from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "HQ Defense",
     "photos": "Universal"
   },
@@ -1131,9 +986,6 @@
       "12% Fan Capacity",
       "12% Reduction Basic Attack Damage"
     ],
-    "description": "Eri is a talented Dancer from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   },
@@ -1149,9 +1001,6 @@
       "240/DPS Defending HQ, GH, Club, LM",
       "12% Skill Damage Reduction"
     ],
-    "description": "Vivienne is a talented Dancer from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "HQ Defense",
     "photos": "Universal"
   },
@@ -1167,9 +1016,6 @@
       "24% Skill Damage",
       "12% Fan Capacity"
     ],
-    "description": "Antonia is a talented Dancer from None.",
-    "rating": null,
-    "thoughts": "No",
     "build": "",
     "photos": "Universal"
   }

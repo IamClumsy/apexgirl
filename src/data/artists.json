@@ -1064,5 +1064,113 @@
     "thoughts": "No",
     "build": "Single Car",
     "photos": "Universal"
+  },
+  {
+    "id": 63,
+    "name": "Marina",
+    "group": "None",
+    "rank": "SSR",
+    "position": "Vocalist",
+    "genre": "Hip Hop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "240/DPS Attacking Group Center, Club, Landmark",
+      "12% Fan Capacity"
+    ],
+    "description": "Marina is a talented Vocalist from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "Single Car",
+    "photos": "Universal"
+  },
+  {
+    "id": 64,
+    "name": "Claudius",
+    "group": "None",
+    "rank": "SSR",
+    "position": "Vocalist",
+    "genre": "Hip Hop",
+    "skills": [
+      "10 sec/1800 Damage",
+      "24% Damage to Player",
+      "24% Damage to Player"
+    ],
+    "description": "Claudius is a talented Vocalist from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "",
+    "photos": "Universal"
+  },
+  {
+    "id": 65,
+    "name": "Cornelia",
+    "group": "None",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "R&B",
+    "skills": [
+      "10 sec/1800 Damage",
+      "240/DPS Defending HQ, GH, Club, LM",
+      "12% Skill Damage Reduction"
+    ],
+    "description": "Cornelia is a talented Dancer from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "HQ Defense",
+    "photos": "Universal"
+  },
+  {
+    "id": 66,
+    "name": "Eri",
+    "group": "None",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "R&B",
+    "skills": [
+      "10 sec/1800 Damage",
+      "12% Fan Capacity",
+      "12% Reduction Basic Attack Damage"
+    ],
+    "description": "Eri is a talented Dancer from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "",
+    "photos": "Universal"
+  },
+  {
+    "id": 67,
+    "name": "Vivienne",
+    "group": "None",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "R&B",
+    "skills": [
+      "10 sec/1800 Damage",
+      "240/DPS Defending HQ, GH, Club, LM",
+      "12% Skill Damage Reduction"
+    ],
+    "description": "Vivienne is a talented Dancer from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "HQ Defense",
+    "photos": "Universal"
+  },
+  {
+    "id": 68,
+    "name": "Antonia",
+    "group": "None",
+    "rank": "SSR",
+    "position": "Dancer",
+    "genre": "Rock",
+    "skills": [
+      "10 sec/1800 Damage",
+      "24% Skill Damage",
+      "12% Fan Capacity"
+    ],
+    "description": "Antonia is a talented Dancer from None.",
+    "rating": null,
+    "thoughts": "No",
+    "build": "",
+    "photos": "Universal"
   }
 ]

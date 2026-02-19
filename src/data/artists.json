@@ -747,7 +747,7 @@
       "10% Rally Fan Capacity"
     ],
     "build": "Single Car, Rally",
-    "photos": "Universal"
+    "photos": "Not Released"
   },
   {
     "id": 51,
@@ -762,7 +762,7 @@
       "14% Fan Capacity"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Tokyo4"
   },
   {
     "id": 52,
@@ -777,7 +777,7 @@
       "12% Reduction Basic Attack Damage"
     ],
     "build": "Damage Reduction",
-    "photos": "Universal"
+    "photos": "Tokyo4"
   },
   {
     "id": 53,
@@ -792,7 +792,7 @@
       "12% Reduction Basic Attack Damage"
     ],
     "build": "Damage Reduction",
-    "photos": "Universal"
+    "photos": "Tokyo4"
   },
   {
     "id": 54,
@@ -807,7 +807,7 @@
       "12% Skill Damage Reduction"
     ],
     "build": "Damage Reduction",
-    "photos": "Universal"
+    "photos": "Bali4"
   },
   {
     "id": 55,
@@ -822,7 +822,7 @@
       "14% Fan Capacity"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Bali4"
   },
   {
     "id": 56,
@@ -837,7 +837,7 @@
       "12% Reduction Basic Attack Damage"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Bali4"
   },
   {
     "id": 57,
@@ -852,7 +852,7 @@
       "12% Reduction Basic Attack Damage"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Rome3"
   },
   {
     "id": 58,
@@ -867,7 +867,7 @@
       "12% Skill Damage Reduction"
     ],
     "build": "",
-    "photos": "Universal"
+    "photos": "Bali3"
   },
   {
     "id": 59,
@@ -882,7 +882,7 @@
       "12% Fan Capacity"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Rome2"
   },
   {
     "id": 60,
@@ -897,7 +897,7 @@
       "12% Skill Damage Reduction"
     ],
     "build": "Damage Reduction",
-    "photos": "Universal"
+    "photos": "Tokyo3"
   },
   {
     "id": 61,
@@ -912,7 +912,7 @@
       "12% Fan Capacity"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Rome2"
   },
   {
     "id": 62,
@@ -927,7 +927,7 @@
       "12% Fan Capacity"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Tokyo3"
   },
   {
     "id": 63,
@@ -942,7 +942,7 @@
       "12% Fan Capacity"
     ],
     "build": "Single Car",
-    "photos": "Universal"
+    "photos": "Bali3"
   },
   {
     "id": 64,
@@ -957,7 +957,7 @@
       "24% Damage to Player"
     ],
     "build": "",
-    "photos": "Universal"
+    "photos": "Rome3"
   },
   {
     "id": 65,
@@ -972,7 +972,7 @@
       "12% Skill Damage Reduction"
     ],
     "build": "HQ Defense",
-    "photos": "Universal"
+    "photos": "Rome2"
   },
   {
     "id": 66,
@@ -987,7 +987,7 @@
       "12% Reduction Basic Attack Damage"
     ],
     "build": "",
-    "photos": "Universal"
+    "photos": "Tokyo3"
   },
   {
     "id": 67,
@@ -1002,7 +1002,7 @@
       "12% Skill Damage Reduction"
     ],
     "build": "HQ Defense",
-    "photos": "Universal"
+    "photos": "Bali3"
   },
   {
     "id": 68,
@@ -1017,6 +1017,6 @@
       "12% Fan Capacity"
     ],
     "build": "",
-    "photos": "Universal"
+    "photos": "Rome3"
   }
 ]

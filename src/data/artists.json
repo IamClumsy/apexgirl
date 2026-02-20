@@ -7,6 +7,7 @@
     "position": "Center",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
@@ -21,6 +22,7 @@
     "position": "Center",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
@@ -35,6 +37,7 @@
     "position": "Vocalist",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
@@ -49,6 +52,7 @@
     "position": "Center",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "15% Reduction Basic Attack Damage",
       "20% Skill Damage"
     ],
@@ -63,6 +67,7 @@
     "position": "Center",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "30% Skill Damage",
       "30% Damage to Player"
     ],
@@ -77,6 +82,7 @@
     "position": "Center",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "180/DPS Attacking Group Center, Club, Landmark",
       "10% Fan Capacity"
     ],
@@ -91,6 +97,7 @@
     "position": "Vocalist",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
@@ -105,6 +112,7 @@
     "position": "Vocalist",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
@@ -119,6 +127,7 @@
     "position": "Dancer",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "10% Fan Capacity"
     ],
@@ -133,6 +142,7 @@
     "position": "Center",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "30% Damage World Building Guard",
       "12% Skill Damage Reduction"
     ],
@@ -147,6 +157,7 @@
     "position": "Dancer",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Skill Damage Reduction",
       "12% Reduction Basic Attack Damage"
     ],
@@ -161,6 +172,7 @@
     "position": "Vocalist",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
@@ -175,6 +187,7 @@
     "position": "Vocalist",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "10% Fan Capacity"
     ],
@@ -189,6 +202,7 @@
     "position": "Center",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
@@ -203,6 +217,7 @@
     "position": "Center",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "50% Basic Attack Damage",
       "20% Skill Damage"
     ],
@@ -217,6 +232,7 @@
     "position": "Dancer",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "180/DPS Attacking Enemy Company",
       "10% Fan Capacity"
     ],
@@ -231,6 +247,7 @@
     "position": "Vocalist",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "200/DPS Defending HQ, GH, Club, LM",
       "30% Damage World Building Guard"
     ],
@@ -245,6 +262,7 @@
     "position": "Center",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "30% Damage to Player",
       "30% Damage to Player"
     ],
@@ -259,6 +277,7 @@
     "position": "Vocalist",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
@@ -273,6 +292,7 @@
     "position": "Center",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Damage WG / 50% Drive Speed",
       "50% Basic Attack Damage"
     ],
@@ -287,6 +307,7 @@
     "position": "Dancer",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "200/DPS Defending HQ, GH, Club, LM",
       "50% Basic Attack Damage"
     ],
@@ -301,6 +322,7 @@
     "position": "Vocalist",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "75% Drive Speed"
     ],
@@ -315,6 +337,7 @@
     "position": "Vocalist",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
@@ -329,6 +352,7 @@
     "position": "Vocalist",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "40% Gold Brick Gathering Speed",
       "40% Gold Brick Gathering Speed"
     ],
@@ -343,6 +367,7 @@
     "position": "Dancer",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
@@ -357,6 +382,7 @@
     "position": "Center",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
@@ -371,6 +397,7 @@
     "position": "Dancer",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "12% Skill Damage Reduction"
     ],
@@ -385,6 +412,7 @@
     "position": "Dancer",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
@@ -399,6 +427,7 @@
     "position": "Vocalist",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "30% Damage World Building Guard",
       "20% Skill Damage"
     ],
@@ -413,6 +442,7 @@
     "position": "Dancer",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "60% Basic Attack Damage",
       "24% Damage to Player"
     ],
@@ -427,6 +457,7 @@
     "position": "Center",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
@@ -441,6 +472,7 @@
     "position": "Dancer",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
@@ -455,6 +487,7 @@
     "position": "Center",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
@@ -469,6 +502,7 @@
     "position": "Vocalist",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "20% Skill Damage",
       "50% Basic Attack Damage"
     ],
@@ -483,6 +517,7 @@
     "position": "Dancer",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
@@ -497,6 +532,7 @@
     "position": "Center",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
@@ -511,6 +547,7 @@
     "position": "Vocalist",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Reduction Basic Attack Damage",
       "50% Basic Attack Damage"
     ],
@@ -525,6 +562,7 @@
     "position": "Dancer",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "40% Gold Brick Gathering Speed",
       "20% Damage to Player"
     ],
@@ -539,6 +577,7 @@
     "position": "Center",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "60% Basic Attack Damage",
       "12% Fan Capacity"
     ],
@@ -553,6 +592,7 @@
     "position": "Center",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "50% Basic Attack Damage",
       "10% Fan Capacity"
     ],
@@ -567,6 +607,7 @@
     "position": "Vocalist",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "15% Reduction Basic Attack Damage",
       "25% Damage to Player"
     ],
@@ -581,6 +622,7 @@
     "position": "Dancer",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "15% Reduction Basic Attack Damage",
       "60% Basic Attack Damage"
     ],
@@ -595,6 +637,7 @@
     "position": "Center",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "50% Basic Attack Damage",
       "40% Gold Brick Gathering Speed"
     ],
@@ -609,6 +652,7 @@
     "position": "Dancer",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "240/DPS Attacking Enemy Company",
       "12% Fan Capacity"
     ],
@@ -623,6 +667,7 @@
     "position": "Center",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "60% Basic Attack Damage",
       "24% Skill Damage"
     ],
@@ -637,6 +682,7 @@
     "position": "Vocalist",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "240/DPS Defending HQ, GH, Club, LM",
       "36% Damage World Building Guard"
     ],
@@ -651,6 +697,7 @@
     "position": "Center",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "10% Rally Fan Capacity",
       "20% Damage to Player"
     ],
@@ -665,6 +712,7 @@
     "position": "Dancer",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "50% Basic Attack Damage",
       "20% Damage to Player"
     ],
@@ -679,6 +727,7 @@
     "position": "Vocalist",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "10% Fan Capacity",
       "50% Basic Attack Damage"
     ],
@@ -693,6 +742,7 @@
     "position": "Vocalist",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "10% Fan Capacity",
       "10% Rally Fan Capacity"
     ],
@@ -707,6 +757,7 @@
     "position": "Center",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "70% Basic Attack Damage",
       "14% Fan Capacity"
     ],
@@ -721,6 +772,7 @@
     "position": "Vocalist",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "28% Damage to Player",
       "12% Reduction Basic Attack Damage"
     ],
@@ -735,6 +787,7 @@
     "position": "Dancer",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "70% Basic Attack Damage",
       "12% Reduction Basic Attack Damage"
     ],
@@ -749,6 +802,7 @@
     "position": "Dancer",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "28% Damage to Player",
       "12% Skill Damage Reduction"
     ],
@@ -763,6 +817,7 @@
     "position": "Vocalist",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "28% Skill Damage",
       "14% Fan Capacity"
     ],
@@ -777,6 +832,7 @@
     "position": "Dancer",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "14% Fan Capacity",
       "12% Reduction Basic Attack Damage"
     ],
@@ -791,6 +847,7 @@
     "position": "Center",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Fan Capacity",
       "12% Reduction Basic Attack Damage"
     ],
@@ -805,6 +862,7 @@
     "position": "Center",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "24% Damage to Player",
       "12% Skill Damage Reduction"
     ],
@@ -819,6 +877,7 @@
     "position": "Center",
     "genre": "Pop",
     "skills": [
+      "10 sec/1800 Damage",
       "240/DPS Attacking Enemy Company",
       "12% Fan Capacity"
     ],
@@ -833,6 +892,7 @@
     "position": "Center",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "24% Damage to Player",
       "12% Skill Damage Reduction"
     ],
@@ -847,6 +907,7 @@
     "position": "Vocalist",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "24% Damage to Player",
       "12% Fan Capacity"
     ],
@@ -861,6 +922,7 @@
     "position": "Vocalist",
     "genre": "Electronic",
     "skills": [
+      "10 sec/1800 Damage",
       "24% Skill Damage",
       "12% Fan Capacity"
     ],
@@ -875,6 +937,7 @@
     "position": "Vocalist",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "240/DPS Attacking Group Center, Club, Landmark",
       "12% Fan Capacity"
     ],
@@ -889,6 +952,7 @@
     "position": "Vocalist",
     "genre": "Hip Hop",
     "skills": [
+      "10 sec/1800 Damage",
       "24% Damage to Player",
       "24% Damage to Player"
     ],
@@ -903,6 +967,7 @@
     "position": "Dancer",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "240/DPS Defending HQ, GH, Club, LM",
       "12% Skill Damage Reduction"
     ],
@@ -917,6 +982,7 @@
     "position": "Dancer",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "12% Fan Capacity",
       "12% Reduction Basic Attack Damage"
     ],
@@ -931,6 +997,7 @@
     "position": "Dancer",
     "genre": "R&B",
     "skills": [
+      "10 sec/1800 Damage",
       "240/DPS Defending HQ, GH, Club, LM",
       "12% Skill Damage Reduction"
     ],
@@ -945,6 +1012,7 @@
     "position": "Dancer",
     "genre": "Rock",
     "skills": [
+      "10 sec/1800 Damage",
       "24% Skill Damage",
       "12% Fan Capacity"
     ],

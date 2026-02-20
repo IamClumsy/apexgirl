@@ -78,7 +78,7 @@ export const FilterRow = ({
   const artistNames = [...new Set(artists.map((artist) => artist.name))].sort();
 
   return (
-    <tr className="align-middle bg-gradient-to-r from-violet-800/70 via-fuchsia-800/70 to-pink-700/70">
+    <tr className="align-middle filter-toolbar">
       <th className="px-1 py-2">
         <select
           value={searchTerm}

@@ -44,7 +44,7 @@ export const ArtistRow = ({ artist, calculatePoints, skillArrays }: ArtistRowPro
 
   return (
     <tr
-      className="hover:bg-amber-400/10 transition-colors duration-200"
+      className="artist-row hover:bg-amber-400/10 transition-colors duration-200"
       role="row"
     >
       <td className="px-1 py-2 whitespace-nowrap" role="gridcell">

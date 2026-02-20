@@ -166,49 +166,55 @@ function App() {
     <div className="w-full min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
       <div className="w-full flex flex-col items-center py-8 text-white gap-8 px-4">
         {/* Page Title */}
-        <header className="flex flex-col items-center gap-4 app-header">
-          <h1
-            className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.6)] tracking-tight text-center bg-gradient-to-r from-pink-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent animate-pulse"
-            style={{ color: '#ffffff' }}
-          >
-                    JohnnyDepth's Awesome SSR Artist Helper
-          </h1>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                window.location.href = '/?page=create';
-              }}
-              className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-bold flex items-center justify-center aspect-square w-12 h-12"
-              style={{ fontSize: '22px' }}
-              title="SR Artists"
-              aria-label="Navigate to SR Artists page"
+        <header className="relative flex flex-col items-center gap-4 app-header hero-banner">
+          <div className="hero-banner__glow" aria-hidden="true" />
+          <div className="relative z-10 flex flex-col items-center gap-4 w-full max-w-5xl">
+            <h1
+              className="text-4xl md:text-6xl font-extrabold tracking-tight text-center bg-gradient-to-r from-pink-200 via-purple-200 to-fuchsia-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(236,72,153,0.7)] hero-title"
+              style={{ color: '#fff' }}
             >
-              SR
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                window.open(googleSheetUrl, '_blank', 'noopener');
-              }}
-              className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform flex items-center justify-center aspect-square w-12 h-12"
-              title="Open artist-and-records-1.9 Google Sheet"
-              aria-label="Open artists Google Sheet"
-            >
-              <FaDownload size={22} aria-hidden="true" />
-            </button>
+              JohnnyDepth's Awesome SSR Artist Helper
+            </h1>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = '/?page=create';
+                }}
+                className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform font-bold flex items-center justify-center aspect-square w-12 h-12"
+                style={{ fontSize: '22px' }}
+                title="SR Artists"
+                aria-label="Navigate to SR Artists page"
+              >
+                SR
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  window.open(googleSheetUrl, '_blank', 'noopener');
+                }}
+                className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 transform flex items-center justify-center aspect-square w-12 h-12"
+                title="Open artist-and-records-1.9 Google Sheet"
+                aria-label="Open artists Google Sheet"
+              >
+                <FaDownload size={22} aria-hidden="true" />
+              </button>
+            </div>
+            <p className="text-sm text-white/80 text-center max-w-3xl">
+              Curated SSR talent breakdown with live filters, scoring, and VS map-ready callouts set against a bold neon pulse. The table below catalogues every artist by build, genre, and skill mix.
+            </p>
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-700/90 via-fuchsia-700/85 to-pink-600/90 rounded-2xl text-white shadow-[0_0_40px_rgba(219,39,119,0.5)] border-2 border-pink-400/50 backdrop-blur-md ring-2 ring-fuchsia-400/40 hover:shadow-[0_0_60px_rgba(219,39,119,0.7)] transition-all duration-300 mx-auto">
-          <div className="overflow-x-auto w-full">
+        <main className="w-fit flex flex-col items-center bg-gradient-to-br from-violet-800/80 via-fuchsia-800/80 to-pink-700/80 rounded-2xl text-white shadow-[0_0_60px_rgba(219,39,119,0.6)] border-2 border-fuchsia-500/50 backdrop-blur-xl transition-all duration-300 mx-auto table-card">
+          <div className="overflow-x-auto w-full px-2 py-4 table-wrapper">
             <table
               className="table-fixed table-force-white table-with-spacing italic"
               role="table"
               aria-label="SSR Artists table with filters"
             >
-              <thead className="bg-gray-800/95 backdrop-blur-sm sticky top-0 z-10 shadow-lg">
+              <thead className="bg-transparent backdrop-blur-lg sticky top-0 z-10 shadow-xl">
                 <FilterRow
                   artists={artists}
                   searchTerm={searchTerm}
@@ -262,7 +268,7 @@ function App() {
           {/* Legend (moved inside main to align with table width) */}
           <div
             id="skill-legend"
-            className="mt-8 mb-4 px-6 py-4 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm rounded-xl border-2 border-fuchsia-400/40 shadow-[0_0_30px_rgba(192,38,211,0.4)] relative z-10 w-fit mx-auto hover:shadow-[0_0_40px_rgba(192,38,211,0.6)] hover:border-pink-400/60 transition-all duration-300"
+            className="mt-8 mb-4 px-6 py-4 backdrop-blur-sm rounded-2xl border-2 border-fuchsia-400/40 shadow-[0_0_30px_rgba(192,38,211,0.4)] relative z-10 legend-panel"
           >
             <h3
               className="text-xl font-bold text-pink-100 mb-4 text-center drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]"

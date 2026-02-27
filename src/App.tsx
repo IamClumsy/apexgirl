@@ -173,7 +173,7 @@ function App() {
               className="text-4xl md:text-6xl font-extrabold tracking-tight text-center bg-gradient-to-r from-pink-200 via-purple-200 to-fuchsia-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(236,72,153,0.7)] hero-title"
               style={{ color: '#fff' }}
             >
-              JohnnyDepth's Awesome SSR Artist Helper
+              Mick's Awesome SSR Artist Helper
             </h1>
             <div className="flex items-center gap-3">
               <button
@@ -335,7 +335,7 @@ function App() {
 
         {/* Footer */}
         <footer className="mt-8 py-4 w-full flex justify-center items-center text-sm relative z-10">
-                  <p className="text-white font-medium">© {new Date().getFullYear()} JustJohnnyDepth</p>
+                  <p className="text-white font-medium">© {new Date().getFullYear()} Mick</p>
         </footer>
       </div>
     </div>

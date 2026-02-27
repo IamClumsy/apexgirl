@@ -200,9 +200,6 @@ function App() {
                 <FaDownload size={22} aria-hidden="true" />
               </button>
             </div>
-            <p className="text-sm text-white/80 text-center max-w-3xl">
-              Curated SSR talent breakdown with live filters, scoring, and VS map-ready callouts set against a bold neon pulse. The table below catalogues every artist by build, genre, and skill mix.
-            </p>
           </div>
         </header>
 

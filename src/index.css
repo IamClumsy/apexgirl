@@ -211,6 +211,7 @@ body::before {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.88;
+  filter: brightness(0.25);
   z-index: -1;
 }
 

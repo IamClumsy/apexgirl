@@ -200,14 +200,18 @@ body {
   position: relative;
 }
 
-/* Removed radial glow overlay */
+/* Background image overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: transparent;
-  mix-blend-mode: overlay;
+  background-image: url('./gametiles_com.a3.topgirl.gplay.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.88;
+  z-index: -1;
 }
 
 /* Smooth scrolling */
